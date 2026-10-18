@@ -590,6 +590,45 @@
     .validation-note strong { display:block; margin-bottom:3px; color:#73542e; }
     @media(max-width:600px) { .progress-card { padding:13px; } .progress-head { align-items:flex-start; } .day-notes { min-height:76px; } }
 
+
+    /* ===== Today card, trip info sheet, phrase cards ===== */
+    .today-card { background:#fff; border:1px solid var(--border); border-left:4px solid var(--primary); border-radius:15px; padding:13px 16px; margin-bottom:18px; }
+    .today-card.is-muted { border-left-color:#cbd5e1; }
+    .today-head { display:flex; align-items:center; justify-content:space-between; gap:10px; font-weight:700; font-size:.9rem; }
+    .today-line { margin-top:8px; font-size:.86rem; color:#334155; display:flex; gap:8px; align-items:baseline; }
+    .today-line .lbl { flex:0 0 46px; font-size:.72rem; font-weight:700; color:var(--primary); }
+    .today-line a { color:var(--primary); text-decoration:none; font-weight:600; margin-left:auto; white-space:nowrap; }
+    .pill-btn { border:1px solid var(--primary); background:var(--primary-light); color:var(--primary); border-radius:999px; padding:5px 12px; font-size:.78rem; font-weight:700; cursor:pointer; }
+    .today-dot { font-size:.62rem; font-weight:800; color:#fff; background:#dc2626; border-radius:8px; padding:1px 6px; margin-top:2px; }
+    .info-btn { font-size:.8rem; font-weight:600; color:#fff; background:rgba(255,255,255,.2); border:0; border-radius:10px; padding:4px 10px; cursor:pointer; }
+    .sheet-overlay { position:fixed; inset:0; z-index:300; background:rgba(15,23,42,.55); display:flex; align-items:flex-end; justify-content:center; }
+    .sheet-overlay[hidden] { display:none; }
+    .sheet { background:var(--bg); width:100%; max-width:640px; max-height:88vh; border-radius:20px 20px 0 0; display:flex; flex-direction:column; overflow:hidden; }
+    .sheet-head { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:#fff; border-bottom:1px solid var(--border); font-size:1.05rem; }
+    .sheet-close { border:0; background:#f1f5f9; border-radius:50%; width:34px; height:34px; font-size:1rem; cursor:pointer; }
+    .sheet-tabs { display:flex; gap:8px; padding:10px 16px; background:#fff; border-bottom:1px solid var(--border); }
+    .sheet-tab { flex:1; padding:9px 0; border-radius:10px; border:1px solid var(--border); background:#fff; font-weight:700; font-size:.85rem; color:var(--text-muted); cursor:pointer; }
+    .sheet-tab.active { background:var(--primary); border-color:var(--primary); color:#fff; }
+    .sheet-body { overflow-y:auto; padding:14px 16px 28px; -webkit-overflow-scrolling:touch; }
+    .info-group { background:#fff; border:1px solid var(--border); border-radius:14px; padding:14px; margin-bottom:12px; }
+    .info-group h3 { font-size:.95rem; margin-bottom:8px; }
+    .info-row { display:flex; justify-content:space-between; gap:12px; padding:7px 0; border-top:1px solid #f1f5f9; font-size:.86rem; }
+    .info-row:first-of-type { border-top:0; }
+    .info-row small { display:block; color:var(--text-muted); font-size:.74rem; }
+    .info-row a { color:var(--primary); font-weight:700; text-decoration:none; white-space:nowrap; }
+    .info-list { padding-left:18px; font-size:.86rem; color:#334155; }
+    .info-list li { margin-bottom:6px; }
+    .info-note { width:100%; min-height:110px; border:1px solid var(--border); border-radius:10px; padding:10px; font-size:.86rem; resize:vertical; font-family:inherit; }
+    .phrase { width:100%; text-align:left; display:block; background:#fff; border:1px solid var(--border); border-radius:12px; padding:10px 12px; margin-bottom:8px; cursor:pointer; }
+    .phrase .ko { font-size:1.05rem; font-weight:700; color:var(--text); }
+    .phrase .rom { font-size:.78rem; color:var(--primary); margin-top:1px; }
+    .phrase .en { font-size:.82rem; color:var(--text-muted); margin-top:1px; }
+    .phrase-hint { font-size:.78rem; color:var(--text-muted); margin:0 2px 10px; }
+    .phrase-big { position:fixed; inset:0; z-index:400; background:#0f172a; color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:28px; }
+    .phrase-big[hidden] { display:none; }
+    .phrase-big .ko { font-size:clamp(2rem,9vw,3.2rem); font-weight:800; line-height:1.3; }
+    .phrase-big .en { margin-top:16px; color:#94a3b8; font-size:1rem; }
+    .phrase-big .tap { position:absolute; bottom:28px; color:#64748b; font-size:.8rem; }
   </style>
 </head>
 <body>
@@ -597,7 +636,7 @@
   <header>
     <div class="header-title">
       <span>🇰🇷 Korea Trip 2026</span>
-      <span style="font-size:0.8rem; font-weight:normal; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:10px;">Family of 4</span>
+      <span style="display:flex; gap:8px; align-items:center;"><span style="font-size:0.8rem; font-weight:normal; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:10px;">Family of 4</span><button class="info-btn" onclick="openSheet('practical')" aria-label="Open trip info">ℹ️ Info</button></span>
     </div>
     <div class="header-sub">Korean Air (EB3YNF) • Nov 10 – Nov 25</div>
   </header>
@@ -617,6 +656,7 @@
         <ul class="hero-highlights" id="heroHighlights"><li>Airport arrival and rental car pick-up</li><li>Check in at The Marevo, Suwon</li><li>Suwon Hwaseong Fortress</li></ul>
       </div>
     </section>
+    <div id="todayCard"></div>
     <div class="nap-toggle-card">
       <div class="nap-toggle-label">
         <span>😴 Afternoon Nap Schedule</span>
@@ -630,6 +670,19 @@
     <div id="dayPanelsContainer"></div>
   </main>
 
+
+  <div id="infoSheet" class="sheet-overlay" hidden role="dialog" aria-modal="true" aria-label="Trip info" onclick="if(event.target===this)closeSheet()">
+    <div class="sheet">
+      <div class="sheet-head"><strong>Trip info</strong><button class="sheet-close" onclick="closeSheet()" aria-label="Close">✕</button></div>
+      <div class="sheet-tabs">
+        <button class="sheet-tab active" id="tabPractical" onclick="openSheet('practical')">Practical</button>
+        <button class="sheet-tab" id="tabPhrases" onclick="openSheet('phrases')">Korean phrases</button>
+      </div>
+      <div class="sheet-body" id="sheetBody"></div>
+    </div>
+  </div>
+  <div id="phraseBig" class="phrase-big" hidden onclick="this.hidden=true"><div class="ko" id="phraseBigKo"></div><div class="en" id="phraseBigEn"></div><div class="tap">Tap anywhere to close</div></div>
+
   <script>
     const daysData = [
       {
@@ -637,17 +690,27 @@
         date: "Nov 10 (Tue)",
         heroTitle: "Arrival in Korea & Suwon",
         heroCopy: "Ease into the trip after landing: pick up the rental car, settle into The Marevo, enjoy Suwon galbi and take a gentle fortress stroll.",
-        highlights: ["Incheon Airport arrival & car pick-up", "Hotel check-in and family lunch", "Suwon Hwaseong Fortress"],
+        highlights: ["Land at Incheon T2 at 8:50 AM (KE 646)", "Rental car pick-up & drive to Suwon", "Suwon Hwaseong Fortress"],
         stay: "The Marevo, Suwon",
         addr: "1591 Bongyeong-ro, Yeongtong-gu, Suwon-si, Gyeonggi-do 16703, South Korea",
         hotelImg: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
         items: [
           {
-            time: "08:00 AM",
-            title: "Breakfast: Inflight / Airport Arrival",
-            desc: "Light breakfast upon landing at Incheon Terminal 2.",
+            time: "08:50 AM",
+            title: "Land at Incheon Terminal 2 (KE 646)",
+            desc: "Overnight flight from Singapore (departs SIN 01:35 on 10 Nov, lands ICN 08:50). Immigration and baggage with children can take 60–90 minutes.",
             img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80",
-            fact: "Incheon Airport T2 offers excellent bakery cafes and family dining right after customs.",
+            fact: "Korean Air operates from Incheon Terminal 2. Use the family or priority lanes at immigration if offered.",
+            dir: "Incheon Airport Arrival Hall",
+            mapQuery: "Incheon International Airport Terminal 2",
+            tag: "drive"
+          },
+          {
+            time: "10:15 AM",
+            title: "Airport Breakfast & Rental Car Pick-up",
+            desc: "Light breakfast after customs, then collect the rental car and check that the child seats are fitted before leaving.",
+            img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80",
+            fact: "Incheon T2 has bakery cafes and family dining right after customs.",
             dir: "Incheon Airport Arrival Hall",
             mapQuery: "Incheon International Airport Terminal 2",
             tag: "food"
@@ -655,7 +718,7 @@
           {
             time: "11:30 AM",
             title: "Drive to Suwon & Hotel Check-in",
-            desc: "Pick up rental car and drive ~1 hr to The Marevo, Suwon.",
+            desc: "Drive about 1–1.5 hrs to The Marevo, Suwon. If check-in is not ready on arrival, ask the front desk to hold your bags.",
             img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
             fact: "The Marevo offers clean, spacious family rooms close to Suwon's cultural landmarks.",
             dir: "Drive to The Marevo Suwon",
@@ -675,7 +738,7 @@
           {
             time: "02:30 PM",
             title: "Nap Break @ The Marevo",
-            desc: "Midday recharge after the overnight flight.",
+            desc: "Midday recharge after the overnight flight (you left Singapore at 1:35 AM). If the room is not ready yet, ask for early check-in.",
             img: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
             fact: "Quiet rooms ensure toddlers get proper rest.",
             dir: "The Marevo Hotel Suwon",
@@ -1775,57 +1838,87 @@
         day: "Day 16",
         date: "Nov 25 (Wed)",
         heroTitle: "Departure Day",
-        heroCopy: "Enjoy a relaxed breakfast, allow generous airport-transfer time and keep the final hours flexible for check-in and security.",
-        highlights: ["Breakfast and hotel check-out", "AREX / airport transfer", "Incheon Airport Terminal 2"],
+        heroCopy: "An early start for the 2:35 PM flight home: breakfast, check-out, AREX to Incheon, then lunch and play at the airport before boarding.",
+        highlights: ["Check out by 8:00 AM", "AREX to Incheon T2", "KE 643 departs 2:35 PM, lands SIN 8:25 PM"],
         stay: "Departure Day ✈️",
         addr: "Incheon Airport Terminal 2",
         hotelImg: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
         items: [
           {
-            time: "09:00 AM",
+            time: "06:45 AM",
             title: "Breakfast: Fraser Place Resident Breakfast",
-            desc: "Relaxed final morning breakfast at hotel.",
-            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
-            fact: "Final morning in Seoul.",
+            desc: "Early breakfast so you can leave the hotel by about 8:30. Your flight departs at 2:35 PM.",
+            img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
+            fact: "Final morning in Seoul. Have bags packed the night before.",
             dir: "Fraser Place Central Seoul",
             mapQuery: "Fraser Place Central Seoul",
             tag: "food"
           },
           {
-            time: "11:00 AM",
+            time: "08:00 AM",
             title: "Check-out Fraser Place Central",
-            desc: "Store luggage and prepare for airport transit.",
-            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
-            fact: "Luggage storage assistance available post-checkout.",
+            desc: "Settle the bill, return keys and confirm all luggage, passports and the children’s essentials are with you.",
+            img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
+            fact: "Do a last sweep of drawers, chargers and the bathroom.",
             dir: "Fraser Place Central Seoul",
             mapQuery: "Fraser Place Central Seoul"
           },
           {
-            time: "01:00 PM",
-            title: "AREX Express Train to Incheon",
-            desc: "Direct comfortable transit from Seoul Station to Incheon T2.",
-            img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
-            fact: "The AREX Express connects Seoul Station to ICN in 43 minutes.",
+            time: "08:30 AM",
+            title: "Taxi to Seoul Station",
+            desc: "Take a taxi with luggage from the hotel to the AREX platform at Seoul Station; allow extra time for the morning traffic.",
+            img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
+            fact: "Seoul Station is the AREX Express terminus in the city.",
             dir: "Seoul Station AREX platform",
             mapQuery: "Seoul Station AREX",
             tag: "drive"
           },
           {
-            time: "03:30 PM",
-            title: "Check-in @ Incheon Airport T2",
-            desc: "Korean Air check-in (EB3YNF), visit kids play zones inside T2 transit lounge.",
+            time: "09:20 AM",
+            title: "AREX Express Train to Incheon",
+            desc: "Non-stop AREX Express from Seoul Station to Incheon T2, about 50 minutes. Buy tickets at the station.",
             img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
-            fact: "Incheon T2 features dedicated children's play areas and family lounges.",
+            fact: "AREX Express runs non-stop; to Terminal 2 it takes roughly 50 minutes.",
+            dir: "Seoul Station AREX platform",
+            mapQuery: "Seoul Station AREX",
+            tag: "drive"
+          },
+          {
+            time: "10:15 AM",
+            title: "Check-in @ Incheon Airport T2",
+            desc: "Korean Air check-in and bag drop for KE 643 (departs 2:35 PM). Counters usually open about 3 hours before departure, so confirm the time in the Korean Air app.",
+            img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
+            fact: "Aim to be through check-in by about 11:30 AM, leaving time for security and immigration with children.",
             dir: "Incheon Airport Terminal 2",
             mapQuery: "Incheon International Airport Terminal 2",
             tag: "kid"
           },
           {
-            time: "08:25 PM",
-            title: "Flight Departure to Singapore",
-            desc: "Korean Air (EB3YNF) return flight back to Singapore (SIN).",
+            time: "12:00 PM",
+            title: "Lunch: Incheon Airport T2",
+            desc: "Relaxed airport lunch after security. Check restaurant opening hours and keep an eye on the boarding time.",
             img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
-            fact: "Korean Air provides bassinet services and children's meals upon request.",
+            fact: "Incheon T2 has family restaurants and children’s play areas near the gates.",
+            dir: "Incheon International Airport Terminal 2 restaurants",
+            mapQuery: "Incheon International Airport Terminal 2 restaurants",
+            tag: "food"
+          },
+          {
+            time: "01:15 PM",
+            title: "Gate & Play Zone",
+            desc: "Head to your gate early and let the children use the play areas before boarding.",
+            img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
+            fact: "Check your gate on the display boards; gates can change.",
+            dir: "Incheon Airport T2 Boarding Gate",
+            mapQuery: "Incheon International Airport Terminal 2",
+            tag: "kid"
+          },
+          {
+            time: "02:35 PM",
+            title: "Flight Departure to Singapore (KE 643)",
+            desc: "Korean Air KE 643 departs Incheon at 2:35 PM and arrives in Singapore Changi at 8:25 PM.",
+            img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
+            fact: "Korean Air provides bassinet services and children’s meals on request.",
             dir: "Incheon Airport T2 Boarding Gate",
             mapQuery: "Incheon International Airport Terminal 2"
           }
@@ -1850,8 +1943,7 @@
       { day: "Day 11", title: "Dinner: Insadong Korean Set Meal", desc: "A traditional Korean set meal or kalguksu near Insadong works well after the palace and museum visits.", dir: "Insadong family restaurant", mapQuery: "Insadong family restaurant" },
       { day: "Day 12", title: "Dinner: Jamsil / Lotte World Mall", desc: "Eat around Jamsil for a convenient choice after the aquarium and indoor attractions.", dir: "Jamsil family restaurant", mapQuery: "Jamsil family restaurant" },
       { day: "Day 13", title: "Dinner: Seongsu or Dongdaemun", desc: "Choose a casual Korean restaurant near your final stop rather than crossing the city again.", dir: "Seongsu-dong family restaurant", mapQuery: "Seongsu-dong family restaurant" },
-      { day: "Day 14", title: "Dinner: Hongdae Casual Korean Dining", desc: "A relaxed meal around Hongdae; look for noodles, dumplings or grilled meat with mild side dishes.", dir: "Hongdae family restaurant", mapQuery: "Hongdae family restaurant" },
-      { day: "Day 16", title: "Dinner: Incheon Airport T2", desc: "Keep the final meal flexible at the airport before boarding; check opening hours and allow time for security.", dir: "Incheon International Airport Terminal 2 restaurants", mapQuery: "Incheon International Airport Terminal 2 restaurants" }
+      { day: "Day 14", title: "Dinner: Hongdae Casual Korean Dining", desc: "A relaxed meal around Hongdae; look for noodles, dumplings or grilled meat with mild side dishes.", dir: "Hongdae family restaurant", mapQuery: "Hongdae family restaurant" }
     ];
     dinnerSuggestions.forEach(suggestion => {
       const day = daysData.find(d => d.day === suggestion.day);
@@ -2170,12 +2262,13 @@
     ];
 
     const paceNotes = {
-      "Day 1": {label:"Arrival day — keep it gentle", text:"After an overnight flight, prioritise rental-car collection, hotel check-in, food and rest. Treat the fortress visit as optional if everyone is tired."},
+      "Day 1": {label:"Arrival day — keep it gentle", text:"You land at 8:50 AM after a 1:35 AM departure, so allow time at the airport. Prioritise rental-car collection, hotel check-in, food and rest. Treat the fortress visit as optional if everyone is tired."},
       "Day 2": {label:"Long intercity drive", text:"Suwon to Andong is a substantial drive. Allow a comfort stop and verify the hanok check-in instructions before leaving Suwon."},
       "Day 7": {label:"Longest driving day", text:"Busan to the Cheonan-area stopover is the trip's longest drive. Plan two breaks, keep shopping to a rest stop, and confirm the overnight hotel address."},
       "Day 10": {label:"Cross-city day", text:"COEX and Myeongdong are in different parts of Seoul. The afternoon hotel rest helps, but check the live subway route from the previous stop before setting out again."},
       "Day 13": {label:"Heavy shopping day", text:"Olive Young N Seongsu plus Giheung Outlet is ambitious without a car. Limit the Seongsu browse, check the final bus/taxi connection from Giheung Station, and confirm the return route before shopping."},
-      "Day 16": {label:"Airport buffer", text:"Keep a generous buffer for hotel checkout, Seoul Station, AREX, check-in and security. Do not add another sightseeing stop to the departure day."}
+      "Day 15": {label:"Early flight tomorrow", text:"Your flight leaves at 2:35 PM on 25 Nov, so pack tonight, keep passports and essentials together and aim for an early night."},
+      "Day 16": {label:"Airport buffer", text:"Your flight leaves at 2:35 PM, so the day starts early. Keep a generous buffer for check-out, Seoul Station, AREX, check-in and security, and do not add another sightseeing stop."}
     };
 
     function paceNoteHtml(day) {
@@ -2383,6 +2476,7 @@
         panel.classList.toggle('active', i === index);
       });
       if (returnToNav) document.querySelector('.day-nav-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (typeof renderTodayCard === 'function') renderTodayCard();
     }
 
     function toggleNapMode() {
@@ -2393,10 +2487,136 @@
       } else {
         document.body.classList.add('no-nap-active');
       }
+      renderTodayCard();
     }
+
+
+    // ===== Today / Now-Next =====
+    const TRIP_START_UTC = Date.UTC(2026, 10, 10); // 10 Nov 2026 = Day 1
+    function koreaNow() {
+      const sim = new URLSearchParams(location.search).get('today'); // e.g. ?today=2026-11-14T15:30 for testing
+      if (sim && /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?$/.test(sim)) {
+        const [d, t] = sim.split('T'); const [y, m, dd] = d.split('-').map(Number); const [h, mi] = (t || '12:00').split(':').map(Number);
+        return {y, m, d: dd, minutes: h * 60 + mi};
+      }
+      const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {timeZone:'Asia/Seoul', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hour12:false}).formatToParts(new Date()).map(x => [x.type, x.value]));
+      return {y:+parts.year, m:+parts.month, d:+parts.day, minutes:(+parts.hour % 24) * 60 + (+parts.minute)};
+    }
+    function tripDayIndex() { const n = koreaNow(); return Math.round((Date.UTC(n.y, n.m - 1, n.d) - TRIP_START_UTC) / 86400000); }
+    function parseClock(str) {
+      const m = /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i.exec(str || ''); if (!m) return null;
+      let h = (+m[1]) % 12; if (m[3].toUpperCase() === 'PM') h += 12; return h * 60 + (+m[2]);
+    }
+    function currentViewIndex() { return [...document.querySelectorAll('.day-btn')].findIndex(b => b.classList.contains('active')); }
+    function renderTodayCard() {
+      const box = document.getElementById('todayCard'); if (!box) return;
+      const idx = tripDayIndex(), total = daysData.length;
+      document.querySelectorAll('.day-btn .today-dot').forEach(el => el.remove());
+      if (idx < 0) {
+        box.innerHTML = `<div class="today-card is-muted"><div class="today-head"><span>✈️ Trip starts in ${-idx} day${-idx === 1 ? '' : 's'}</span></div></div>`; return;
+      }
+      if (idx >= total) {
+        box.innerHTML = `<div class="today-card is-muted"><div class="today-head"><span>🏠 Trip complete — welcome home!</span></div></div>`; return;
+      }
+      const btn = document.querySelectorAll('.day-btn')[idx];
+      if (btn) { const dot = document.createElement('span'); dot.className = 'today-dot'; dot.textContent = 'TODAY'; btn.insertBefore(dot, btn.firstChild); }
+      const day = daysData[idx], now = koreaNow().minutes, viewing = currentViewIndex();
+      const napOff = document.body.classList.contains('no-nap-active');
+      const timed = day.items.filter(it => !(napOff && it.tag === 'nap')).map(it => ({it, t: parseClock(it.time)})).filter(x => x.t !== null).sort((a, b) => a.t - b.t);
+      const past = timed.filter(x => x.t <= now), upcoming = timed.filter(x => x.t > now);
+      const cur = past[past.length - 1], next = upcoming[0];
+      const line = (lbl, x) => x ? `<div class="today-line"><span class="lbl">${lbl}</span><span>${x.it.time} · ${x.it.title}</span><a href="${makeGoogleUrl(x.it)}" target="_blank" rel="noopener">Map</a></div>` : '';
+      const jump = viewing !== idx ? `<button class="pill-btn" onclick="selectDay(${idx}, true)">Jump to today</button>` : '';
+      box.innerHTML = `<div class="today-card"><div class="today-head"><span>📍 Today · ${day.day} · ${day.heroTitle || day.stay}</span>${jump}</div>`
+        + line('NOW', cur) + line('NEXT', next)
+        + (!cur && !next ? '<div class="today-line"><span>Enjoy the day — no timed stops.</span></div>' : '')
+        + (cur && !next ? '<div class="today-line"><span>That’s the last timed stop for today.</span></div>' : '') + '</div>';
+    }
+    setInterval(renderTodayCard, 60000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) renderTodayCard(); });
+
+    // ===== Trip info sheet =====
+    const PHRASES = [
+      {g:'Eating with kids', list:[
+        ['맵지 않게 해주세요', 'maep-ji an-ke hae-ju-se-yo', 'Not spicy, please'],
+        ['아이 의자 있어요?', 'a-i ui-ja i-sseo-yo?', 'Do you have a high chair?'],
+        ['알레르기가 있어요', 'al-le-reu-gi-ga i-sseo-yo', 'I (we) have an allergy'],
+        ['아기 우유 데워 주세요', 'a-gi u-yu de-wo ju-se-yo', 'Please warm the baby’s milk'],
+        ['물 주세요', 'mul ju-se-yo', 'Water, please'],
+        ['이거 주세요', 'i-geo ju-se-yo', 'This one, please'],
+        ['포장해 주세요', 'po-jang-hae ju-se-yo', 'Takeaway, please'],
+        ['계산해 주세요', 'gye-san-hae ju-se-yo', 'The bill, please']]},
+      {g:'Getting around', list:[
+        ['화장실이 어디예요?', 'hwa-jang-si-ri eo-di-ye-yo?', 'Where is the toilet?'],
+        ['유모차 들어가도 돼요?', 'yu-mo-cha deu-reo-ga-do dwae-yo?', 'Can the stroller go in?'],
+        ['여기 가 주세요', 'yeo-gi ga ju-se-yo', 'Please take me here (show the map)'],
+        ['주차장이 어디예요?', 'ju-cha-jang-i eo-di-ye-yo?', 'Where is the car park?']]},
+      {g:'Help & basics', list:[
+        ['도와주세요', 'do-wa-ju-se-yo', 'Please help'],
+        ['아이가 아파요', 'a-i-ga a-pa-yo', 'My child is unwell'],
+        ['안녕하세요', 'an-nyeong-ha-se-yo', 'Hello'],
+        ['감사합니다', 'gam-sa-ham-ni-da', 'Thank you']]}
+    ];
+    function stayGroups() {
+      const out = [];
+      daysData.forEach((d, i) => {
+        if (!d.addr || /departure/i.test(d.stay)) return;
+        const last = out[out.length - 1];
+        if (last && last.stay === d.stay) { last.endIdx = i; } else { out.push({stay:d.stay, addr:d.addr, startIdx:i, endIdx:i}); }
+      });
+      return out.map(g => { const nextDay = daysData[g.endIdx + 1]; const inD = daysData[g.startIdx].date.replace(/\s*\(.*\)/, ''); const outD = nextDay ? nextDay.date.replace(/\s*\(.*\)/, '') : ''; return {...g, inD, outD}; });
+    }
+    function practicalHtml() {
+      const stays = stayGroups().map(g => `<div class="info-row"><div><strong>${g.stay}</strong><small>${g.inD}${g.outD ? ' → ' + g.outD : ''} · ${g.addr}</small></div><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(g.stay + ' ' + g.addr)}" target="_blank" rel="noopener">Map</a></div>`).join('');
+      const saved = readSaved('koreaTripPrivateNotes_v1', '');
+      return `
+        <div class="info-group"><h3>✈️ Flights (Korean Air)</h3>
+          <div class="info-row"><div><strong>KE 646 · 10 Nov</strong><small>SIN 01:35 → ICN 08:50 (Terminal 2)</small></div></div>
+          <div class="info-row"><div><strong>KE 643 · 25 Nov</strong><small>ICN 14:35 → SIN 20:25 (Terminal 2)</small></div></div>
+        </div>
+        <div class="info-group"><h3>🆘 Emergency & help</h3>
+          <div class="info-row"><div>Police<small>Korea</small></div><a href="tel:112">112</a></div>
+          <div class="info-row"><div>Fire / ambulance<small>Korea</small></div><a href="tel:119">119</a></div>
+          <div class="info-row"><div>Korea Travel Helpline<small>English support, tourist info</small></div><a href="tel:1330">1330</a></div>
+          <div class="info-row"><div>Singapore MFA 24h duty office<small>Dial +65 from Korea</small></div><a href="tel:+6563798800">+65 6379 8800</a></div>
+        </div>
+        <div class="info-group"><h3>🏨 Where you’re staying</h3>${stays}</div>
+        <div class="info-group"><h3>🚗 Driving & getting around</h3><ul class="info-list">
+          <li>Carry your driving licence, an International Driving Permit and your passport for the rental desk — confirm requirements with the rental company.</li>
+          <li>Child seats are required for young children in cars; confirm they are fitted before you leave the rental lot.</li>
+          <li>Naver Map or Kakao Map is usually more reliable than Google Maps for driving directions in Korea.</li>
+          <li>Ask the rental company how tolls are paid (Hi-pass or cash/card at the booth).</li>
+          <li>A T-money card works on buses, subways and many taxis.</li></ul></div>
+        <div class="info-group"><h3>🔌 Small things</h3><ul class="info-list">
+          <li>Korea uses 220V sockets with two round pins (Type C/F) — bring a Singapore-to-Korea adapter.</li>
+          <li>Tipping is not customary in Korea.</li></ul></div>
+        <div class="info-group"><h3>🔒 Private notes (stays on this device)</h3>
+          <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:8px;">Hotel phone numbers, booking references, insurance hotline. Saved only in this browser, not in the public page.</p>
+          <textarea class="info-note" id="privateNotes" oninput="writeSaved('koreaTripPrivateNotes_v1', this.value)" placeholder="e.g. Marevo +82…, rental company +82…, insurance hotline…">${String(saved).replace(/&/g,'&amp;').replace(/</g,'&lt;')}</textarea></div>`;
+    }
+    function phrasesHtml() {
+      return '<p class="phrase-hint">Tap a phrase to show it in large text to staff.</p>' + PHRASES.map(group => `<div class="info-group"><h3>${group.g}</h3>${group.list.map(p => `<button class="phrase" data-ko="${p[0]}" data-en="${p[2]}" onclick="showPhrase(this)"><div class="ko">${p[0]}</div><div class="rom">${p[1]}</div><div class="en">${p[2]}</div></button>`).join('')}</div>`).join('');
+    }
+    function openSheet(which) {
+      document.getElementById('infoSheet').hidden = false;
+      document.getElementById('tabPractical').classList.toggle('active', which === 'practical');
+      document.getElementById('tabPhrases').classList.toggle('active', which === 'phrases');
+      const body = document.getElementById('sheetBody');
+      body.innerHTML = which === 'phrases' ? phrasesHtml() : practicalHtml();
+      body.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSheet() { document.getElementById('infoSheet').hidden = true; document.body.style.overflow = ''; }
+    function showPhrase(btn) {
+      document.getElementById('phraseBigKo').textContent = btn.dataset.ko;
+      document.getElementById('phraseBigEn').textContent = btn.dataset.en;
+      document.getElementById('phraseBig').hidden = false;
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.getElementById('phraseBig').hidden = true; closeSheet(); } });
 
     renderApp();
     restoreTripState();
+    (function openToday() { const t = tripDayIndex(); if (t >= 0 && t < daysData.length) selectDay(t, false, false); renderTodayCard(); })();
 
     // Photos are shown only for places with a curated Wikipedia article match.
     // The lookup targets every matching stop card by map query, avoiding the old
