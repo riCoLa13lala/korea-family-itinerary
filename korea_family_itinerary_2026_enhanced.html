@@ -725,6 +725,43 @@
     html[data-theme="dark"] .pill-btn { background:#1f3a31; color:#9fd5bd; border-color:#2f5a4b; }
     html[data-theme="dark"] .info-row { border-top-color:#25322d; }
     html[data-theme="dark"] .phrase .ko { color:var(--text); }
+
+    /* ===== Eat & drink ===== */
+    .eat-cta { width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px; margin:12px 0 4px; padding:13px 16px; border:1px solid var(--day-accent,#315b50); border-radius:14px; background:color-mix(in srgb, var(--day-accent,#315b50) 10%, #fff); color:var(--day-deep,#234d40); font:inherit; font-weight:800; font-size:.92rem; cursor:pointer; text-align:left; }
+    .eat-cta .eat-count { font-size:.78rem; font-weight:700; opacity:.85; white-space:nowrap; }
+    .food-stepper { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px; }
+    .food-stepper button { border:1px solid var(--border); background:#fff; border-radius:10px; width:40px; height:40px; font-size:1rem; cursor:pointer; color:var(--text); }
+    .food-stepper .food-day { text-align:center; font-weight:800; font-size:.95rem; line-height:1.25; }
+    .food-stepper .food-day small { display:block; font-weight:600; color:var(--text-muted); font-size:.74rem; }
+    .food-chips { display:flex; gap:6px; overflow-x:auto; padding-bottom:8px; margin-bottom:6px; scrollbar-width:none; }
+    .food-chips::-webkit-scrollbar { display:none; }
+    .food-chip { flex:0 0 auto; border:1px solid var(--border); background:#fff; color:var(--text-muted); border-radius:999px; padding:6px 12px; font-size:.78rem; font-weight:700; cursor:pointer; white-space:nowrap; }
+    .food-chip.active { background:var(--primary); border-color:var(--primary); color:#fff; }
+    .food-tip { background:#fff7e6; border:1px solid #f1deb4; color:#6b5128; border-radius:12px; padding:10px 12px; font-size:.8rem; line-height:1.5; margin-bottom:12px; }
+    .food-tip button { margin-top:6px; border:1px solid #d8b872; background:#fff; color:#6b5128; border-radius:999px; padding:4px 10px; font-size:.76rem; font-weight:700; cursor:pointer; }
+    .food-card { background:#fff; border:1px solid var(--border); border-radius:14px; padding:13px 14px; margin-bottom:10px; }
+    .food-top { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+    .food-kind { font-size:.66rem; font-weight:800; letter-spacing:.04em; border-radius:6px; padding:2px 7px; }
+    .kind-meal { background:#dcfce7; color:#15803d; } .kind-cafe { background:#fef3c7; color:#92400e; } .kind-snack { background:#ffe4e6; color:#9f1239; }
+    .food-star { font-size:.72rem; font-weight:800; color:#b45309; }
+    .food-name { font-weight:800; font-size:1rem; line-height:1.3; }
+    .food-ko { font-weight:600; font-size:.88rem; color:var(--text-muted); margin-left:4px; }
+    .food-spec { font-size:.85rem; color:#334155; margin-top:4px; line-height:1.45; }
+    .food-order, .food-note { font-size:.8rem; color:var(--text-muted); margin-top:5px; line-height:1.45; }
+    .food-actions { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+    .food-actions a, .food-actions button { font:inherit; font-size:.75rem; font-weight:700; text-decoration:none; border-radius:9px; padding:7px 10px; border:1px solid var(--border); background:#f8fafc; color:var(--primary); cursor:pointer; }
+    .food-foot { font-size:.74rem; color:var(--text-muted); line-height:1.5; margin:10px 2px 0; }
+    html[data-theme="dark"] .eat-cta { background:color-mix(in srgb, var(--day-accent,#3a8a70) 18%, #17211e); color:#e7ede9; border-color:color-mix(in srgb, var(--day-accent,#3a8a70) 55%, #17211e); }
+    html[data-theme="dark"] .food-stepper button, html[data-theme="dark"] .food-chip, html[data-theme="dark"] .food-card { background:var(--card-bg); border-color:var(--border); color:var(--text); }
+    html[data-theme="dark"] .food-chip { color:#9fb0a7; }
+    html[data-theme="dark"] .food-chip.active { background:var(--primary); border-color:var(--primary); color:#fff; }
+    html[data-theme="dark"] .food-tip { background:#2b2519; border-color:#3f3523; color:#dcc08e; }
+    html[data-theme="dark"] .food-tip button { background:#1c1710; border-color:#5b4a2a; color:#dcc08e; }
+    html[data-theme="dark"] .food-spec { color:#c6d3cc; }
+    html[data-theme="dark"] .food-star { color:#e0b274; }
+    html[data-theme="dark"] .kind-meal { background:#17301f; color:#86d0a2; } html[data-theme="dark"] .kind-cafe { background:#3a2f17; color:#e9c27a; } html[data-theme="dark"] .kind-snack { background:#3d2023; color:#f0a7a0; }
+    html[data-theme="dark"] .food-actions a, html[data-theme="dark"] .food-actions button { background:#1b2622; border-color:#2b3833; color:#7fc4a8; }
+
   </style>
 </head>
 <body>
@@ -772,7 +809,8 @@
       <div class="sheet-head"><strong>Trip info</strong><button class="sheet-close" onclick="closeSheet()" aria-label="Close">✕</button></div>
       <div class="sheet-tabs">
         <button class="sheet-tab active" id="tabPractical" onclick="openSheet('practical')">Practical</button>
-        <button class="sheet-tab" id="tabPhrases" onclick="openSheet('phrases')">Korean phrases</button>
+        <button class="sheet-tab" id="tabFood" onclick="openFood()">🍜 Eat</button>
+        <button class="sheet-tab" id="tabPhrases" onclick="openSheet('phrases')">Phrases</button>
       </div>
       <div class="sheet-body" id="sheetBody"></div>
     </div>
@@ -1846,12 +1884,12 @@
         noNapExtra: [
           {
             time: "02:30 PM",
-            title: "Seoul Animation Center (Tayo Zone)",
-            desc: "Interactive play zone featuring Tayo the Little Bus.",
+            title: "Gyeongui Line Forest Park & Yeonnam-dong Cafés",
+            desc: "Flat, stroller-friendly park walk along the old rail line in Yeonnam-dong, with small cafés and bakeries beside it. A gentle replacement for a toddler play stop.",
             img: "https://images.unsplash.com/photo-1567449302671-55b5d84942e6?auto=format&fit=crop&w=600&q=80",
-            fact: "Paradise for toddlers who love animated characters.",
-            dir: "Seoul Animation Center",
-            mapQuery: "Seoul Animation Center",
+            fact: "Right next to Hongdae, so it pairs easily with the toy street stop.",
+            dir: "Gyeongui Line Forest Park Yeonnam-dong",
+            mapQuery: "Gyeongui Line Forest Park Yeonnam-dong",
             tag: "kid"
           }
         ]
@@ -2153,7 +2191,7 @@
       "COEX Aquarium Seoul":"COEX Aquarium",
       "Lotte World Adventure Seoul":"Lotte World",
       "Yeouido Hangang Park Seoul":"Yeouido Hangang Park",
-      "Seoul Animation Center":"Seoul Animation Center",
+      "Gyeongui Line Forest Park Yeonnam-dong":"Gyeongui Line Forest Park Yeonnam-dong",
       "Lotte Mart Seoul Station":"Lotte Mart Seoul Station",
       "Dongdaemun Design Plaza Seoul":"Dongdaemun Design Plaza",
       "Myeongdong Shopping Street Seoul":"Myeong-dong",
@@ -2230,7 +2268,7 @@
       "Seongsu-dong Cafe Street Seoul": {address:"Yeonmujang-gil / Seongsu-dong area, Seongdong-gu, Seoul, South Korea", korean:"성수동 카페거리", exact:false},
       "Dongdaemun Design Plaza Seoul": {address:"281 Eulji-ro, Jung-gu, Seoul, South Korea", korean:"동대문디자인플라자 DDP", exact:true},
       "Childrens Grand Park Seoul": {address:"216 Neungdong-ro, Gwangjin-gu, Seoul, South Korea", korean:"서울어린이대공원", exact:true},
-      "Seoul Animation Center": {address:"126 Sogong-ro, Jung-gu, Seoul, South Korea", korean:"서울애니메이션센터", exact:true},
+      "Gyeongui Line Forest Park Yeonnam-dong": {address:"Yeonnam-dong, Mapo-gu, Seoul, South Korea", korean:"경의선숲길 연남동", exact:false},
       "Lotte Mart Seoul Station": {address:"405 Hangang-daero, Jung-gu, Seoul, South Korea", korean:"롯데마트 제타플렉스 서울역점", exact:true},
       "Namsan Seoul Tower": {address:"105 Namsangongwon-gil, Yongsan-gu, Seoul, South Korea", korean:"N서울타워", exact:true},
       "Starfield Library": {address:"513 Yeongdong-daero, Gangnam-gu, Seoul, South Korea", korean:"별마당도서관", exact:true},
@@ -2304,7 +2342,7 @@
       "Lunch nearby": "Stay near Children’s Grand Park; nearby eateries are walkable. Nearest station remains Children's Grand Park (Line 7), Exit 1.",
       "Hotel Nap / Rest": "From Children's Grand Park: take Line 7 to Konkuk University, transfer to Line 2 to Euljiro 3-ga, then Line 5 to Seodaemun; allow around 40–50 min including walking.",
       "Shopping: Hongdae Youth & Toy Street": "Nearest station: Hongik University (Line 2, AREX and Gyeongui–Jungang), usually Exit 8/9 for the main shopping streets. From the hotel, use Line 5 and transfer to Line 2, or use a bus/taxi if the children are tired.",
-      "Seoul Animation Center (Tayo Zone)": "Nearest station: Myeongdong (Line 4), then walk uphill around 10–15 min toward Namsan. From Hongdae, Line 2 to Dongdaemun History & Culture Park then Line 4 to Myeongdong; allow about 30–40 min.",
+      "Gyeongui Line Forest Park & Yeonnam-dong Cafés": "Nearest station: Hongik Univ. (Line 2 / AREX) or Hongik Univ. Station Exit 3; the park starts just north of the station, flat and stroller friendly.",
       "Breakfast: Seoul Station Bakery": "From Fraser Place: walk about 10–15 min to Seoul Station, or take a short taxi. Nearest station: Seoul Station (Lines 1/4, AREX and Gyeongui–Jungang).",
       "Shopping: Lotte Mart Seoul Station": "At Seoul Station; follow signs from the station concourse. Nearest station: Seoul Station (Lines 1/4, AREX and Gyeongui–Jungang).",
       "Farewell Lunch near Seoul Station": "Keep lunch inside or beside Seoul Station so you can walk back to the hotel without another cross-city transfer.",
@@ -2498,7 +2536,7 @@
         }).join('');
 
         const routeNote = d.items.map(item => driveNotes[item.title]).find(Boolean);
-        const daySummaryHtml = `<div class="day-summary"><span class="summary-chip">📍 <strong>${d.items.length}</strong> planned stops</span>${routeNote ? `<span class="summary-chip">🚗 ${routeNote.time}</span>` : `<span class="summary-chip">👨‍👩‍👧‍👦 Family-friendly pace</span>`}</div>`;
+        const daySummaryHtml = `<div class="day-summary"><span class="summary-chip">📍 <strong>${d.items.length}</strong> planned stops</span>${routeNote ? `<span class="summary-chip">🚗 ${routeNote.time}</span>` : `<span class="summary-chip">👨‍👩‍👧‍👦 Family-friendly pace</span>`}</div>${foodCtaHtml(idx)}`;
 
         let noNapHtml = (d.noNapExtra || []).map((item, itemIndex) => `
           <div class="timeline-item no-nap-block">
@@ -2623,13 +2661,175 @@
       const cur = past[past.length - 1], next = upcoming[0];
       const line = (lbl, x) => x ? `<div class="today-line"><span class="lbl">${lbl}</span><span>${x.it.time} · ${x.it.title}</span><a href="${makeGoogleUrl(x.it)}" target="_blank" rel="noopener">Map</a></div>` : '';
       const jump = viewing !== idx ? `<button class="pill-btn" onclick="selectDay(${idx}, true)">Jump to today</button>` : '';
-      box.innerHTML = `<div class="today-card"><div class="today-head"><span>📍 Today · ${day.day} · ${day.heroTitle || day.stay}</span>${jump}</div>`
+      const eatBtn = `<button class="pill-btn" onclick="openFood(${idx})">🍜 Eat</button>`;
+      box.innerHTML = `<div class="today-card"><div class="today-head"><span>📍 Today · ${day.day} · ${day.heroTitle || day.stay}</span><span style="display:flex;gap:6px;">${jump}${eatBtn}</span></div>`
         + line('NOW', cur) + line('NEXT', next)
         + (!cur && !next ? '<div class="today-line"><span>Enjoy the day — no timed stops.</span></div>' : '')
         + (cur && !next ? '<div class="today-line"><span>That’s the last timed stop for today.</span></div>' : '') + '</div>';
     }
     setInterval(renderTodayCard, 60000);
     document.addEventListener('visibilitychange', () => { if (!document.hidden) renderTodayCard(); });
+
+
+    // ===== Eat & drink picks =====
+    // Entry: [English name, Korean name, kind (meal|cafe|snack), speciality, what to order, family note, must-try (1/0), optional place override in Korean]
+    const FOOD = [
+      {area:"Suwon", ko:"수원", picks:[
+        ["Gabojeong Galbi","가보정갈비","meal","Suwon-style charcoal-grilled beef short ribs, the city’s signature dish","Saeng-galbi (plain ribs) or marinated yangnyeom-galbi, plus a bowl of galbi-tang soup","Very large hall and not spicy. Ask staff to cut the meat small for toddlers.",1],
+        ["Bon Suwon Galbi","본수원갈비","meal","Another long-standing Suwon galbi house, a good alternative","Marinated galbi set with rice and soup","Mild flavours that suit children.",0],
+        ["Suwon Fried Chicken Street","수원통닭거리","meal","Old-style whole fried chicken (tongdak) near Paldalmun Gate","One whole plain fried chicken to share","Pick the plain fried chicken rather than the spicy seasoned kind. A relaxed casual dinner.",0,"팔달문"],
+        ["Nammun Market","남문시장","snack","Traditional market with street snacks beside Paldalmun","Hotteok (sweet filled pancake), fish-cake skewers, fried snacks","Busy at peak times. Ask for tteokbokki non-spicy.",0,"팔달문"],
+        ["Haengridan-gil cafés","행리단길","cafe","Café and dessert lane beside Hwaseong Haenggung","Coffee, pastries and juice after the fortress walk","Some cafés are small, so check there are seats for the family before ordering.",0],
+        ["Jidong Market Sundae Town","지동시장 순대타운","snack","Market alley known for sundae (Korean blood sausage) and soup","Sundae-guk or plain tteokbokki to share","Rice cakes and fish cakes are the easiest picks for children.",0,"지동시장"],
+        ["Starfield Suwon food court","스타필드 수원","meal","Big mall food court with many cuisines","Rice bowls, noodles or Japanese sets","A reliable back-up after a long travel day, with high chairs and nursing rooms nearby.",0]
+      ]},
+      {area:"Andong", ko:"안동", picks:[
+        ["Andong Jjimdak Alley","안동찜닭골목","meal","Soy-braised chicken with glass noodles and vegetables, Andong’s signature dish","One mild jjimdak to share, with extra noodles","Sweet-savoury and easy for kids. Ask for it not spicy (an maep-ge).",1,"안동구시장"],
+        ["Kkachi Gumeong-jib","까치구멍집","meal","Heotjesabap: soy-seasoned bibimbap-style rice with vegetables, jeon and fish","The heotjesabap set","Made without chilli paste, so one of the friendliest local meals for children.",1],
+        ["Andong Gan-godeungeo","안동간고등어","meal","Salt-cured Andong mackerel, grilled and served as a set","Gan-godeungeo gui set meal","Salty, so share small pieces and check for bones.",0],
+        ["Geonjin Guksu","건진국수","meal","Andong’s traditional noodles in a light broth","A bowl of geonjin-guksu","Mild and soft, easy for toddlers.",0],
+        ["Highway rest-stop snacks","고속도로 휴게소","snack","Classic Korean road-trip snacks","Hodu-gwaja (walnut cakes), hot odeng skewers and grilled tteok-galbi","Easy to share on the 3-hour drive. Odeng broth is mild and warming.",0,"휴게소"]
+      ]},
+      {area:"Andong → Gyeongju", ko:"경주", picks:[
+        ["Mammoth Bakery","맘모스제과","cafe","Andong’s much-loved bakery, open since 1974","Mammoth bread (a big cream-filled bun) and fresh pastries to take on the drive","Has seating inside. Check opening time before an early start.",1,"안동"],
+        ["Gyori Gimbap","교리김밥","meal","Light, egg-rich gimbap that is famous across Korea, plus noodle soup","Gimbap with a bowl of guksu","Mild and kid-friendly. Queues at lunch and some closing days, so go early or take away.",1],
+        ["Hwangnam Bread","황남빵","snack","Gyeongju’s iconic red-bean pastry","A small box of hwangnam-ppang","Soft, sweet and portable. Best eaten the day you buy it.",1],
+        ["Chalbori-bbang","경주 찰보리빵","snack","Chewy barley pancake with red-bean filling, a Gyeongju speciality","One plain or red-bean piece","The soft texture works well for toddlers.",0],
+        ["Gyeongju ssambap","경주 쌈밥","meal","Leaf-wrap rice set with grilled meat and many side dishes","Ssambap jeongsik (set meal)","Wrapping is fun for kids. Ask for dipping sauces that are not spicy.",0],
+        ["Yosokkoong (Yoseokgung 1779)","요석궁","meal","Silla royal-style banquet (hanjeongsik) in the Gyochon hanok village","A set course, booked in advance","Splurge pick. Closed on Tuesdays and courses move slowly, so only if the children are settled.",0],
+        ["Hwangridan-gil cafés","황리단길","cafe","Trendy café street in restored hanok buildings, with desserts and bakeries","Coffee, bakery treats, sweet rice cakes","Quieter on weekday afternoons.",0],
+        ["Byeolchaeban","별채반","meal","Ssambap (rice with leaf wraps) near Cheomseongdae","The ssambap set with its side dishes","Not spicy and kids enjoy building their own wraps.",0,"경주 첨성로"],
+        ["Seongdong Market","성동시장","snack","Gyeongju's everyday market food","Tteokbokki, jeon (savoury pancakes) and fruit","Pick plain jeon for children and check opening hours.",0,"경주"]
+      ]},
+      {area:"Gyeongju", ko:"경주", picks:[
+        ["Bulguksa-area sundubu","불국사 순두부","meal","Soft tofu stew near the temple","White (non-spicy) sundubu with rice","Silky and mild, a good fit for toddlers.",1,"불국사"],
+        ["Bulguksa mountain-vegetable set","불국사 산채정식","meal","Korean set meal of seasonal mountain vegetables and side dishes","Sanchae-jeongsik","Mostly mild. Skip the spicier banchan.",0,"불국사"],
+        ["Hwangridan-gil brunch cafés","황리단길","cafe","Brunch, pastries and desserts in hanok cafés","Toast, pastries and warm drinks","Good for the 4:30 PM street walk.",0],
+        ["Hwangnam Bread","황남빵","snack","Gyeongju’s iconic red-bean pastry","A small box to take home","Pick one up on your Hwangridan-gil walk.",0],
+        ["Hwangnam Milmyeon","황남밀면","meal","Fresh wheat noodles with fruit-and-vegetable seasoning","Milmyeon made to order; ask whether a warm option is served","Seasoning is not hot, but the dish is served cold, so a snack portion may suit a chilly day.",0,"경주 포석로"],
+        ["Oncheonjib","온천집 황리단길","meal","Japanese-style shabu-shabu in a hanok","Shabu-shabu set with beef and vegetables","Mild broth cooked at the table; a calm family dinner.",0,"경주 황리단길"]
+      ]},
+      {area:"Gyeongju → Busan", ko:"부산 해운대", picks:[
+        ["Wonjo Halmae Gukbap (Songjeong)","원조할매국밥","meal","Busan’s pork-and-rice soup (dwaeji gukbap) near Songjeong Beach","Dwaeji gukbap, with salted shrimp added only if you like","Gentle milky broth. Keep it unsalted for kids and add rice. Close to the Blueline Park Songjeong stop.",1,"송정"],
+        ["Songjeong Mulchong Kalguksu","송정물총칼국수","meal","Hand-cut noodle soup in a seafood-style broth near Blueline Park","A bowl of kalguksu","Soft noodles and mild broth. Check the shellfish content if it matters to you.",0,"송정"],
+        ["Haeundae Market","해운대시장","snack","Traditional market about five minutes from the beach, with local street food","Fish-cake (eomuk), hotteok, fried snacks","A light evening bite near the Airbnb.",0],
+        ["Haeundae Amso Galbijip","해운대암소갈비집","meal","Beef galbi house, a Haeundae classic","Beef short ribs (galbi) and galbi-tang","Mild, family-friendly dinner after the Beach Train. Book if you can.",1],
+        ["Cheongsapo & Blueline Park cafés","청사포 카페","cafe","Sea-view cafés along the Blueline coast","Hot drinks and cake while you wait for the Beach Train","Check the last Beach Train time before you settle in.",0,"청사포"]
+      ]},
+      {area:"Busan", ko:"부산 해운대", picks:[
+        ["Samjin Eomuk","삼진어묵","snack","Busan’s famous fish-cake bakery","Fish-cake sausage, croquettes and fried fish cakes","Not spicy and easy for kids. Check the nearest branch on the map.",1],
+        ["Ssiat Hotteok","씨앗호떡","snack","Busan’s seed-stuffed sweet pancake","One seed hotteok, eaten hot","Crispy outside and nutty-sweet inside. The filling is very hot, so let it cool for the kids.",1,"부산 남포동 BIFF광장"],
+        ["Jagalchi Market","자갈치시장","meal","Busan’s huge seafood market with grilled-fish restaurants","A grilled fish set (gui) rather than raw (hoe)","Ask for grilled and not spicy. Skip raw dishes with young children.",0,"부산 자갈치"],
+        ["Dalmaji-gil (Moontan Road) cafés","달맞이길 카페","cafe","Hillside café road with sea views east of Haeundae","Coffee and desserts with a view","A calm stop that suits the afternoon rest hour.",0,"해운대 달맞이길"],
+        ["Shinsegae Centum City dining","신세계 센텀시티","meal","Giant department store with many family restaurants and a food hall","Pick a Korean set meal or noodle shop on the dining floor","A good all-weather fallback, especially if it is cold or raining.",0,"센텀시티"],
+        ["Bupyeong Kkangtong Market","부평깡통시장","snack","Busy market and night-market street food","Bibim-dangmyeon (seasoned glass noodles), yachae-kimbap and fish cake","Veggie kimbap and fish cake are easy for children.",0,"부산 부평"]
+      ]},
+      {area:"Busan → Jeonju", ko:"전주", picks:[
+        ["Gajok Hoegwan","가족회관","meal","Classic Jeonju bibimbap with beef, bean sprouts and many toppings","Jeonju bibimbap, with the chilli paste on the side","Add chilli paste to taste, so it is easy to keep mild.",1],
+        ["Hanguk-jip","한국집","meal","Another long-running Jeonju bibimbap house","Bibimbap or the beef set","Expect queues, so go early or off-peak.",0],
+        ["PNB Pungnyeon Bakery","풍년제과","cafe","Jeonju’s original choco-pie bakery","PNB choco pie and fresh pastries","A sweet treat the kids will remember.",1],
+        ["Jeonju Hanok Village snacks","전주한옥마을 먹거리","snack","Street snacks along the hanok lanes, such as grilled minced-rib patties (tteok-galbi) and skewers","Tteok-galbi skewer, choco pie, sweet snacks","Mild and handheld. The Nambu Night Market usually runs only Friday and Saturday, so it will not be on during your Monday visit.",0],
+        ["Hanok tea houses","전통찻집","cafe","Traditional teas and rice-cake sets inside hanok houses","Jujube tea, citron tea, sweet rice cakes","A warm rest stop, often with floor seating.",0,"전주한옥마을"],
+        ["Gogung Bibimbap","고궁 전주비빔밥","meal","Jeonju bibimbap, the city's signature dish","Jeonju bibimbap with the gochujang served on the side","Ask for the chilli paste separately so you can keep it mild.",1,"전주"]
+      ]},
+      {area:"Jeonju → Seoul", ko:"서울", picks:[
+        ["Sambaekjip","삼백집","meal","Old-school Jeonju kongnamul-gukbap (bean-sprout and rice soup)","Kongnamul-gukbap with an egg","Mild and comforting, a good breakfast before leaving Jeonju.",1,"전주"],
+        ["Hyundaeok","현대옥","meal","Jeonju-born chain known for kongnamul-gukbap","Kongnamul-gukbap, non-spicy version","A quick alternative if Sambaekjip has a queue.",0,"전주"],
+        ["Namdaemun Market Kalguksu Alley","남대문시장 칼국수골목","meal","Hand-cut noodle soup and rice dishes in a market lane","Kalguksu","Mild broth. Skip the kimchi if it is spicy.",1],
+        ["Namdaemun Market street snacks","남대문시장 먹거리","snack","Stuffed hotteok, fried dumplings and egg bread","Hotteok and gyeran-ppang (egg bread)","Easy handheld snacks for the shopping stroll.",0],
+        ["Myeongdong street food","명동 길거리음식","snack","Egg bread (gyeran-ppang), rice-cake skewers and hotteok","Gyeran-ppang and tteok-kkochi (non-spicy)","Evening crowds, so keep little hands away from hot grills.",0]
+      ]},
+      {area:"Seoul", ko:"서울", picks:[
+        ["Gwangjang Market","광장시장","snack","Historic market famous for bindaetteok (mung-bean pancake) and mayak gimbap","Bindaetteok, mini gimbap, non-spicy tteokbokki","Very crowded with strollers. Go early and avoid the lunch peak.",1,"종로"],
+        ["Imun Seolleongtang","이문설농탕","meal","Seolleongtang (milky ox-bone soup) from one of Seoul’s oldest restaurants","Seolleongtang with rice","Very mild. You season it yourself with salt and spring onion.",1,"종로"],
+        ["Times Square Yeongdeungpo restaurants","타임스퀘어 영등포","meal","Large mall with a food court and family restaurants","Pick a Korean set meal or noodle shop","A reliable indoor lunch near Pororo Park.",0,"영등포"],
+        ["Kyochon Chicken","교촌치킨","meal","Korean fried chicken chain known for soy-garlic","Soy-garlic (not spicy) fried chicken","A simple, casual dinner after the mall, with a mild flavour.",0]
+      ]},
+      {area:"Seoul", ko:"서울", picks:[
+        ["Myeongdong Gyoja","명동교자","meal","Chicken-broth kalguksu and steamed dumplings (mandu), a Myeongdong institution","Kalguksu and mandu","The noodles and dumplings are mild, though the kimchi on the side is spicy. Queues at peak times.",1,"명동"],
+        ["Hadongkwan","하동관","meal","Gomtang (clear beef-bone soup) with rice, a long-standing Myeongdong favourite","Gomtang","Very mild and good for children. Check opening hours.",1,"명동"],
+        ["Starfield COEX Mall dining","스타필드 코엑스몰","meal","Large choice of Korean, Japanese and western options and cafés under one roof","Choose a Korean noodle or rice set","All-weather, so handy after the aquarium.",0,"코엑스"]
+      ]},
+      {area:"Seoul (palaces)", ko:"서울", picks:[
+        ["Tosokchon Samgyetang","토속촌삼계탕","meal","Whole young chicken stuffed with rice, ginseng and jujube, simmered in broth","Samgyetang","Mild and nourishing. Queues form, so arrive before about 11:30.",1,"경복궁"],
+        ["Tongin Market Dosirak Café","통인시장 도시락카페","meal","Fill a tray with market dishes using brass yeopjeon coins","A tray of jeon, gyeran-mari (rolled omelette), japchae and rice","Fun for children. Choose non-spicy dishes and check coin availability at the counter.",1],
+        ["Samcheong-dong Sujebi","삼청동수제비","meal","Hand-torn dough flakes in a clear broth","Sujebi, with a savoury pancake to share","Gentle and filling. The kimchi on the side is spicy.",1,"삼청동"],
+        ["Café Onion Anguk","어니언 안국","cafe","Bakery café in a hanok, famous for pastries and bread","Pastries and bread with a warm drink","Very popular. Arrive at opening or mid-afternoon.",1,"안국"],
+        ["Insadong tea houses","인사동 전통찻집","cafe","Traditional teas and rice-cake sets","Jujube, citron or ginger tea","A warm rest during the Insadong browse.",0,"인사동"],
+        ["Insadong street snacks","인사동 길거리","snack","Hotteok, roasted sweet potatoes and chestnuts","Roasted sweet potato or chestnuts","Cosy winter snacks. Let them cool first.",0,"인사동"],
+        ["Sanchon","산촌 인사동","meal","Temple-style vegetarian set meal in Insadong","A set of vegetable and tofu dishes","Mostly mild; check reservations first.",0,"인사동"]
+      ]},
+      {area:"Seoul (Jamsil)", ko:"서울 잠실", picks:[
+        ["Lotte World Mall dining","롯데월드몰","meal","Many family restaurants and food halls inside the mall","A Korean set meal or noodle shop","Convenient before or after the aquarium.",0],
+        ["Songridan-gil","송리단길","meal","Restaurants and cafés in the lanes near Seokchon Lake","A relaxed lunch or coffee stop","Slightly outside the mall crowds.",1],
+        ["Seokchon Lake cafés","석촌호수 카페","cafe","Lakeside cafés between Jamsil and the lake path","Hot drinks and cake","A pleasant pause before the Han River walk.",0],
+        ["Han River ramyeon","한강 라면","snack","Cook instant noodles at riverside convenience stores","Jin Ramen mild (sunhan-mat) or Jjapaghetti, which is not spicy","Fun and cheap. Eat inside or go early, since November evenings are cold.",1,"잠실한강공원"],
+        ["Sulbing","설빙","snack","Korean dessert café chain known for shaved-ice and rice-cake treats","Injeolmi toast or a warm option","Bingsu is cold, so pick the toast if it is chilly.",0],
+        ["Lotte Department Store basement food hall","롯데백화점 잠실 지하 식품관","snack","Department-store food hall with bakery and dessert counters","Takeaway boxes, pastries and desserts","Good for a quiet hotel dinner after a long day at Lotte World.",0,"잠실"]
+      ]},
+      {area:"Seoul (Seongsu / Giheung)", ko:"서울 성수", picks:[
+        ["Onion Seongsu","어니언 성수","cafe","Bakery café in a converted factory building","Pastries and bread with a warm drink","Popular, so go mid-morning or mid-afternoon.",1],
+        ["Daelim Changgo","대림창고","cafe","Warehouse gallery café and a Seongsu landmark","Coffee and bakery items","Large space, easier with a stroller.",0],
+        ["Seongsu café lanes","성수동 카페거리","cafe","Bakeries, dessert shops and concept cafés near Seongsu Station","Dessert and a warm drink between shops","Opening days vary by shop.",0],
+        ["Giheung outlet food court","롯데프리미엄아울렛 기흥 푸드코트","meal","Food court and restaurants inside the outlet","Korean set meal or noodle dish","Your planned dinner stop. Eat early to avoid the evening crowd.",0,"기흥"]
+      ]},
+      {area:"Seoul (Hongdae)", ko:"서울 홍대", picks:[
+        ["Yeontral Park cafés","연남동 경의선숲길","cafe","Café and restaurant strip along the Gyeongui Line Forest Park","Brunch, desserts and coffee","A relaxed, walkable area with places to sit.",1,"연남동"],
+        ["Hongdae Walking Street snacks","홍대 걷고싶은거리","snack","Street snacks such as egg bread, tornado potato and rice-cake skewers","Gyeran-ppang, tornado potato","Lively and fun for children. Keep an eye on crowds.",1,"홍대"],
+        ["Yeonnam-dong bakeries","연남동 베이커리","cafe","Small bakeries and dessert cafés","Pastries and warm drinks","Many are tiny, so check seating first.",0,"연남동"],
+        ["Mapo galbi","마포갈비","meal","Old-school galbi restaurants in Mapo-gu","Marinated galbi, not spicy","Good for a family dinner after the shopping.",0,"마포"],
+        ["Konkuk University food street","건대입구 맛의거리","meal","Student district with many casual restaurants","Tonkatsu, ramen or dakgalbi","Lots of mild options and quick service near Children's Grand Park.",0,"건대입구"]
+      ]},
+      {area:"Seoul (farewell)", ko:"서울", picks:[
+        ["Jinokhwa Halmae Wonjo Dakhanmari","진옥화할매원조닭한마리","meal","Dakhanmari: a whole chicken simmered at the table with potatoes and rice cakes","One dakhanmari to share, then noodles or porridge to finish","Order the broth plain. The dipping sauce has chilli, so leave it out for the kids.",1,"동대문"],
+        ["Maple Tree House","메이플트리하우스","meal","Korean BBQ with English-speaking staff and menus in Itaewon","Marinated bulgogi or galbi","A friendly farewell dinner. Book ahead.",1,"이태원"],
+        ["Seoul Station food court & cafés","서울역 푸드코트","meal","Quick Korean and casual food options inside the station","A set meal or noodle dish","Handy near the hotel for a simple lunch.",0,"서울역"],
+        ["Hanilkwan","한일관","meal","Classic Korean restaurant known for bulgogi and galbitang","Bulgogi and galbitang (short-rib soup)","Mild flavours and a calm setting for a farewell dinner.",0]
+      ]},
+      {area:"Incheon Airport T2", ko:"인천공항 제2여객터미널", picks:[
+        ["Incheon T2 food court & restaurants","인천공항 제2여객터미널 식당","meal","Korean set meals (bibimbap, kalguksu, kimchi stew) and casual dining","Bibimbap or kalguksu for a last Korean meal","Check opening hours, and note that more cafés are open after security.",0],
+        ["Airport bakery cafés","파리바게뜨 인천공항","cafe","Paris Baguette and similar bakery chains","Sandwiches and snacks for the flight","Handy to buy snacks for the children before boarding.",0],
+        ["Convenience-store snacks","편의점 GS25 CU","snack","Korean convenience-store treats for the flight","Banana milk, honey-butter chips and triangle gimbap","Handy for the return flight; stock up before security.",0,"인천공항"]
+      ]}
+    ];
+    let foodDay = 0, foodFilter = 'all';
+    const FOOD_KIND_LABEL = {meal:'MEAL', cafe:'CAFÉ / BAKERY', snack:'SNACK / SWEET'};
+    function foodCtaHtml(idx) {
+      const f = FOOD[idx]; if (!f) return '';
+      return `<button class="eat-cta" onclick="openFood(${idx})"><span>🍜 Where to eat today</span><span class="eat-count">${f.picks.length} picks ›</span></button>`;
+    }
+    function openFood(idx) {
+      const i = Number.isInteger(idx) ? idx : currentViewIndex();
+      foodDay = Math.min(Math.max(i, 0), FOOD.length - 1);
+      foodFilter = 'all';
+      openSheet('food');
+    }
+    function setFoodFilter(f) { foodFilter = f; renderFood(); }
+    function stepFood(dir) { foodDay = Math.min(Math.max(foodDay + dir, 0), FOOD.length - 1); renderFood(); document.getElementById('sheetBody').scrollTop = 0; }
+    function renderFood() { const body = document.getElementById('sheetBody'); if (body) body.innerHTML = foodHtml(); }
+    function foodHtml() {
+      const f = FOOD[foodDay], d = daysData[foodDay];
+      let picks = f.picks.map((p, i) => ({p, i})).filter(x => foodFilter === 'all' || (foodFilter === 'star' ? x.p[6] === 1 : x.p[2] === foodFilter));
+      picks.sort((a, b) => (b.p[6] - a.p[6]) || (a.i - b.i));
+      const chips = [['all','All'],['star','★ Must-try'],['meal','Meals'],['cafe','Cafés & bakeries'],['snack','Snacks & sweets']]
+        .map(c => `<button class="food-chip ${foodFilter === c[0] ? 'active' : ''}" onclick="setFoodFilter('${c[0]}')">${c[1]}</button>`).join('');
+      const cards = picks.map(({p}) => {
+        const loc = p[7] || f.ko, q = encodeURIComponent(p[1] + ' ' + loc);
+        return `<div class="food-card"><div class="food-top"><span class="food-kind kind-${p[2]}">${FOOD_KIND_LABEL[p[2]]}</span>${p[6] ? '<span class="food-star">★ Must-try</span>' : ''}</div>
+          <div class="food-name">${p[0]}<span class="food-ko">${p[1]}</span></div>
+          <div class="food-spec">${p[3]}</div>
+          <div class="food-order"><strong>Try:</strong> ${p[4]}</div>
+          <div class="food-note">👶 ${p[5]}</div>
+          <div class="food-actions"><a href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">🧭 Naver Map</a><a href="https://www.google.com/maps/search/?api=1&query=${q}" target="_blank" rel="noopener">↗ Google Maps</a><button data-ko="${p[1]}" data-en="${p[0]}" onclick="showPhrase(this)">🗣️ Show name</button></div></div>`;
+      }).join('') || '<p class="food-foot">Nothing in this filter for today.</p>';
+      return `<div class="food-stepper"><button onclick="stepFood(-1)" aria-label="Previous day" ${foodDay === 0 ? 'disabled style="opacity:.35"' : ''}>◀</button>
+          <div class="food-day">${d.day} · ${d.date.replace(/\s*\(.*\)/, '')}<small>${f.area} · ${f.picks.length} picks</small></div>
+          <button onclick="stepFood(1)" aria-label="Next day" ${foodDay === FOOD.length - 1 ? 'disabled style="opacity:.35"' : ''}>▶</button></div>
+        <div class="food-chips">${chips}</div>
+        <div class="food-tip">Easy mild dishes to look for: bulgogi, galbi, gimbap, mandu, kalguksu, gomtang, samgyetang, jeon and steamed egg. Say “an maep-ge hae-ju-se-yo” for not spicy.<br><button data-ko="맵지 않게 해주세요" data-en="Not spicy, please" onclick="showPhrase(this)">🗣️ Show “not spicy”</button></div>
+        ${cards}
+        <p class="food-foot">Picks are well-known places chosen for families, not a live listing. Opening hours, closing days and queues change, so check the map before you go. “Show name” displays the Korean name in large text for taxi drivers or staff.</p>`;
+    }
 
     // ===== Trip info sheet =====
     const PHRASES = [
@@ -2696,9 +2896,10 @@
     function openSheet(which) {
       document.getElementById('infoSheet').hidden = false;
       document.getElementById('tabPractical').classList.toggle('active', which === 'practical');
+      document.getElementById('tabFood').classList.toggle('active', which === 'food');
       document.getElementById('tabPhrases').classList.toggle('active', which === 'phrases');
       const body = document.getElementById('sheetBody');
-      body.innerHTML = which === 'phrases' ? phrasesHtml() : practicalHtml();
+      body.innerHTML = which === 'phrases' ? phrasesHtml() : which === 'food' ? foodHtml() : practicalHtml();
       body.scrollTop = 0;
       document.body.style.overflow = 'hidden';
     }
