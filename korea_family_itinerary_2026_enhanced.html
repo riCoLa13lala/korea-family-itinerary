@@ -1,0 +1,2432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Korea Family Trip Nov 2026</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #f59e0b;
+      --nap-color: #8b5cf6;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 40px;
+    }
+
+    header {
+      background: #1e293b;
+      color: white;
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-sub {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    /* Days Nav Slider */
+    .day-nav-container {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 61px;
+      z-index: 99;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .day-nav-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .day-nav {
+      display: inline-flex;
+      padding: 8px 12px;
+      gap: 8px;
+    }
+
+    .day-btn {
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .day-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .day-btn .date {
+      font-size: 0.7rem;
+      opacity: 0.8;
+      font-weight: normal;
+    }
+
+    main {
+      padding: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .day-panel {
+      display: none;
+    }
+
+    .day-panel.active {
+      display: block;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .hotel-card {
+      border-left: 4px solid var(--primary);
+      background: var(--primary-light);
+      padding: 16px;
+    }
+
+    .hotel-title {
+      font-weight: 700;
+      color: #1e40af;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hotel-desc {
+      font-size: 0.85rem;
+      color: #3b82f6;
+      margin-top: 4px;
+    }
+
+    .hotel-addr {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    .hotel-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    /* Toggle Switch */
+    .nap-toggle-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f1f5f9;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .nap-toggle-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 26px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #cbd5e1;
+      transition: .3s;
+      border-radius: 26px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--nap-color);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(22px);
+    }
+
+    /* Timeline & Cards */
+    .timeline {
+      padding: 16px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+      padding-left: 24px;
+      border-left: 2px solid var(--border);
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -7px;
+      top: 2px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 2px solid white;
+    }
+
+    .time-stamp {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .item-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .item-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .fact-box {
+      background: #f8fafc;
+      border-left: 3px solid var(--accent);
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      color: #334155;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 10px;
+    }
+
+    .fact-title {
+      font-weight: 700;
+      color: #b45309;
+      margin-bottom: 2px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn-link {
+      flex: 1;
+      text-align: center;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .btn-dir {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .btn-map {
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .tag-kid { background: #fef3c7; color: #b45309; }
+    .tag-food { background: #dcfce7; color: #15803d; }
+    .tag-drive { background: #f3e8ff; color: #6b21a8; }
+    .tag-nap { background: #f3e8ff; color: #7c3aed; }
+    .tag-shop { background: #ffe4e6; color: #9f1239; }
+
+
+    .drive-info { background:#f5f3ff; border:1px solid #ddd6fe; border-radius:8px; padding:10px 12px; margin:8px 0 10px; font-size:.8rem; color:#4c1d95; }
+    .drive-info strong { display:block; margin-bottom:3px; }
+    .trip-notes { background:#fff; border:1px solid var(--border); border-radius:12px; padding:16px; margin:0 0 16px; }
+    .trip-notes h2 { font-size:1rem; margin-bottom:8px; }
+    .trip-notes li { font-size:.82rem; color:#475569; margin:6px 0 0 18px; }
+    .image-credit {font-size:.65rem;color:#64748b;margin-top:4px}
+    .image-loading {background:#e2e8f0}
+
+    /* Conditional Blocks for Nap Switch */
+    .nap-block { display: block; }
+    .no-nap-block { display: none; }
+
+    body.no-nap-active .nap-block { display: none; }
+    body.no-nap-active .no-nap-block { display: block; }
+
+    /* Refined, photo-led itinerary layout inspired by the Portugal guide */
+    :root { --bg:#f6f4ef; --card-bg:#fffdfa; --primary:#315b50; --primary-light:#eaf1ed; --text:#1e2925; --text-muted:#68756e; --border:#e2e5de; --accent:#c18b4a; --nap-color:#8b7355; --radius:16px; }
+    body { background:var(--bg); }
+    header { background:#203b34; padding:18px 20px 16px; }
+    .header-title { letter-spacing:-.025em; }
+    .header-sub { color:#c4d2ca; }
+    .day-nav-container { top:65px; background:rgba(255,253,250,.96); backdrop-filter:blur(12px); }
+    .day-nav { gap:7px; padding:10px 12px; }
+    .day-btn { min-width:66px; border-radius:13px; padding:9px 12px; background:#fffdfa; }
+    .day-btn.active { background:var(--primary); border-color:var(--primary); }
+    main { max-width:760px; padding:18px 16px 40px; }
+    .trip-notes { border-radius:16px; box-shadow:0 4px 18px rgba(34,52,43,.04); }
+    .hotel-card { border:1px solid #d9e4dc; border-left:5px solid var(--primary); border-radius:16px; margin-bottom:4px; background:linear-gradient(120deg,#eaf1ed,#f8f8f1); padding:17px 18px; }
+    .hotel-title { color:#244a3e; font-size:1rem; }
+    .hotel-desc { color:#46695d; font-size:.9rem; }
+    .hotel-addr { color:#6b786f; }
+    .hotel-img { display:none !important; }
+    .timeline { padding:18px 2px 0 8px; }
+    .timeline-item { border-left:2px solid #d7ded7; padding-left:22px; margin-bottom:25px; }
+    .timeline-item::before { background:var(--primary); box-shadow:0 0 0 4px var(--bg); }
+    .time-stamp { color:var(--primary); font-size:.78rem; letter-spacing:.035em; }
+    .section-card { border-radius:16px; border-color:#e5e7e0; box-shadow:0 5px 18px rgba(32,59,52,.055); }
+    .timeline .section-card { background:var(--card-bg); }
+    .card-img { height:clamp(180px, 36vw, 245px); border-radius:0; margin:0; object-fit:cover; background:#e9ece6; }
+    .item-title { font-size:1.05rem; letter-spacing:-.015em; margin-top:2px; }
+    .item-desc { font-size:.9rem; line-height:1.55; }
+    .btn-link { min-height:36px; border-radius:9px; font-size:.78rem; }
+    .btn-dir { background:#edf2ef; color:#2d574a; border-color:#d4e1d9; }
+    .btn-map { background:#f7f0e6; color:#79592f; border-color:#ead8bd; }
+    .tag { letter-spacing:.04em; }
+    .drive-info { background:#f2eee7; border-color:#e5d8c5; color:#66513a; border-radius:11px; line-height:1.5; }
+    .fact-box { background:#f7f6f0; border-left-color:#c18b4a; }
+    .fact-title { color:#94662e; }
+    .nap-toggle-card { border-radius:14px; box-shadow:0 3px 12px rgba(32,59,52,.04); }
+    .photo-credit { font-size:.68rem; color:#7b857d; margin:0 12px 10px; }
+    .photo-missing { display:none !important; }
+    .place-address { margin:10px 0 2px; padding:9px 10px; border-radius:9px; background:#f7f8f4; color:#4e5d55; font-size:.78rem; line-height:1.45; overflow-wrap:anywhere; }
+    .place-address strong { color:#294b3e; }
+    .suggestions-wrap { margin:18px 0 6px; padding:14px; border:1px solid #e2e5de; border-radius:16px; background:#fbfaf6; }
+    .suggestions-heading { font-weight:800; color:#294b3e; margin:0 0 10px; }
+    .suggestion-card { padding:12px; margin:9px 0; border:1px solid #e5e8e1; border-radius:12px; background:#fff; }
+    .suggestion-label { font-size:.7rem; font-weight:800; letter-spacing:.04em; color:#68786d; text-transform:uppercase; }
+    .suggestion-title { font-weight:750; margin:4px 0 6px; color:#283f35; }
+    .suggestion-desc { font-size:.86rem; line-height:1.5; color:#59645e; }
+    .day-summary { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 4px; }
+    .summary-chip { display:inline-flex; align-items:center; gap:6px; padding:7px 10px; border:1px solid #e2e5de; border-radius:999px; background:#fffdfa; color:#53645b; font-size:.76rem; font-weight:650; }
+    .summary-chip strong { color:#284b3f; }
+    @media (min-width:700px) { .timeline { padding-left:10px; } .timeline-item { padding-left:28px; } }
+
+
+
+    /* Editorial redesign: calm, premium travel-planner aesthetic */
+    :root {
+      --bg: #f3f5f2;
+      --card-bg: #ffffff;
+      --primary: #234d40;
+      --primary-light: #e8f0eb;
+      --text: #1b2923;
+      --text-muted: #66756d;
+      --border: #dfe6e0;
+      --accent: #c28d4d;
+      --radius: 18px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: #f3f5f2; color: var(--text); line-height: 1.6; }
+    header {
+      position: relative; top: auto; z-index: 100;
+      padding: 18px max(20px, calc((100vw - 1040px) / 2));
+      background: #183b31;
+      box-shadow: 0 6px 22px rgba(21, 50, 40, .12);
+    }
+    .header-title { font-size: clamp(1.1rem, 2.5vw, 1.45rem); gap: 12px; }
+    .header-title span:last-child { font-size: .74rem !important; padding: 5px 10px !important; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.09) !important; white-space: nowrap; }
+    .header-sub { font-size: .82rem; margin-top: 5px; letter-spacing: .015em; }
+    .day-nav-container { position: sticky; top: 0; z-index: 90; border-bottom: 1px solid #dce4dd; box-shadow: 0 5px 18px rgba(24,59,49,.05); }
+    .day-nav { display: flex; width: max-content; padding: 10px max(14px, calc((100vw - 1040px) / 2)); gap: 8px; }
+    .day-btn { min-width: 74px; border-radius: 12px; border: 1px solid transparent; background: transparent; padding: 8px 12px; color: #64736a; }
+    .day-btn:hover { background: #eef3ef; }
+    .day-btn.active { color: white; background: #234d40; border-color: #234d40; box-shadow: 0 4px 10px rgba(35,77,64,.18); }
+    .day-btn .date { font-size: .68rem; margin-top: 2px; }
+    main { max-width: 1040px; padding: 24px 22px 60px; }
+    .trip-hero {
+      position: relative; isolation: isolate; overflow: hidden;
+      display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(220px, .8fr);
+      gap: 22px; align-items: center; padding: clamp(22px, 4vw, 38px);
+      margin: 0 0 22px; border-radius: 24px; color: #fff;
+      background: linear-gradient(120deg, #183b31 0%, #2e6250 62%, #6b8d76 100%);
+      box-shadow: 0 14px 34px rgba(31, 67, 53, .15);
+    }
+    .trip-hero:before, .trip-hero:after { content: ''; position: absolute; z-index: -1; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; }
+    .trip-hero:before { width: 360px; height: 360px; right: -90px; top: -170px; }
+    .trip-hero:after { width: 260px; height: 260px; right: 25px; bottom: -190px; }
+    .hero-kicker { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px; color: #e3c69d; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .hero-title { max-width: 580px; font-size: clamp(1.75rem, 4.5vw, 3rem); line-height: 1.08; letter-spacing: -.045em; font-weight: 780; }
+    .hero-copy { max-width: 540px; margin-top: 13px; color: rgba(255,255,255,.79); font-size: .94rem; }
+    .hero-facts { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+    .hero-fact { padding: 14px; min-height: 83px; border-radius: 14px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.09); backdrop-filter: blur(8px); }
+    .hero-fact strong { display: block; font-size: 1.16rem; line-height: 1.3; }
+    .hero-fact span { display: block; margin-top: 4px; color: rgba(255,255,255,.74); font-size: .73rem; }
+    .nap-toggle-card { background: #fff; border: 1px solid var(--border); border-radius: 15px; padding: 13px 16px; margin-bottom: 18px; }
+    .nap-toggle-label { font-size: .88rem; }
+    .trip-notes { background: #fff; border: 1px solid var(--border); border-radius: 17px; padding: 20px 22px; margin-bottom: 24px; box-shadow: 0 5px 18px rgba(30,55,42,.035); }
+    .trip-notes h2 { font-size: 1rem; letter-spacing: -.01em; display: flex; align-items: center; gap: 8px; }
+    .trip-notes li { color: #59685f; font-size: .84rem; padding-left: 2px; line-height: 1.55; }
+    .hotel-card { position: relative; border: 1px solid #d5e2d8; border-left: 4px solid var(--primary); border-radius: 16px; margin: 0 0 10px; padding: 16px 19px; background: linear-gradient(120deg, #e9f1eb, #f8faf6); }
+    .hotel-title { font-size: .75rem; letter-spacing: .09em; text-transform: uppercase; color: #567165; }
+    .hotel-desc { margin-top: 5px; font-size: 1.12rem; font-weight: 750; color: #234d40; }
+    .hotel-addr { font-style: normal; font-size: .78rem; }
+    .day-summary { gap: 8px; margin: 14px 0 18px; }
+    .summary-chip { border-color: #e0e7e1; background: #fff; padding: 7px 11px; font-size: .75rem; }
+    .timeline { padding: 5px 0 0 5px; }
+    .timeline-item { border-left: 2px solid #dce5de; padding-left: 25px; margin-bottom: 24px; }
+    .timeline-item::before { left: -7px; top: 3px; width: 12px; height: 12px; background: #2d6551; border: 3px solid #f3f5f2; box-shadow: 0 0 0 1px #c9d9ce; }
+    .time-stamp { font-size: .72rem; font-weight: 800; letter-spacing: .1em; color: #477260; margin-bottom: 7px; }
+    .section-card { border: 1px solid #e1e7e2; border-radius: 17px; margin-bottom: 0; box-shadow: 0 5px 18px rgba(25,55,40,.045); transition: transform .18s ease, box-shadow .18s ease; }
+    .section-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(25,55,40,.08); }
+    .card-img { height: clamp(190px, 30vw, 290px); object-fit: cover; }
+    .item-title { font-size: 1.08rem; line-height: 1.3; margin: 3px 0 7px; letter-spacing: -.02em; }
+    .item-desc { font-size: .9rem; line-height: 1.65; color: #637169; margin-bottom: 12px; }
+    .tag { border-radius: 6px; padding: 4px 8px; font-size: .64rem; letter-spacing: .09em; }
+    .tag-kid { background: #fbf0d8; color: #94631f; }
+    .tag-food { background: #e3f1e8; color: #2d6b4d; }
+    .tag-drive { background: #ece8f8; color: #67539b; }
+    .tag-nap { background: #eee8f7; color: #7353a0; }
+    .tag-shop { background: #f8e7e2; color: #9a5546; }
+    .place-address { border: 1px solid #e6ebe6; background: #f7f9f6; padding: 11px 12px; font-size: .78rem; line-height: 1.55; }
+    .place-address strong { color: #315c49; }
+    .action-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .btn-link { flex: 1 1 145px; min-height: 39px; border-radius: 10px; padding: 8px 11px; font-size: .77rem; font-weight: 750; transition: background .15s ease, transform .15s ease; }
+    .btn-link:hover { transform: translateY(-1px); }
+    .btn-dir { background: #eaf2ed; color: #285541; border-color: #d2e2d7; }
+    .btn-map { background: #fbf2e7; color: #805a2d; border-color: #ebdbc5; }
+    .drive-info { padding: 13px 14px; border-radius: 12px; font-size: .82rem; line-height: 1.6; }
+    .fact-box { padding: 11px 13px; font-size: .82rem; line-height: 1.55; }
+    .suggestions-wrap { margin: 26px 0 0; padding: 20px; background: #eaf0eb; border: 1px solid #dce6de; border-radius: 19px; }
+    .suggestions-heading { font-size: 1rem; margin-bottom: 13px; }
+    .suggestion-card { padding: 15px; margin: 10px 0; border-color: #e3e9e3; border-radius: 14px; box-shadow: 0 2px 8px rgba(31,58,42,.025); }
+    .suggestion-label { letter-spacing: .1em; font-size: .65rem; }
+    .suggestion-title { font-size: .96rem; line-height: 1.4; }
+    .suggestion-desc { font-size: .85rem; line-height: 1.6; }
+    .photo-credit { margin: 0 14px 12px; }
+    .day-stepper { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:26px 0 0; padding:15px; border:1px solid #dce5de; border-radius:16px; background:#fff; }
+    .day-stepper button { border:1px solid #d5e2d8; border-radius:10px; background:#edf4ef; color:#285541; padding:10px 13px; min-height:42px; font:inherit; font-size:.82rem; font-weight:750; cursor:pointer; }
+    .day-stepper button:disabled { opacity:.35; cursor:not-allowed; }
+    .day-stepper .step-caption { color:#637169; font-size:.76rem; text-align:center; }
+    .day-stepper .step-caption strong { display:block; color:#234d40; font-size:.86rem; }
+    .quick-tip { margin:0 0 16px; padding:11px 14px; border-radius:12px; background:#f8f2e8; color:#76582e; font-size:.8rem; border:1px solid #eee0ca; }
+    a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #c28d4d; outline-offset: 3px; }
+    @media (min-width: 760px) {
+      main { padding-top: 28px; }
+      .timeline { padding-left: 8px; }
+      .timeline-item { padding-left: 29px; }
+      .section-card > div[style*="padding: 12px"] { padding: 18px !important; }
+      .suggestions-wrap { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+      .suggestions-heading { grid-column: 1 / -1; }
+      .suggestion-card { margin: 0; }
+    }
+    @media (max-width: 600px) {
+      header { padding: 15px 16px; }
+      .header-title { align-items: flex-start; }
+      .header-title span:last-child { margin-top: 2px; }
+      main { padding: 16px 13px 42px; }
+      .trip-hero { grid-template-columns: 1fr; gap: 18px; padding: 23px 20px; border-radius: 20px; }
+      .hero-facts { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .hero-fact { min-height: 72px; padding: 11px; }
+      .hero-fact strong { font-size: 1.02rem; }
+      .trip-notes { padding: 17px; }
+      .timeline { padding-left: 1px; }
+      .timeline-item { padding-left: 20px; }
+      .card-img { height: 190px; }
+      .suggestions-wrap { padding: 13px; }
+      .action-buttons { gap: 7px; }
+      .btn-link { flex-basis: 130px; font-size: .73rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+
+
+    /* Day-by-day colour system and dynamic highlight hero */
+    .trip-hero { background: linear-gradient(122deg, var(--day-deep, #183b31), var(--day-accent, #2e6250) 62%, var(--day-soft, #6b8d76)); transition: background .25s ease; }
+    .hero-day-kicker { margin: 0 0 8px; color: rgba(255,255,255,.82); font-size: .72rem; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+    .hero-highlights-label { margin-top: 19px; color: rgba(255,255,255,.76); font-size: .67rem; font-weight: 850; letter-spacing: .14em; }
+    .hero-highlights { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin: 9px 0 0; padding: 0; list-style: none; }
+    .hero-highlights li { position: relative; padding: 10px 11px 10px 27px; border: 1px solid rgba(255,255,255,.2); border-radius: 11px; background: rgba(255,255,255,.1); color: #fff; font-size: .77rem; line-height: 1.4; }
+    .hero-highlights li:before { content: '✓'; position: absolute; left: 10px; color: #f2d5a9; font-weight: 900; }
+    .hero-title { margin-top: 2px; }
+    .day-panel { --day-accent:#2e6250; --day-soft:#e8f0eb; --day-deep:#183b31; }
+    .day-panel .hotel-card { border-color: color-mix(in srgb, var(--day-accent) 30%, white); border-left-color: var(--day-accent); background: linear-gradient(120deg, var(--day-soft), #fff 95%); }
+    .day-panel .hotel-desc, .day-panel .summary-chip strong { color: var(--day-deep); }
+    .day-panel .timeline-item { border-left-color: color-mix(in srgb, var(--day-accent) 28%, #e7ebe7); }
+    .day-panel .timeline-item::before { background: var(--day-accent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--day-accent) 35%, white); }
+    .day-panel .time-stamp { color: var(--day-accent); }
+    .day-panel .suggestions-wrap { background: color-mix(in srgb, var(--day-soft) 72%, white); border-color: color-mix(in srgb, var(--day-accent) 20%, white); }
+    .transit-info { margin: 12px 0 4px; padding: 10px 12px; border-radius: 10px; background: #f1f5f9; border: 1px solid #dbe5ee; color: #243447; font-size: .9rem; line-height: 1.5; }
+    .transit-info strong { display:block; font-size:.78rem; letter-spacing:.04em; text-transform:uppercase; color:#35566f; margin-bottom:3px; }
+    .transit-info .transit-small { display:block; margin-top:4px; color:#526579; font-size:.82rem; }
+    .day-btn { border-bottom: 3px solid transparent; }
+    .day-btn.active { background: var(--nav-accent, #234d40); border-color: var(--nav-accent, #234d40); }
+    @media (max-width: 650px) { .hero-highlights { grid-template-columns: 1fr; gap: 6px; } .hero-highlights li { padding: 8px 10px 8px 27px; } }
+
+  
+    /* Practical trip companion: persistent progress, notes and day pacing */
+    .progress-card { margin: 12px 0 18px; padding: 15px 16px; border: 1px solid var(--border); border-radius: 15px; background: #fff; box-shadow: 0 4px 14px rgba(24,59,49,.035); }
+    .progress-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:9px; }
+    .progress-title { font-weight:800; color:#284b3e; font-size:.93rem; }
+    .progress-count { color:#64736a; font-size:.78rem; font-weight:750; white-space:nowrap; }
+    .progress-track { height:7px; border-radius:999px; background:#edf1ed; overflow:hidden; }
+    .progress-fill { height:100%; width:0; border-radius:999px; background:var(--day-accent,#315b50); transition:width .2s ease; }
+    .progress-help { margin-top:7px; color:#6a776f; font-size:.76rem; }
+    .day-notes-label { display:block; margin:13px 0 5px; color:#40574b; font-size:.78rem; font-weight:800; }
+    .day-notes { width:100%; min-height:66px; resize:vertical; padding:10px 11px; border:1px solid #dfe6e0; border-radius:10px; background:#fbfcfa; color:#26372e; font:inherit; font-size:.82rem; line-height:1.45; }
+    .day-notes:focus { outline:2px solid color-mix(in srgb, var(--day-accent,#315b50) 30%, white); border-color:var(--day-accent,#315b50); }
+    .complete-toggle { display:flex; align-items:center; gap:7px; margin:0 0 8px; color:#68756d; font-size:.75rem; font-weight:700; cursor:pointer; width:max-content; max-width:100%; }
+    .complete-toggle input { width:17px; height:17px; accent-color:var(--day-accent,#315b50); }
+    .timeline-item.is-complete .item-title { color:#7b8980; text-decoration:line-through; text-decoration-thickness:1px; }
+    .timeline-item.is-complete .section-card { opacity:.78; }
+    .pace-note { display:flex; align-items:flex-start; gap:9px; padding:11px 12px; margin:10px 0 2px; border-radius:11px; background:var(--day-soft,#eaf1ed); border:1px solid color-mix(in srgb, var(--day-accent,#315b50) 20%, white); color:#40564a; font-size:.81rem; line-height:1.45; }
+    .pace-note strong { display:block; color:var(--day-deep,#234d40); margin-bottom:2px; }
+    .route-caveat { margin-top:7px; font-size:.74rem; color:#69776e; }
+    .day-btn .mini-progress { font-size:.62rem; opacity:.82; margin-top:3px; }
+    .validation-note { margin:0 0 14px; padding:11px 13px; border:1px solid #e8d9bd; border-radius:12px; background:#fbf4e7; color:#695337; font-size:.79rem; line-height:1.45; }
+    .validation-note strong { display:block; margin-bottom:3px; color:#73542e; }
+    @media(max-width:600px) { .progress-card { padding:13px; } .progress-head { align-items:flex-start; } .day-notes { min-height:76px; } }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-title">
+      <span>🇰🇷 Korea Trip 2026</span>
+      <span style="font-size:0.8rem; font-weight:normal; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:10px;">Family of 4</span>
+    </div>
+    <div class="header-sub">Korean Air (EB3YNF) • Nov 10 – Nov 25</div>
+  </header>
+
+  <div class="day-nav-container">
+    <div class="day-nav" id="dayNav"></div>
+  </div>
+
+  <main>
+    <section class="trip-hero" aria-label="Trip overview">
+      <div>
+        <div class="hero-kicker">✦ FAMILY TRAVEL JOURNAL · AUTUMN 2026</div>
+        <div class="hero-day-kicker" id="heroDayKicker">DAY 1 · TUESDAY, 10 NOVEMBER</div>
+        <h1 class="hero-title" id="heroTitle">Arrival in Korea & Suwon</h1>
+        <p class="hero-copy" id="heroCopy">A gentle arrival day with hotel check-in, Suwon galbi and a relaxed fortress stroll.</p>
+        <div class="hero-highlights-label">TODAY’S KEY HIGHLIGHTS</div>
+        <ul class="hero-highlights" id="heroHighlights"><li>Airport arrival and rental car pick-up</li><li>Check in at The Marevo, Suwon</li><li>Suwon Hwaseong Fortress</li></ul>
+      </div>
+    </section>
+    <div class="nap-toggle-card">
+      <div class="nap-toggle-label">
+        <span>😴 Afternoon Nap Schedule</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="napToggle" checked onchange="toggleNapMode()">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div id="dayPanelsContainer"></div>
+  </main>
+
+  <script>
+    const daysData = [
+      {
+        day: "Day 1",
+        date: "Nov 10 (Tue)",
+        heroTitle: "Arrival in Korea & Suwon",
+        heroCopy: "Ease into the trip after landing: pick up the rental car, settle into The Marevo, enjoy Suwon galbi and take a gentle fortress stroll.",
+        highlights: ["Incheon Airport arrival & car pick-up", "Hotel check-in and family lunch", "Suwon Hwaseong Fortress"],
+        stay: "The Marevo, Suwon",
+        addr: "1591 Bongyeong-ro, Yeongtong-gu, Suwon-si, Gyeonggi-do 16703, South Korea",
+        hotelImg: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:00 AM",
+            title: "Breakfast: Inflight / Airport Arrival",
+            desc: "Light breakfast upon landing at Incheon Terminal 2.",
+            img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80",
+            fact: "Incheon Airport T2 offers excellent bakery cafes and family dining right after customs.",
+            dir: "Incheon Airport Arrival Hall",
+            mapQuery: "Incheon International Airport Terminal 2",
+            tag: "food"
+          },
+          {
+            time: "11:30 AM",
+            title: "Drive to Suwon & Hotel Check-in",
+            desc: "Pick up rental car and drive ~1 hr to The Marevo, Suwon.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "The Marevo offers clean, spacious family rooms close to Suwon's cultural landmarks.",
+            dir: "Drive to The Marevo Suwon",
+            mapQuery: "The Marevo Hotel Suwon",
+            tag: "drive"
+          },
+          {
+            time: "01:00 PM",
+            title: "Lunch: Banchung Galbi Suwon",
+            desc: "Famous non-spicy grilled short ribs ideal for toddlers.",
+            img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80",
+            fact: "Suwon Galbi is historically renowned across Korea for its exceptional oak charcoal grilling.",
+            dir: "Suwon Wanggalbi Street",
+            mapQuery: "Suwon Wanggalbi Street",
+            tag: "food"
+          },
+          {
+            time: "02:30 PM",
+            title: "Nap Break @ The Marevo",
+            desc: "Midday recharge after the overnight flight.",
+            img: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+            fact: "Quiet rooms ensure toddlers get proper rest.",
+            dir: "The Marevo Hotel Suwon",
+            mapQuery: "The Marevo Hotel Suwon",
+            tag: "nap"
+          },
+          {
+            time: "05:00 PM",
+            title: "Suwon Hwaseong Fortress",
+            desc: "Stroll along flat fortress grounds with smooth stroller pathways.",
+            img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80",
+            fact: "Built in 1796 by King Jeongjo, Hwaseong Fortress is a UNESCO World Heritage site.",
+            dir: "Suwon Hwaseong Fortress",
+            mapQuery: "Suwon Hwaseong Fortress",
+            tag: "kid"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:30 PM",
+            title: "Suwon Starfield Mall",
+            desc: "Explore the giant Starfield mall and kids play zones.",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+            fact: "Starfield features a stunning multi-story Starry Library.",
+            dir: "Starfield Suwon",
+            mapQuery: "Starfield Suwon",
+            tag: "shop"
+          }
+        ]
+      },
+      {
+        day: "Day 2",
+        date: "Nov 11 (Wed)",
+        heroTitle: "Suwon to Andong Hanok Stay",
+        heroCopy: "Drive inland to Andong, with a relaxed cultural stop and time to settle into FeelGood Hanok.",
+        highlights: ["Breakfast in Suwon", "Scenic drive to Andong", "Andong culture and hanok stay"],
+        stay: "FeelGood Hanok, Andong",
+        addr: "6-1 Seogyeongji 7-gil, Andong Andong-si, South Korea 36676",
+        hotelImg: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Suwon Bakery Café",
+            desc: "Fresh pastries and warm milk/coffee near hotel.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Local bakeries in Suwon open early with fresh morning bakes.",
+            dir: "Suwon café district",
+            mapQuery: "Suwon bakery",
+            tag: "food"
+          },
+          {
+            time: "09:30 AM",
+            title: "Drive to Andong",
+            desc: "Scenic highway drive (~2.5 hrs) to Andong cultural hub.",
+            img: "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=600&q=80",
+            fact: "Andong is known as the Capital of Korean Traditional Culture.",
+            dir: "Drive to Andong",
+            mapQuery: "Andong city Gyeongsangbuk-do",
+            tag: "drive"
+          },
+          {
+            time: "12:30 PM",
+            title: "Lunch: Andong Jjimdak (Mild)",
+            desc: "Famous savory steamed chicken with vegetables and glass noodles.",
+            img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80",
+            fact: "Andong Market's Jjimdak alley is famous for sharing platters.",
+            dir: "Andong Old Market Jjimdak Alley",
+            mapQuery: "Andong Gu Market Jjimdak",
+            tag: "food"
+          },
+          {
+            time: "02:00 PM",
+            title: "Check-in @ FeelGood Hanok & Nap",
+            desc: "Traditional heated ondol flooring for a cozy family stay.",
+            img: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+            fact: "Authentic courtyard hanok experience with modern comforts.",
+            dir: "FeelGood Hanok Andong",
+            mapQuery: "FeelGood Hanok Andong",
+            tag: "nap"
+          },
+          {
+            time: "05:00 PM",
+            title: "Woryeonggyo Moonlight Bridge",
+            desc: "Scenic wooden footbridge walk over the river at dusk.",
+            img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+            fact: "Woryeonggyo is Korea's longest wooden footbridge.",
+            dir: "Woryeonggyo Bridge Andong",
+            mapQuery: "Woryeonggyo Bridge Andong",
+            tag: "kid"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:00 PM",
+            title: "Andong Hahoe Folk Village",
+            desc: "UNESCO village walk and traditional open fields.",
+            img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80",
+            fact: "Hahoe Village preserves clan architecture for over 600 years.",
+            dir: "Andong Hahoe Folk Village",
+            mapQuery: "Andong Hahoe Folk Village",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 3",
+        date: "Nov 12 (Thu)",
+        heroTitle: "Journey to Historic Gyeongju",
+        heroCopy: "Travel south to the ancient Silla capital and explore its historic landmarks at a family-friendly pace.",
+        highlights: ["Drive from Andong to Gyeongju", "Historic Silla sights", "Evening around Hwangridan-gil"],
+        stay: "Soyojae (소요재), Gyeongju",
+        addr: "Hwangnam-dong, Gyeongju-si",
+        hotelImg: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Andong Local Bakery",
+            desc: "Try local Andong mallow bread and coffee.",
+            img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",
+            fact: "Andong has thriving artisan bakeries near the central district.",
+            dir: "Andong downtown cafe",
+            mapQuery: "Andong cafe",
+            tag: "food"
+          },
+          {
+            time: "09:30 AM",
+            title: "Drive to Gyeongju",
+            desc: "Approx 1.5 hrs drive south to ancient Silla capital.",
+            img: "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=600&q=80",
+            fact: "Gyeongju was the capital of the Silla Kingdom for nearly 1,000 years.",
+            dir: "Drive to Gyeongju",
+            mapQuery: "Gyeongju Gyeongsangbuk-do",
+            tag: "drive"
+          },
+          {
+            time: "11:30 AM",
+            title: "Cheomseongdae Observatory Park",
+            desc: "Flat grassy lawns and ancient royal tombs for toddler strolls.",
+            img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80",
+            fact: "Cheomseongdae is Asia's oldest surviving astronomical observatory.",
+            dir: "Cheomseongdae Gyeongju",
+            mapQuery: "Cheomseongdae Gyeongju",
+            tag: "kid"
+          },
+          {
+            time: "01:00 PM",
+            title: "Lunch: Gyeongju Ssambap",
+            desc: "Fresh greens wrap with rice and mild side dishes.",
+            img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80",
+            fact: "Traditional Ssambap meals feature dozens of healthy vegetable plates.",
+            dir: "Gyeongju Ssambap Street",
+            mapQuery: "Gyeongju Ssambap Street",
+            tag: "food"
+          },
+          {
+            time: "02:30 PM",
+            title: "Check-in @ Soyojae & Nap",
+            desc: "Boutique historic hanok stay in Gyeongju cultural quarter.",
+            img: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+            fact: "Soyojae combines 1935 heritage architecture with modern luxury.",
+            dir: "Soyojae Gyeongju",
+            mapQuery: "Soyojae Gyeongju",
+            tag: "nap"
+          },
+          {
+            time: "05:30 PM",
+            title: "Donggung Palace & Wolji Pond",
+            desc: "Stunning night illumination reflecting on historic royal waters.",
+            img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+            fact: "Wolji Pond was completed in 674 AD for royal banquets.",
+            dir: "Donggung Palace and Wolji Pond",
+            mapQuery: "Donggung Palace and Wolji Pond",
+            tag: "kid"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:30 PM",
+            title: "Gyeongju National Children's Museum",
+            desc: "Interactive hands-on artifact exhibits for toddlers.",
+            img: "https://images.unsplash.com/photo-1567449302671-55b5d84942e6?auto=format&fit=crop&w=600&q=80",
+            fact: "Offers playful digging and building stations for young kids.",
+            dir: "Gyeongju National Museum",
+            mapQuery: "Gyeongju National Museum Childrens Museum",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 4",
+        date: "Nov 13 (Fri)",
+        heroTitle: "Gyeongju Heritage Day",
+        heroCopy: "Spend the day among temples, royal history and traditional streets, with indoor options if the weather turns.",
+        highlights: ["Bulguksa Temple", "Gyeongju heritage sights", "Hwangridan-gil cafés and boutiques"],
+        stay: "Soyojae (소요재), Gyeongju",
+        addr: "Hwangnam-dong, Gyeongju-si",
+        hotelImg: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Hwangridan-gil Brunch Cafe",
+            desc: "Cozy café breakfast with pastries and juices.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Hwangridan-gil is famous for charming artisan cafes.",
+            dir: "Hwangridan-gil Gyeongju",
+            mapQuery: "Hwangridan-gil Gyeongju",
+            tag: "food"
+          },
+          {
+            time: "09:30 AM",
+            title: "Bulguksa Temple",
+            desc: "Stunning autumn foliage walk through ancient Buddhist grounds.",
+            img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80",
+            fact: "Established in 774 AD, Bulguksa is a masterpiece of Silla architecture.",
+            dir: "Bulguksa Temple Gyeongju",
+            mapQuery: "Bulguksa Temple Gyeongju",
+            tag: "kid"
+          },
+          {
+            time: "12:00 PM",
+            title: "Lunch: Bulguksa Sundubu",
+            desc: "Silky soft tofu stew made with local mineral water.",
+            img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80",
+            fact: "Soft tofu villages near Bulguksa offer warm, comforting meals.",
+            dir: "Bulguksa Sundubu Village",
+            mapQuery: "Bulguksa Sundubu Village",
+            tag: "food"
+          },
+          {
+            time: "02:00 PM",
+            title: "Hotel Rest / Nap @ Soyojae",
+            desc: "Quiet courtyard relaxation time.",
+            img: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80",
+            fact: "Peaceful atmosphere for toddler afternoon sleep.",
+            dir: "Soyojae Gyeongju",
+            mapQuery: "Soyojae Gyeongju",
+            tag: "nap"
+          },
+          {
+            time: "04:30 PM",
+            title: "Hwangridan-gil Street Walk",
+            desc: "Trendy street browsing and trying Gyeongju 10-won bread.",
+            img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
+            fact: "Blends traditional tile-roofed buildings with modern artisan shops.",
+            dir: "Hwangridan-gil Gyeongju",
+            mapQuery: "Hwangridan-gil Gyeongju",
+            tag: "shop"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:00 PM",
+            title: "Gyeongju Bird Park",
+            desc: "Walk-through tropical aviaries and animal exhibits.",
+            img: "https://images.unsplash.com/photo-1567449302671-55b5d84942e6?auto=format&fit=crop&w=600&q=80",
+            fact: "Korea's first glass-dome animal park dedicated to birds.",
+            dir: "Gyeongju Bird Park",
+            mapQuery: "Gyeongju Bird Park",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 5",
+        date: "Nov 14 (Sat)",
+        heroTitle: "Gyeongju to Busan Coast",
+        heroCopy: "Head to Busan and switch from historic sites to sea views, beachside fun and a relaxed Haeundae evening.",
+        highlights: ["Drive to Haeundae, Busan", "Coastal views and beach time", "Haeundae dinner and evening stroll"],
+        stay: "Airbnb Haeundae, Busan",
+        addr: "Haeundae-gu, Busan",
+        hotelImg: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Gyeongju Bakery & Coffee",
+            desc: "Quick breakfast pastries before departing for Busan.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Fuel up for the coastal drive to Busan.",
+            dir: "Gyeongju center bakery",
+            mapQuery: "Gyeongju bakery",
+            tag: "food"
+          },
+          {
+            time: "10:00 AM",
+            title: "Drive to Busan",
+            desc: "Approx 1 hr drive south to Korea's coastal metropolis.",
+            img: "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=600&q=80",
+            fact: "Busan is South Korea's largest port city.",
+            dir: "Drive to Busan",
+            mapQuery: "Busan Haeundae Beach",
+            tag: "drive"
+          },
+          {
+            time: "11:30 AM",
+            title: "Haedong Yonggungsa Temple",
+            desc: "Seaside Buddhist temple perched directly on ocean rocks.",
+            img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80",
+            fact: "Uniquely built right against crashing ocean waves.",
+            dir: "Haedong Yonggungsa Temple Busan",
+            mapQuery: "Haedong Yonggungsa Temple Busan",
+            tag: "kid"
+          },
+          {
+            time: "01:00 PM",
+            title: "Lunch: Mild Dwaeji Gukbap",
+            desc: "Comforting pork bone soup with rice, ideal for kids.",
+            img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80",
+            fact: "Busan's signature culinary dish born during the Korean War.",
+            dir: "Haeundae restaurant district",
+            mapQuery: "Haeundae Dwaeji Gukbap",
+            tag: "food"
+          },
+          {
+            time: "02:30 PM",
+            title: "Check-in Haeundae Airbnb & Nap",
+            desc: "Ocean-view apartment rest and nap time.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "Haeundae is South Korea's most famous beach.",
+            dir: "Haeundae Airbnb Busan",
+            mapQuery: "Haeundae Beach Busan",
+            tag: "nap"
+          },
+          {
+            time: "05:30 PM",
+            title: "Haeundae Blueline Park Beach Train",
+            desc: "Scenic coastal capsule train ride along old railway tracks.",
+            img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
+            fact: "Transforms abandoned railways into coastal sightseeing cars.",
+            dir: "Mipo Station Busan",
+            mapQuery: "Haeundae Blueline Park Mipo Station",
+            tag: "kid"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:30 PM",
+            title: "SEA LIFE Busan Aquarium",
+            desc: "State-of-the-art aquarium on Haeundae Beach front.",
+            img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+            fact: "Features over 250 species and an 80-meter underwater glass tunnel.",
+            dir: "SEA LIFE Busan Aquarium",
+            mapQuery: "SEA LIFE Busan Aquarium",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 6",
+        date: "Nov 15 (Sun)",
+        heroTitle: "Busan Family Discovery",
+        heroCopy: "Enjoy a flexible Busan day with coastal sights, indoor family attractions and time for shopping.",
+        highlights: ["Busan sightseeing", "Aquarium or coastal activity", "Shinsegae Centum City shopping"],
+        stay: "Airbnb Haeundae, Busan",
+        addr: "Haeundae-gu, Busan",
+        hotelImg: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Haeundae Beachside Cafe",
+            desc: "Coffee and pastries with ocean views.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Haeundae avenue has fantastic morning bakery cafes.",
+            dir: "Haeundae beach cafe street",
+            mapQuery: "Haeundae cafe",
+            tag: "food"
+          },
+          {
+            time: "09:30 AM",
+            title: "SEA LIFE Busan Aquarium",
+            desc: "Interactive touch pools, penguin feedings, and underwater tunnels.",
+            img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+            fact: "Great morning activity with toddler-friendly marine zones.",
+            dir: "SEA LIFE Busan Aquarium",
+            mapQuery: "SEA LIFE Busan Aquarium",
+            tag: "kid"
+          },
+          {
+            time: "12:30 PM",
+            title: "Lunch near Centum City",
+            desc: "Family-friendly dining inside Shinsegae Centum City.",
+            img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80",
+            fact: "Recognized as the world's largest department store.",
+            dir: "Shinsegae Centum City Busan",
+            mapQuery: "Shinsegae Centum City Busan",
+            tag: "food"
+          },
+          {
+            time: "02:00 PM",
+            title: "Nap Time @ Airbnb",
+            desc: "Afternoon rest and relaxation.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "Essential downtime for toddlers.",
+            dir: "Haeundae Airbnb Busan",
+            mapQuery: "Haeundae Beach Busan",
+            tag: "nap"
+          },
+          {
+            time: "05:00 PM",
+            title: "Gamcheon Culture Village",
+            desc: "Colorful hillside village stroll with pastel houses.",
+            img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80",
+            fact: "Known as Korea's Santorini.",
+            dir: "Gamcheon Culture Village Busan",
+            mapQuery: "Gamcheon Culture Village Busan",
+            tag: "kid"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:00 PM",
+            title: "Pororo Play Park Busan",
+            desc: "Indoor themed play zone for toddlers.",
+            img: "https://images.unsplash.com/photo-1567449302671-55b5d84942e6?auto=format&fit=crop&w=600&q=80",
+            fact: "Pororo is affectionately known as the President for Toddlers.",
+            dir: "Pororo Park Busan",
+            mapQuery: "Pororo Park Busan",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 7",
+        date: "Nov 16 (Mon)",
+        heroTitle: "Jeonju Hanok Stay & Easy Evening",
+        heroCopy: "Drive from Busan to Jeonju, check in to your booked traditional-style home at 4:00 PM, then enjoy a gentle evening around Jeonjugaeksa and the nearby café streets.",
+        highlights: ["Drive from Busan to Jeonju", "Check in at 4:00 PM", "Relaxed family evening in central Jeonju"],
+        stay: "Home in Jeonju-si (host: 동석)",
+        addr: "73-6 Jeonjugaeksa 2-gil, Jeonju-si, South Korea",
+        hotelImg: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Busan Haeundae Bakery",
+            desc: "Morning coffee and toast before departure.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Easy breakfast before heading north.",
+            dir: "Haeundae bakery",
+            mapQuery: "Haeundae bakery",
+            tag: "food"
+          },
+          {
+            time: "10:00 AM",
+            title: "Drive from Busan to Jeonju",
+            desc: "Allow around 3–3.5 hours of driving before breaks and traffic; use a highway rest area if the children need one.",
+            img: "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=600&q=80",
+            fact: "Keep the drive flexible with a comfort stop for the children.",
+            dir: "Jeonju-si",
+            mapQuery: "Jeonju-si South Korea",
+            tag: "drive"
+          },
+          {
+            time: "12:30 PM",
+            title: "Lunch at Highway Rest Stop",
+            desc: "Stop for a simple lunch at a highway rest area en route to Jeonju, if needed.",
+            img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80",
+            fact: "A flexible stop keeps the family comfortable on the drive.",
+            dir: "Expressway Rest Area",
+            mapQuery: "Korea Expressway Rest Area",
+            tag: "food"
+          },
+          {
+            time: "02:30 PM",
+            title: "Midway Check-in & Nap",
+            desc: "Aim to reach Jeonju with time for a relaxed arrival; your accommodation check-in is from 4:00 PM.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "Avoid adding another hotel stop: Jeonju is your overnight base on Nov 16.",
+            dir: "Home in Jeonju-si",
+            mapQuery: "73-6 Jeonjugaeksa 2-gil, Jeonju-si, South Korea",
+            tag: "nap"
+          },
+          {
+            time: "05:30 PM",
+            title: "Check in at Home in Jeonju-si (4:00 PM)",
+            desc: "Check in at 4:00 PM, settle in, then choose a nearby family dinner and keep the evening unhurried.",
+            img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
+            fact: "Checkout is Tue, Nov 17 at 12:00 PM; message the host through the booking app if arrival timing changes.",
+            dir: "Jeonjugaeksa 2-gil restaurants",
+            mapQuery: "Jeonjugaeksa 2-gil restaurants Jeonju"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:30 PM",
+            title: "Optional evening stroll near Jeonjugaeksa",
+            desc: "Only if the family has energy after the drive: take a short stroll and pick up snacks nearby.",
+            img: "https://images.unsplash.com/photo-1567449302671-55b5d84942e6?auto=format&fit=crop&w=600&q=80",
+            fact: "Keep this optional; the priority is settling into the accommodation.",
+            dir: "Jeonjugaeksa 2-gil, Jeonju",
+            mapQuery: "Jeonjugaeksa 2-gil, Jeonju-si",
+            tag: "shop"
+          }
+        ]
+      },
+      {
+        day: "Day 8",
+        date: "Nov 17 (Tue)",
+        heroTitle: "Arrive in Seoul",
+        heroCopy: "Check out of your Jeonju home by 12:00 PM, drive to Seoul, return the rental car and settle into Fraser Place Central Seoul.",
+        highlights: ["Check out of Jeonju home by noon", "Drive to Seoul and return the rental car", "Check in and have an easy evening"],
+        stay: "Fraser Place Central Seoul",
+        addr: "78 Tongil-ro, Jung-gu, Seoul 04517, South Korea",
+        hotelImg: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "09:00 AM",
+            title: "Breakfast in Jeonju & pack",
+            desc: "Have breakfast nearby, pack up and enjoy a relaxed final morning before the 12:00 PM checkout.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Confirm the checkout instructions in your booking app and leave by noon.",
+            dir: "Jeonjugaeksa 2-gil cafes",
+            mapQuery: "Jeonjugaeksa 2-gil cafes Jeonju",
+            tag: "food"
+          },
+          {
+            time: "12:00 PM",
+            title: "Check out & drive to Seoul",
+            desc: "Leave Jeonju at checkout and drive to Seoul; allow roughly 3 hours or more depending on traffic and breaks, then return the rental car.",
+            img: "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&w=600&q=80",
+            fact: "Check the live route and rental-car return cut-off before departing.",
+            dir: "Fraser Place Central Seoul / rental-car return location",
+            mapQuery: "Seoul Station rental car return",
+            tag: "drive"
+          },
+          {
+            time: "03:30 PM",
+            title: "Late lunch near Seoul Station",
+            desc: "Comforting warm noodles or mild broth.",
+            img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80",
+            fact: "Quick and convenient family dining.",
+            dir: "Seoul Station restaurants",
+            mapQuery: "Seoul Station restaurants",
+            tag: "food"
+          },
+          {
+            time: "04:00 PM",
+            title: "Check in at Fraser Place Central Seoul & rest",
+            desc: "Spacious family residence suite check-in and nap.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "Apartment-style living ideal for families with young kids.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul",
+            tag: "nap"
+          },
+          {
+            time: "05:00 PM",
+            title: "Shopping: Nammarket & Myeongdong",
+            desc: "Explore Namdaemun Market and vibrant shopping streets.",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+            fact: "Namdaemun is Korea's oldest continuously running market.",
+            dir: "Namdaemun Market Seoul",
+            mapQuery: "Namdaemun Market Seoul",
+            tag: "shop"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:00 PM",
+            title: "Pororo Park Yeongdeungpo",
+            desc: "Indoor Pororo theme park rides and play zones.",
+            img: "https://images.unsplash.com/photo-1567449302671-55b5d84942e6?auto=format&fit=crop&w=600&q=80",
+            fact: "Climate-controlled indoor environment.",
+            dir: "Pororo Park Yeongdeungpo",
+            mapQuery: "Pororo Park Yeongdeungpo",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 9",
+        date: "Nov 18 (Wed)",
+        heroTitle: "Markets & Family Fun in Seoul",
+        heroCopy: "Explore central Seoul with flexible shopping and an indoor play option for the children.",
+        highlights: ["Seoul neighbourhood exploration", "Namdaemun or nearby shopping", "Optional indoor children’s play"],
+        stay: "Fraser Place Central Seoul",
+        addr: "78 Tongil-ro, Jung-gu, Seoul 04517, South Korea",
+        hotelImg: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Paris Baguette Seoul",
+            desc: "Popular local bakery chain with fresh pastries and coffee.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Korea's favorite morning bakery spot.",
+            dir: "Near Fraser Place Central",
+            mapQuery: "Paris Baguette Seoul Station",
+            tag: "food"
+          },
+          {
+            time: "10:00 AM",
+            title: "Pororo Park Yeongdeungpo",
+            desc: "Rides, character shows, and ball pits for 2yo & 4yo.",
+            img: "https://images.unsplash.com/photo-1567449302671-55b5d84942e6?auto=format&fit=crop&w=600&q=80",
+            fact: "Designed specifically for toddler motor skills.",
+            dir: "Times Square Mall Yeongdeungpo",
+            mapQuery: "Pororo Park Yeongdeungpo Times Square",
+            tag: "kid"
+          },
+          {
+            time: "01:00 PM",
+            title: "Lunch & Shopping at Times Square Mall",
+            desc: "Mall food court dining and family retail shopping.",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+            fact: "One of Seoul's largest retail and entertainment complexes.",
+            dir: "Times Square Mall Yeongdeungpo",
+            mapQuery: "Times Square Mall Yeongdeungpo",
+            tag: "shop"
+          },
+          {
+            time: "02:30 PM",
+            title: "Hotel Nap @ Fraser Place from Yeongdeungpo",
+            desc: "Afternoon nap in your residence suite.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "Central location allows quick return to hotel.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul",
+            tag: "nap"
+          },
+          {
+            time: "05:30 PM",
+            title: "Gwanghwamun Square & Stream Walk",
+            desc: "Flat pedestrian square and gentle stream walk.",
+            img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80",
+            fact: "Cheonggyecheon is a modern 11-km urban restoration stream.",
+            dir: "Gwanghwamun Square Seoul",
+            mapQuery: "Gwanghwamun Square Seoul",
+            tag: "kid"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:30 PM",
+            title: "Shopping: COEX Mall & Starfield Library",
+            desc: "Explore massive underground shopping and iconic bookstore.",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+            fact: "Starfield Library features 13-meter-tall bookshelves.",
+            dir: "COEX Mall Gangnam",
+            mapQuery: "COEX Mall Gangnam Seoul",
+            tag: "shop"
+          }
+        ]
+      },
+      {
+        day: "Day 10",
+        date: "Nov 19 (Thu)",
+        heroTitle: "A Flexible Seoul Day",
+        heroCopy: "Balance sightseeing with shopping, cafés and breaks; keep the route compact to avoid unnecessary cross-city travel.",
+        highlights: ["Central Seoul highlights", "Shopping and local food", "Relaxed evening near the hotel"],
+        stay: "Fraser Place Central Seoul",
+        addr: "78 Tongil-ro, Jung-gu, Seoul 04517, South Korea",
+        hotelImg: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Hotel Resident Café",
+            desc: "Convenient breakfast inside Fraser Place.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Start the day with fresh coffee and breakfast sets.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul",
+            tag: "food"
+          },
+          {
+            time: "10:00 AM",
+            title: "Coex Aquarium (Gangnam)",
+            desc: "Over 40,000 sea creatures and Lego marine zones.",
+            img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+            fact: "One of Korea's largest marine theme parks.",
+            dir: "COEX Aquarium Seoul",
+            mapQuery: "COEX Aquarium Seoul",
+            tag: "kid"
+          },
+          {
+            time: "01:00 PM",
+            title: "Shopping & Lunch at COEX Mall",
+            desc: "Extensive subterranean retail shopping and family dining.",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+            fact: "One of the largest underground shopping malls in Asia.",
+            dir: "COEX Mall Gangnam",
+            mapQuery: "COEX Mall Gangnam",
+            tag: "shop"
+          },
+          {
+            time: "02:30 PM",
+            title: "Hotel Rest / Nap from COEX",
+            desc: "Afternoon rest at Fraser Place.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "Consistent afternoon breaks keep toddlers energized.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul",
+            tag: "nap"
+          },
+          {
+            time: "05:30 PM",
+            title: "Myeongdong Shopping Street Walk",
+            desc: "Browse cosmetics, fashion boutiques, and mild street treats.",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+            fact: "Seoul's premier shopping district.",
+            dir: "Myeongdong Shopping Street",
+            mapQuery: "Myeongdong Shopping Street Seoul",
+            tag: "shop"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:30 PM",
+            title: "Seoul Museum of History Kids Zone",
+            desc: "Free indoor interactive children's gallery.",
+            img: "https://images.unsplash.com/photo-1567449302671-55b5d84942e6?auto=format&fit=crop&w=600&q=80",
+            fact: "Designed for hands-on learning and imaginative play.",
+            dir: "Seoul Museum of History",
+            mapQuery: "Seoul Museum of History",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 11",
+        date: "Nov 20 (Fri)",
+        heroTitle: "Palaces & Traditional Seoul",
+        heroCopy: "Discover royal history and traditional streets, with hands-on museum options for younger travellers.",
+        highlights: ["Palace and cultural sights", "Insadong crafts and souvenirs", "Children’s museum option"],
+        stay: "Fraser Place Central Seoul",
+        addr: "78 Tongil-ro, Jung-gu, Seoul 04517, South Korea",
+        hotelImg: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Gyeongbokgung Area Cafe",
+            desc: "Traditional tea and pastries near the palace.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Charming traditional tea houses surround the palace district.",
+            dir: "Anguk-dong cafe street",
+            mapQuery: "Anguk station cafe",
+            tag: "food"
+          },
+          {
+            time: "10:00 AM",
+            title: "Gyeongbokgung Palace & Hanbok Experience",
+            desc: "Dress kids in Hanbok (free admission for Hanbok wearers!).",
+            img: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80",
+            fact: "Main royal palace of the Joseon dynasty, built in 1395.",
+            dir: "Gyeongbokgung Palace Seoul",
+            mapQuery: "Gyeongbokgung Palace Seoul",
+            tag: "kid"
+          },
+          {
+            time: "12:30 PM",
+            title: "Lunch: Tosokchon Samgyetang",
+            desc: "Nourishing ginseng chicken soup with tender rice.",
+            img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80",
+            fact: "Traditional health-restoring chicken soup.",
+            dir: "Tosokchon Samgyetang Seoul",
+            mapQuery: "Tosokchon Samgyetang Seoul",
+            tag: "food"
+          },
+          {
+            time: "02:00 PM",
+            title: "Hotel Nap @ Fraser Place from Tosokchon",
+            desc: "Afternoon rest at the hotel.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "Peaceful downtime following palace exploration.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul",
+            tag: "nap"
+          },
+          {
+            time: "05:00 PM",
+            title: "Shopping: Insadong Craft Street & Ssamzigil",
+            desc: "Browse artisan crafts, souvenirs, and multi-level boutique shops.",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+            fact: "Ssamzigil features a spiraling open-air walkway of artisan shops.",
+            dir: "Insadong Ssamzigil Seoul",
+            mapQuery: "Insadong Ssamzigil Seoul",
+            tag: "shop"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:00 PM",
+            title: "National Children's Museum of Korea",
+            desc: "World-class interactive play museum near palace district.",
+            img: "https://images.unsplash.com/photo-1567449302671-55b5d84942e6?auto=format&fit=crop&w=600&q=80",
+            fact: "Multiple floors of imaginative science and sensory play.",
+            dir: "National Childrens Museum Seoul",
+            mapQuery: "National Childrens Museum Seoul",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 12",
+        date: "Nov 21 (Sat)",
+        heroTitle: "Aquarium & Lotte World Mall",
+        heroCopy: "A convenient indoor day around Jamsil, ideal for cooler weather and a family-friendly mix of attractions and shopping.",
+        highlights: ["Lotte World Mall", "Aquarium or theme-park choice", "Family dining in Jamsil"],
+        stay: "Fraser Place Central Seoul",
+        addr: "78 Tongil-ro, Jung-gu, Seoul 04517, South Korea",
+        hotelImg: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Jamsil Bakery Cafe",
+            desc: "Morning coffee and pastries near Lotte World.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Jamsil district features wonderful morning cafes.",
+            dir: "Jamsil Station cafe",
+            mapQuery: "Jamsil cafe",
+            tag: "food"
+          },
+          {
+            time: "10:00 AM",
+            title: "Lotte World Aquarium & Magic Island",
+            desc: "See Beluga whales, touch marine pools, and toddler rides.",
+            img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+            fact: "Massive indoor theme park and world-class aquarium.",
+            dir: "Lotte World Aquarium Seoul",
+            mapQuery: "Lotte World Aquarium Seoul",
+            tag: "kid"
+          },
+          {
+            time: "01:00 PM",
+            title: "Shopping & Lunch at Lotte World Mall",
+            desc: "Extensive luxury and lifestyle retail shopping plus family dining.",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+            fact: "Connected directly to the amusement park and subway.",
+            dir: "Lotte World Mall Seoul",
+            mapQuery: "Lotte World Mall Seoul",
+            tag: "shop"
+          },
+          {
+            time: "02:30 PM",
+            title: "Hotel Nap @ Fraser Place from Jamsil",
+            desc: "Afternoon rest back at the residence.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "Essential midday break after morning excitement.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul",
+            tag: "nap"
+          },
+          {
+            time: "05:30 PM",
+            title: "Han River Park Walk",
+            desc: "Watch river lights and enjoy a gentle walk along riverside park.",
+            img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+            fact: "The Han River flows right through the heart of Seoul.",
+            dir: "Yeouido Hangang Park Seoul",
+            mapQuery: "Yeouido Hangang Park Seoul",
+            tag: "kid"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:30 PM",
+            title: "Lotte World Indoor Children's Zone",
+            desc: "Extend playtime in indoor soft play zones for younger kids.",
+            img: "https://images.unsplash.com/photo-1567449302671-55b5d84942e6?auto=format&fit=crop&w=600&q=80",
+            fact: "Indoor Adventure zone protected from weather.",
+            dir: "Lotte World Adventure Seoul",
+            mapQuery: "Lotte World Adventure Seoul",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 13",
+        date: "Nov 22 (Sun)",
+        heroTitle: "K-Beauty Flagship & Factory Outlet",
+        heroCopy: "A dedicated shopping day: visit Korea’s largest Olive Young in Seongsu, browse the neighbourhood, then head to the Giheung outlet for family and fashion shopping. This is a long day with around 1.5 hours of transit each way to the outlet, so keep the pace flexible.",
+        highlights: ["Olive Young N Seongsu — immersive beauty experience", "Lunch and concept shops in Seongsu", "LOTTE Premium Outlets Giheung"],
+        stay: "Fraser Place Central Seoul",
+        addr: "78 Tongil-ro, Jung-gu, Seoul 04517, South Korea",
+        hotelImg: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast near Fraser Place Central Seoul",
+            desc: "Have breakfast near the hotel before starting the shopping day. Aim to leave in time to reach Seongsu close to the 10:00 AM opening.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Starting early gives you more time at both shopping stops without rushing the children.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul",
+            tag: "food"
+          },
+          {
+            time: "10:00 AM",
+            title: "Olive Young N Seongsu — Immersive K-Beauty Store",
+            desc: "Explore the multi-floor K-beauty flagship, trend displays, brand pop-ups and beauty experience zones. Allow around 1.5–2 hours; check whether any consultations or experiences need a reservation.",
+            img: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=600&q=80",
+            fact: "A large experiential K-beauty store with multi-floor concepts and beauty services. The Seoul tourism guide currently identifies the Myeongdong flagship as the country’s largest; keep this Seongsu stop for its distinct experience.",
+            dir: "Olive Young N Seongsu",
+            mapQuery: "Olive Young N Seongsu",
+            tag: "shop"
+          },
+          {
+            time: "12:00 PM",
+            title: "Lunch & Seongsu Concept-Shop Browse",
+            desc: "Eat around Yeonmujang-gil, then browse a few nearby fashion, lifestyle and café stores. Keep this to a short loop so you have enough time for the outlet later.",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+            fact: "Olive Young N Seongsu is near Seongsu Station Exit 4, so this first part of the day is easy to explore on foot.",
+            dir: "Seongsu Yeonmujang-gil shopping street",
+            mapQuery: "Seongsu-dong Cafe Street Seoul",
+            tag: "shop"
+          },
+          {
+            time: "01:30 PM",
+            title: "Transit to LOTTE Premium Outlets Giheung",
+            desc: "From Seongsu Station, take Line 2 to Wangsimni and transfer to the Suin–Bundang Line towards Giheung. From Giheung Station, use a local bus or taxi for the final leg to the outlet. Allow about 1.5–1.75 hours door-to-door and confirm the final connection in Naver Map on the day.",
+            img: "https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?auto=format&fit=crop&w=600&q=80",
+            fact: "The outlet is outside central Seoul; public transport is possible, but the last-mile connection makes this a longer excursion than an in-city mall.",
+            dir: "LOTTE Premium Outlets Giheung",
+            mapQuery: "LOTTE Premium Outlets Giheung",
+            tag: "drive"
+          },
+          {
+            time: "03:15 PM",
+            title: "Shopping & Family Break at LOTTE Premium Outlets Giheung",
+            desc: "Browse fashion, sportswear, kids’ brands and home goods. The complex also advertises family attractions such as a forest adventure playground, mini train and indoor surfing. Choose a few priority stores rather than trying to cover the whole outlet.",
+            img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80",
+            fact: "Address: 124 Singomae-ro, Giheung-gu, Yongin-si, Gyeonggi-do. Official tourism listings show seasonal hours: 10:30–20:30 Mon–Thu and 10:30–21:00 Fri–Sun in November–February. Check the branch notice before visiting; store openings and promotions may change.",
+            dir: "LOTTE Premium Outlets Giheung",
+            mapQuery: "LOTTE Premium Outlets Giheung",
+            tag: "shop"
+          },
+          {
+            time: "06:30 PM",
+            title: "Dinner at the Outlet & Return to Seoul",
+            desc: "Have an early dinner in the outlet dining area, then retrace the route: local bus/taxi to Giheung Station, Suin–Bundang Line to Wangsimni, then Line 2 to central Seoul. Allow around 1.5–2 hours for the return and check the last-mile connection before leaving.",
+            img: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80",
+            fact: "This is the longest shopping day of the Seoul stay. If the children are tired, shorten the Seongsu browse or leave the outlet earlier.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul",
+            tag: "food"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "Flexible alternative",
+            title: "Shorter option: Stay in Seongsu",
+            desc: "If the children need a slower day, skip the outlet excursion and spend the afternoon around Seongsu’s cafés, concept shops and Seoul Forest instead.",
+            img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+            fact: "This alternative avoids the long cross-city journey and is easier to shorten at any point.",
+            dir: "Seongsu-dong Cafe Street Seoul",
+            mapQuery: "Seongsu-dong Cafe Street Seoul",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 14",
+        date: "Nov 23 (Mon)",
+        heroTitle: "Design, Shopping & Play",
+        heroCopy: "Choose a manageable mix of design shops and family activities, avoiding too many distant neighbourhoods in one day.",
+        highlights: ["DDP and design shopping", "Optional children’s activity", "Relaxed evening meal"],
+        stay: "Fraser Place Central Seoul",
+        addr: "78 Tongil-ro, Jung-gu, Seoul 04517, South Korea",
+        hotelImg: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Neighborhood Bakery Cafe",
+            desc: "Warm bakery items and fresh juice near hotel.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Convenient morning dining in Jung-gu.",
+            dir: "Jung-gu cafe",
+            mapQuery: "Jung-gu Seoul cafe",
+            tag: "food"
+          },
+          {
+            time: "10:00 AM",
+            title: "Children's Grand Park",
+            desc: "Free zoo, botanical gardens, and huge outdoor playgrounds.",
+            img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80",
+            fact: "Dedicated entirely to family recreation with wide stroller paths.",
+            dir: "Childrens Grand Park Seoul",
+            mapQuery: "Childrens Grand Park Seoul",
+            tag: "kid"
+          },
+          {
+            time: "01:00 PM",
+            title: "Lunch nearby",
+            desc: "Casual neighborhood dining near the park.",
+            img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80",
+            fact: "Local eateries offering comforting homestyle meals.",
+            dir: "Children's Grand Park exit",
+            mapQuery: "Childrens Grand Park restaurants",
+            tag: "food"
+          },
+          {
+            time: "02:30 PM",
+            title: "Hotel Nap / Rest",
+            desc: "Afternoon rest at Fraser Place.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "Rest before evening activities.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul",
+            tag: "nap"
+          },
+          {
+            time: "05:30 PM",
+            title: "Shopping: Hongdae Youth & Toy Street",
+            desc: "Vibrant shopping district with toy stores and character shops.",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+            fact: "Hongdae is famous for indie culture, trendy fashion, and toy shops.",
+            dir: "Hongdae Shopping Street Seoul",
+            mapQuery: "Hongdae Shopping Street Seoul",
+            tag: "shop"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:30 PM",
+            title: "Seoul Animation Center (Tayo Zone)",
+            desc: "Interactive play zone featuring Tayo the Little Bus.",
+            img: "https://images.unsplash.com/photo-1567449302671-55b5d84942e6?auto=format&fit=crop&w=600&q=80",
+            fact: "Paradise for toddlers who love animated characters.",
+            dir: "Seoul Animation Center",
+            mapQuery: "Seoul Animation Center",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 15",
+        date: "Nov 24 (Tue)",
+        heroTitle: "Souvenirs & Seoul Farewell",
+        heroCopy: "Keep the final full day flexible for Korean snacks, last-minute shopping, packing and a special farewell dinner.",
+        highlights: ["Lotte Mart Seoul Station", "Souvenir and snack shopping", "Farewell dinner in Seoul"],
+        stay: "Fraser Place Central Seoul",
+        addr: "78 Tongil-ro, Jung-gu, Seoul 04517, South Korea",
+        hotelImg: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "08:30 AM",
+            title: "Breakfast: Seoul Station Bakery",
+            desc: "Morning coffee and pastries before final day shopping.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Easy morning transit access.",
+            dir: "Seoul Station bakery",
+            mapQuery: "Seoul Station cafe",
+            tag: "food"
+          },
+          {
+            time: "10:00 AM",
+            title: "Shopping: Lotte Mart Seoul Station",
+            desc: "Ultimate one-stop shop for Korean snacks, seaweed, and souvenirs.",
+            img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
+            fact: "Super close to Fraser Place with direct packing boxes.",
+            dir: "Lotte Mart Seoul Station",
+            mapQuery: "Lotte Mart Seoul Station",
+            tag: "shop"
+          },
+          {
+            time: "12:30 PM",
+            title: "Farewell Lunch near Seoul Station",
+            desc: "Relaxed family lunch.",
+            img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80",
+            fact: "Convenient dining options inside station complex.",
+            dir: "Seoul Station restaurants",
+            mapQuery: "Seoul Station restaurants",
+            tag: "food"
+          },
+          {
+            time: "02:00 PM",
+            title: "Hotel Rest & Packing",
+            desc: "Prepare luggage securely for return flight.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "Organize souvenirs and baby gear.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul",
+            tag: "nap"
+          },
+          {
+            time: "05:30 PM",
+            title: "Farewell Dinner in Seoul",
+            desc: "Special final dinner celebrating your 16-day family adventure.",
+            img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
+            fact: "Memorable final meal together in downtown Seoul.",
+            dir: "Jung-gu Seoul restaurants",
+            mapQuery: "Jung-gu Seoul restaurants",
+            tag: "food"
+          }
+        ],
+        noNapExtra: [
+          {
+            time: "02:00 PM",
+            title: "Namsan Seoul Tower Cable Car",
+            desc: "Panoramic sunset views over Seoul before departure.",
+            img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80",
+            fact: "Offers breathtaking 360-degree views of the entire Seoul basin.",
+            dir: "Namsan Seoul Tower",
+            mapQuery: "Namsan Seoul Tower",
+            tag: "kid"
+          }
+        ]
+      },
+      {
+        day: "Day 16",
+        date: "Nov 25 (Wed)",
+        heroTitle: "Departure Day",
+        heroCopy: "Enjoy a relaxed breakfast, allow generous airport-transfer time and keep the final hours flexible for check-in and security.",
+        highlights: ["Breakfast and hotel check-out", "AREX / airport transfer", "Incheon Airport Terminal 2"],
+        stay: "Departure Day ✈️",
+        addr: "Incheon Airport Terminal 2",
+        hotelImg: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
+        items: [
+          {
+            time: "09:00 AM",
+            title: "Breakfast: Fraser Place Resident Breakfast",
+            desc: "Relaxed final morning breakfast at hotel.",
+            img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80",
+            fact: "Final morning in Seoul.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul",
+            tag: "food"
+          },
+          {
+            time: "11:00 AM",
+            title: "Check-out Fraser Place Central",
+            desc: "Store luggage and prepare for airport transit.",
+            img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
+            fact: "Luggage storage assistance available post-checkout.",
+            dir: "Fraser Place Central Seoul",
+            mapQuery: "Fraser Place Central Seoul"
+          },
+          {
+            time: "01:00 PM",
+            title: "AREX Express Train to Incheon",
+            desc: "Direct comfortable transit from Seoul Station to Incheon T2.",
+            img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80",
+            fact: "The AREX Express connects Seoul Station to ICN in 43 minutes.",
+            dir: "Seoul Station AREX platform",
+            mapQuery: "Seoul Station AREX",
+            tag: "drive"
+          },
+          {
+            time: "03:30 PM",
+            title: "Check-in @ Incheon Airport T2",
+            desc: "Korean Air check-in (EB3YNF), visit kids play zones inside T2 transit lounge.",
+            img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
+            fact: "Incheon T2 features dedicated children's play areas and family lounges.",
+            dir: "Incheon Airport Terminal 2",
+            mapQuery: "Incheon International Airport Terminal 2",
+            tag: "kid"
+          },
+          {
+            time: "08:25 PM",
+            title: "Flight Departure to Singapore",
+            desc: "Korean Air (EB3YNF) return flight back to Singapore (SIN).",
+            img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80",
+            fact: "Korean Air provides bassinet services and children's meals upon request.",
+            dir: "Incheon Airport T2 Boarding Gate",
+            mapQuery: "Incheon International Airport Terminal 2"
+          }
+        ],
+        noNapExtra: []
+      }
+    ];
+
+
+    // Add a dinner suggestion to each day that does not already include one.
+    // These are cuisine/area suggestions rather than claims about a specific restaurant.
+    const dinnerSuggestions = [
+      { day: "Day 1", title: "Dinner: Suwon Galbi or Korean BBQ", desc: "A classic Suwon dinner; choose a nearby family-friendly restaurant and ask for a mild, non-spicy option for children.", dir: "Suwon Paldal-gu galbi family restaurant", mapQuery: "Suwon Paldal-gu galbi family restaurant" },
+      { day: "Day 2", title: "Dinner: Andong Braised Chicken or Korean Set Meal", desc: "Try a mild portion of Andong-style jjimdak or a simple Korean set meal near the hanok stay.", dir: "Andong Gu Market restaurants", mapQuery: "Andong Gu Market restaurants" },
+      { day: "Day 3", title: "Dinner: Gyeongju Hanjeongsik", desc: "A Korean set meal is an easy way to sample local side dishes; confirm spice levels and closing time.", dir: "Gyeongju Hwangnidan-gil Korean set meal", mapQuery: "Gyeongju Hwangnidan-gil Korean set meal" },
+      { day: "Day 4", title: "Dinner: Hwangridan-gil Korean Dining", desc: "Keep dinner close to the hotel after a relaxed sightseeing day; choose noodles, dumplings or a mild set meal.", dir: "Hwangnidan-gil family restaurant", mapQuery: "Hwangnidan-gil family restaurant" },
+      { day: "Day 5", title: "Dinner: Haeundae Seafood or Korean BBQ", desc: "After the beach train and aquarium, keep dinner around Haeundae so the children can get back to the accommodation easily.", dir: "Haeundae family restaurant", mapQuery: "Haeundae family restaurant" },
+      { day: "Day 6", title: "Dinner: Busan Noodles or Korean BBQ", desc: "Choose a casual restaurant near Haeundae or Centum City; request mild broth or sauces on the side.", dir: "Haeundae Busan family restaurant", mapQuery: "Haeundae Busan family restaurant" },
+      { day: "Day 8", title: "Dinner: Seoul Station Korean Comfort Food", desc: "After the drive and rental return, opt for a simple noodle, dumpling or rice meal near the hotel.", dir: "Seoul Station family restaurant", mapQuery: "Seoul Station family restaurant" },
+      { day: "Day 9", title: "Dinner: Myeongdong Korean Street Food", desc: "A flexible dinner option after sightseeing; choose cooked-to-order dishes and keep a simple backup for picky eaters.", dir: "Myeongdong family restaurants", mapQuery: "Myeongdong family restaurants" },
+      { day: "Day 10", title: "Dinner: Myeongdong or Hotel-Area Dining", desc: "Keep the evening meal close to Fraser Place after a full day; noodles, mandu and rice dishes are easy family options.", dir: "Fraser Place Central Seoul restaurants", mapQuery: "Fraser Place Central Seoul restaurants" },
+      { day: "Day 11", title: "Dinner: Insadong Korean Set Meal", desc: "A traditional Korean set meal or kalguksu near Insadong works well after the palace and museum visits.", dir: "Insadong family restaurant", mapQuery: "Insadong family restaurant" },
+      { day: "Day 12", title: "Dinner: Jamsil / Lotte World Mall", desc: "Eat around Jamsil for a convenient choice after the aquarium and indoor attractions.", dir: "Jamsil family restaurant", mapQuery: "Jamsil family restaurant" },
+      { day: "Day 13", title: "Dinner: Seongsu or Dongdaemun", desc: "Choose a casual Korean restaurant near your final stop rather than crossing the city again.", dir: "Seongsu-dong family restaurant", mapQuery: "Seongsu-dong family restaurant" },
+      { day: "Day 14", title: "Dinner: Hongdae Casual Korean Dining", desc: "A relaxed meal around Hongdae; look for noodles, dumplings or grilled meat with mild side dishes.", dir: "Hongdae family restaurant", mapQuery: "Hongdae family restaurant" },
+      { day: "Day 16", title: "Dinner: Incheon Airport T2", desc: "Keep the final meal flexible at the airport before boarding; check opening hours and allow time for security.", dir: "Incheon International Airport Terminal 2 restaurants", mapQuery: "Incheon International Airport Terminal 2 restaurants" }
+    ];
+    dinnerSuggestions.forEach(suggestion => {
+      const day = daysData.find(d => d.day === suggestion.day);
+      if (day && !day.items.some(item => /dinner/i.test(item.title || ""))) {
+        const dinnerItem = { time: suggestion.day === "Day 16" ? "05:30 PM" : "06:00 PM", ...suggestion, tag: "food" };
+        const flightIndex = day.items.findIndex(item => /Flight Departure/i.test(item.title || ""));
+        if (flightIndex >= 0) day.items.splice(flightIndex, 0, dinnerItem);
+        else day.items.push(dinnerItem);
+      }
+    });
+    // The official Seoul tourism guide currently describes the Myeongdong flagship as the country's largest Olive Young.
+    // Add it to the existing Myeongdong evening so the Seongsu experience remains a separate, complementary visit.
+    const myeongdongDay = daysData.find(d => d.day === "Day 10");
+    if (myeongdongDay && !myeongdongDay.items.some(item => /Olive Young Myeongdong Flagship/i.test(item.title || ""))) {
+      const oliveMyeongdong = {
+        time: "05:00 PM",
+        title: "Olive Young Myeongdong Flagship — Largest Flagship Store",
+        desc: "Visit the Myeongdong flagship identified by the official Seoul tourism guide as the country's largest Olive Young. Address: 53 Myeongdong-gil, Jung-gu, Seoul. Listed hours: 10:00 AM–10:30 PM; Myeongdong Station (Line 4), Exit 8, around 5 minutes on foot. Recheck hours before the trip.",
+        dir: "Olive Young Myeongdong Flagship",
+        mapQuery: "Olive Young Myeongdong Flagship",
+        tag: "shop",
+        fact: "The official Seoul tourism guide lists this flagship as the country's largest. Olive Young N Seongsu is a separate, newer experiential concept store."
+      };
+      const myeongdongIndex = myeongdongDay.items.findIndex(item => /Myeongdong Shopping Street Walk/i.test(item.title || ""));
+      if (myeongdongIndex >= 0) {
+        myeongdongDay.items[myeongdongIndex].time = "06:15 PM";
+        myeongdongDay.items.splice(myeongdongIndex, 0, oliveMyeongdong);
+      } else {
+        myeongdongDay.items.push(oliveMyeongdong);
+      }
+      myeongdongDay.highlights = ["COEX Aquarium & Mall", "Afternoon rest at Fraser Place", "Olive Young Myeongdong flagship & shopping"];
+    }
+
+    // Final travel day has no explicit lunch stop in the original plan; add a flexible airport option.
+    const finalDay = daysData.find(d => d.day === "Day 16");
+    if (finalDay && !finalDay.items.some(item => /^Lunch:/i.test(item.title || ""))) {
+      const lunchItem = { time: "12:30 PM", title: "Lunch: Incheon Airport T2", desc: "Choose a convenient airport restaurant after arriving in Seoul; keep the meal flexible around the AREX and check-in schedule.", dir: "Incheon International Airport Terminal 2 restaurants", mapQuery: "Incheon International Airport Terminal 2 restaurants", tag: "food" };
+      const checkinIndex = finalDay.items.findIndex(item => /Check-in @ Incheon Airport/i.test(item.title || ""));
+      finalDay.items.splice(checkinIndex >= 0 ? checkinIndex : finalDay.items.length, 0, lunchItem);
+    }
+
+    // Planning estimates for a normal passenger rental car; confirm the exact route on the day.
+    const driveNotes = {
+      "Drive to Suwon & Hotel Check-in": {
+        route:"Incheon Airport T2 → The Marevo, Suwon",
+        time:"60–90 min",
+        toll:"₩3,000–₩6,000",
+        note:"Allow extra time for rental-car paperwork, child seats, luggage and airport traffic."
+      },
+      "Drive to Andong": {
+        route:"Suwon → Andong",
+        time:"2 hr 45 min–3 hr 30 min",
+        toll:"₩10,000–₩16,000",
+        note:"Plan one 15–20 minute rest stop. The original 2.5-hour estimate may be optimistic with kids."
+      },
+      "Drive to Gyeongju": {
+        route:"Andong → Gyeongju",
+        time:"1 hr 45 min–2 hr 15 min",
+        toll:"₩4,000–₩8,000",
+        note:"Allow time for checkout and a comfort break; keep the first Gyeongju stop flexible."
+      },
+      "Drive to Busan": {
+        route:"Gyeongju → Haeundae, Busan",
+        time:"1 hr 15 min–1 hr 45 min",
+        toll:"₩3,000–₩6,000",
+        note:"Haedong Yonggungsa is east of central Busan; consider visiting it before checking in, as planned."
+      },
+      "Drive North back towards Seoul": {
+        route:"Busan → Cheonan-area stopover",
+        time:"3 hr 30 min–4 hr 30 min driving",
+        toll:"₩20,000–₩30,000",
+        note:"This is a long drive. With children, plan 2 breaks and expect a 5-hour travel block. Confirm the stopover hotel before departure."
+      },
+      "Drive to Seoul & Return Rental Car": {
+        route:"Cheonan → Seoul Station area",
+        time:"1 hr 15 min–2 hr",
+        toll:"₩4,000–₩8,000",
+        note:"Seoul traffic and the exact rental-return branch can add time. Confirm the return address and refuelling policy."
+      }
+    };
+    const imageArticleMap = {
+      "Suwon Hwaseong Fortress":"Hwaseong Fortress",
+      "Woryeonggyo Bridge Andong":"Woryeonggyo Bridge",
+      "Cheomseongdae Gyeongju":"Cheomseongdae",
+      "Donggung Palace and Wolji Pond":"Donggung Palace and Wolji Pond",
+      "Bulguksa Temple Gyeongju":"Bulguksa",
+      "Hwangridan-gil Gyeongju":"Hwangnidan-gil",
+      "Haedong Yonggungsa Temple Busan":"Haedong Yonggungsa",
+      "Haeundae Beach Busan":"Haeundae Beach",
+      "Busan Haeundae Beach":"Haeundae Beach",
+      "Haeundae Blueline Park Mipo Station":"Haeundae Blueline Park",
+      "Gamcheon Culture Village Busan":"Gamcheon Culture Village",
+      "Gwanghwamun Square Seoul":"Gwanghwamun Square",
+      "Gyeongbokgung Palace Seoul":"Gyeongbokgung",
+      "Insadong Ssamzigil Seoul":"Insa-dong",
+      "Lotte World Aquarium Seoul":"Lotte World Aquarium",
+      "Seoul Forest Park":"Seoul Forest",
+      "Olive Young N Seongsu":"Olive Young N Seongsu",
+      "LOTTE Premium Outlets Giheung":"Lotte Premium Outlets Giheung",
+      "Namsan Seoul Tower":"N Seoul Tower",
+      "Incheon International Airport Terminal 2":"Incheon International Airport",
+      "Starfield Suwon":"Starfield Suwon",
+      "Andong Hahoe Folk Village":"Hahoe Folk Village",
+      "Gyeongju National Museum Childrens Museum":"Gyeongju National Museum",
+      "SEA LIFE Busan Aquarium":"Sea Life Busan Aquarium",
+      "Shinsegae Centum City Busan":"Shinsegae Centum City",
+      "Pororo Park Busan":"Pororo Park",
+      "Namdaemun Market Seoul":"Namdaemun Market",
+      "COEX Mall Gangnam":"Starfield Library (COEX Mall)",
+      "COEX Mall Gangnam Seoul":"Starfield Library (COEX Mall)",
+      "COEX Aquarium Seoul":"COEX Aquarium",
+      "Lotte World Adventure Seoul":"Lotte World",
+      "Yeouido Hangang Park Seoul":"Yeouido Hangang Park",
+      "Seoul Animation Center":"Seoul Animation Center",
+      "Lotte Mart Seoul Station":"Lotte Mart Seoul Station",
+      "Dongdaemun Design Plaza Seoul":"Dongdaemun Design Plaza",
+      "Myeongdong Shopping Street Seoul":"Myeong-dong",
+      "Hongdae Shopping Street Seoul":"Hongdae",
+      "Childrens Grand Park Seoul":"Seoul Children's Grand Park",
+      "Seoul Museum of History":"Seoul Museum of History",
+      "Gyeongju Bird Park":"Gyeongju Bird Park",
+      "Tosokchon Samgyetang Seoul":"Samgyetang",
+      "Andong Gu Market Jjimdak":"Jjimdak",
+      "Haeundae Dwaeji Gukbap":"Dwaeji-gukbap"
+    };
+
+    // Curated street addresses for the main destinations. For district-wide suggestions,
+    // the UI explicitly labels the address as an area/search pin rather than pretending it is a venue address.
+    const placeAddresses = {
+      "Incheon International Airport Terminal 2": {address:"272 Gonghang-ro, Jung-gu, Incheon, South Korea", korean:"인천국제공항 제2여객터미널", exact:true},
+      "The Marevo Hotel Suwon": {address:"1591 Bongyeong-ro, Yeongtong-gu, Suwon-si, Gyeonggi-do 16703, South Korea", korean:"더마레보호텔", exact:true},
+      "Suwon Hwaseong Fortress": {address:"825 Jeongjo-ro, Paldal-gu, Suwon-si, Gyeonggi-do, South Korea", korean:"수원화성 화성행궁", exact:true},
+      "Starfield Suwon": {address:"175 Deogyeong-daero, Jangan-gu, Suwon-si, Gyeonggi-do, South Korea", korean:"스타필드 수원", exact:true},
+      "Suwon Wanggalbi Street": {address:"Paldalmun-ro / Ingye-dong area, Paldal-gu, Suwon-si, Gyeonggi-do, South Korea", korean:"수원 왕갈비 거리", exact:false},
+      "Haeundae Traditional Market": {address:"38 Gunam-ro 41beon-gil, Haeundae-gu, Busan, South Korea", korean:"해운대시장", exact:true},
+      "Bomun Tourist Complex": {address:"Bomun-ro, Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"보문관광단지", exact:false},
+      "Andong Gu Market Jjimdak": {address:"55 Beonyeong 1-gil, Seobu-dong, Andong-si, Gyeongsangbuk-do, South Korea", korean:"안동구시장", exact:true},
+      "Andong Hanok Village": {address:"Andong-si, Gyeongsangbuk-do, South Korea — use your booked hanok's confirmation address", korean:"안동 한옥 숙소", exact:false},
+      "FeelGood Hanok Andong": {address:"6-1 Seogyeongji 7-gil, Andong Andong-si, South Korea 36676", korean:"", exact:true},
+      "Woryeonggyo Bridge Andong": {address:"Woryeonggyo Bridge, Sang-a-dong, Andong-si, Gyeongsangbuk-do, South Korea", korean:"월영교", exact:false},
+      "Andong Hahoe Folk Village": {address:"40 Hahoejongga-gil, Pungcheon-myeon, Andong-si, Gyeongsangbuk-do, South Korea", korean:"안동 하회마을", exact:true},
+      "Andong city Gyeongsangbuk-do": {address:"Andong-si, Gyeongsangbuk-do, South Korea", korean:"안동시", exact:false},
+      "Gyeongju Gyeongsangbuk-do": {address:"Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"경주시", exact:false},
+      "Cheomseongdae Gyeongju": {address:"839-1 Inwang-dong, Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"첨성대", exact:true},
+      "Donggung Palace and Wolji Pond": {address:"102 Wonhwa-ro, Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"동궁과 월지", exact:true},
+      "Gyeongju National Museum Childrens Museum": {address:"186 Iljeong-ro, Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"국립경주박물관 어린이박물관", exact:true},
+      "Gyeongju Ssambap Street": {address:"Hwangnam-dong / Poseok-ro area, Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"경주 쌈밥거리", exact:false},
+      "Soyojae Gyeongju": {address:"Use the full address in your Soyojae accommodation confirmation before driving", korean:"소요재 경주", exact:false},
+      "Hwangridan-gil Gyeongju": {address:"Poseok-ro, Hwangnam-dong, Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"황리단길", exact:false},
+      "Bulguksa Temple Gyeongju": {address:"385 Bulguk-ro, Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"불국사", exact:true},
+      "Bulguksa Sundubu Village": {address:"Bulguk-ro / Bulguksa visitor area, Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"불국사 두부마을", exact:false},
+      "Gyeongju Bird Park": {address:"74 Bomun-ro, Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"경주 버드파크", exact:true},
+      "Busan Haeundae Beach": {address:"264 Haeundaehaebyeon-ro, Haeundae-gu, Busan, South Korea", korean:"해운대해수욕장", exact:true},
+      "Haeundae Beach Busan": {address:"264 Haeundaehaebyeon-ro, Haeundae-gu, Busan, South Korea", korean:"해운대해수욕장", exact:true},
+      "Haedong Yonggungsa Temple Busan": {address:"86 Yonggung-gil, Gijang-gun, Busan, South Korea", korean:"해동용궁사", exact:true},
+      "Haeundae Blueline Park Mipo Station": {address:"13 Dalmaji-gil 62beon-gil, Haeundae-gu, Busan, South Korea", korean:"해운대블루라인파크 미포정거장", exact:true},
+      "SEA LIFE Busan Aquarium": {address:"266 Haeundaehaebyeon-ro, Haeundae-gu, Busan, South Korea", korean:"씨라이프 부산 아쿠아리움", exact:true},
+      "Shinsegae Centum City Busan": {address:"35 Centum nam-daero, Haeundae-gu, Busan, South Korea", korean:"신세계백화점 센텀시티점", exact:true},
+      "Gamcheon Culture Village Busan": {address:"203 Gamnae 2-ro, Saha-gu, Busan, South Korea", korean:"감천문화마을", exact:true},
+      "Pororo Park Busan": {address:"Search the current Pororo Park Busan branch by name before setting off; branches can change", korean:"뽀로로파크 부산", exact:false},
+      "Chungcheongbuk-do Korea": {address:"Chungcheongbuk-do, South Korea — set the exact rest stop in Naver Map before departure", korean:"충청북도 휴게소", exact:false},
+      "Korea Expressway Rest Area": {address:"Choose a rest area along the live route; the exact stop depends on traffic and route", korean:"고속도로 휴게소", exact:false},
+      "Cheonan-si Chungcheongnam-do": {address:"Cheonan-si, Chungcheongnam-do, South Korea — use the confirmed hotel address", korean:"천안시", exact:false},
+      "Hyundai Premium Outlet": {address:"Use the selected Hyundai Premium Outlet branch's address; confirm which branch before departure", korean:"현대 프리미엄 아울렛", exact:false},
+      "Seoul Station rental car return": {address:"Confirm the rental company's exact Seoul Station branch address and return instructions", korean:"서울역 렌터카 반납", exact:false},
+      "Fraser Place Central Seoul": {address:"78 Tongil-ro, Jung-gu, Seoul 04517, South Korea", korean:"프레이저 플레이스 센트럴 서울", exact:true},
+      "Namdaemun Market Seoul": {address:"21 Namdaemunsijang 4-gil, Jung-gu, Seoul, South Korea", korean:"남대문시장", exact:true},
+      "Pororo Park Yeongdeungpo": {address:"Times Square Mall, 15 Yeongjung-ro, Yeongdeungpo-gu, Seoul, South Korea — confirm current Pororo venue/floor before visiting", korean:"뽀로로파크 영등포", exact:false},
+      "Pororo Park Yeongdeungpo Times Square": {address:"Times Square Mall, 15 Yeongjung-ro, Yeongdeungpo-gu, Seoul, South Korea — confirm current Pororo venue/floor before visiting", korean:"뽀로로파크 영등포 타임스퀘어", exact:false},
+      "Times Square Mall Yeongdeungpo": {address:"15 Yeongjung-ro, Yeongdeungpo-gu, Seoul, South Korea", korean:"타임스퀘어", exact:true},
+      "Gwanghwamun Square Seoul": {address:"172 Sejong-daero, Jongno-gu, Seoul, South Korea", korean:"광화문광장", exact:true},
+      "COEX Mall Gangnam Seoul": {address:"513 Yeongdong-daero, Gangnam-gu, Seoul, South Korea", korean:"코엑스몰 별마당도서관", exact:true},
+      "COEX Aquarium Seoul": {address:"513 Yeongdong-daero, Gangnam-gu, Seoul, South Korea", korean:"코엑스 아쿠아리움", exact:true},
+      "COEX Mall Gangnam": {address:"513 Yeongdong-daero, Gangnam-gu, Seoul, South Korea", korean:"스타필드 코엑스몰", exact:true},
+      "Myeongdong Shopping Street Seoul": {address:"Myeongdong-gil, Jung-gu, Seoul, South Korea", korean:"명동거리", exact:false},
+      "Seoul Museum of History": {address:"55 Saemunan-ro, Jongno-gu, Seoul, South Korea", korean:"서울역사박물관", exact:true},
+      "Gyeongbokgung Palace Seoul": {address:"161 Sajik-ro, Jongno-gu, Seoul, South Korea", korean:"경복궁", exact:true},
+      "Tosokchon Samgyetang Seoul": {address:"5 Jahamun-ro 5-gil, Jongno-gu, Seoul, South Korea", korean:"토속촌 삼계탕", exact:true},
+      "Insadong Ssamzigil Seoul": {address:"44 Insadong-gil, Jongno-gu, Seoul, South Korea", korean:"쌈지길", exact:true},
+      "National Childrens Museum Seoul": {address:"135 Seobinggo-ro, Yongsan-gu, Seoul, South Korea", korean:"국립중앙박물관 어린이박물관", exact:true},
+      "Lotte World Aquarium Seoul": {address:"300 Olympic-ro, Songpa-gu, Seoul, South Korea", korean:"롯데월드 아쿠아리움", exact:true},
+      "Lotte World Mall Seoul": {address:"300 Olympic-ro, Songpa-gu, Seoul, South Korea", korean:"롯데월드몰", exact:true},
+      "Yeouido Hangang Park Seoul": {address:"68 Yeouinaru-ro, Yeongdeungpo-gu, Seoul, South Korea", korean:"여의도 한강공원", exact:true},
+      "Seoul Forest Park": {address:"273 Ttukseom-ro, Seongdong-gu, Seoul, South Korea", korean:"서울숲", exact:true},
+      "Olive Young N Seongsu": {address:"13 Yeonmujang 7-gil, Seongdong-gu, Seoul, South Korea", korean:"올리브영N 성수", exact:true},
+      "Olive Young Myeongdong Flagship": {address:"53 Myeongdong-gil, Jung-gu, Seoul 04538, South Korea", korean:"올리브영 명동 플래그십", exact:true},
+      "LOTTE Premium Outlets Giheung": {address:"124 Singomae-ro, Giheung-gu, Yongin-si, Gyeonggi-do, South Korea", korean:"롯데프리미엄아울렛 기흥점", exact:true},
+      "Seongsu-dong Cafe Street Seoul": {address:"Yeonmujang-gil / Seongsu-dong area, Seongdong-gu, Seoul, South Korea", korean:"성수동 카페거리", exact:false},
+      "Dongdaemun Design Plaza Seoul": {address:"281 Eulji-ro, Jung-gu, Seoul, South Korea", korean:"동대문디자인플라자 DDP", exact:true},
+      "Childrens Grand Park Seoul": {address:"216 Neungdong-ro, Gwangjin-gu, Seoul, South Korea", korean:"서울어린이대공원", exact:true},
+      "Seoul Animation Center": {address:"126 Sogong-ro, Jung-gu, Seoul, South Korea", korean:"서울애니메이션센터", exact:true},
+      "Lotte Mart Seoul Station": {address:"405 Hangang-daero, Jung-gu, Seoul, South Korea", korean:"롯데마트 제타플렉스 서울역점", exact:true},
+      "Namsan Seoul Tower": {address:"105 Namsangongwon-gil, Yongsan-gu, Seoul, South Korea", korean:"N서울타워", exact:true},
+      "Starfield Library": {address:"513 Yeongdong-daero, Gangnam-gu, Seoul, South Korea", korean:"별마당도서관", exact:true},
+      "Andong Culture Street": {address:"164-1 Daean-ro, Andong-si, Gyeongsangbuk-do, South Korea", korean:"안동 문화의거리", exact:true},
+      "Confucian Land Andong": {address:"346-30 Gwangwangdanji-ro, Andong-si, Gyeongsangbuk-do, South Korea", korean:"유교랜드", exact:true},
+      "Hero Play Park Gyeongju": {address:"97-1 Gwangjung-gil, Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"히어로플레이파크 경주", exact:true},
+      "Gyeongju World": {address:"544 Bomun-ro, Gyeongju-si, Gyeongsangbuk-do, South Korea", korean:"경주월드", exact:true},
+      "Lotte Outlets Dongbusan": {address:"147 Gijanghaean-ro, Gijang-gun, Busan, South Korea", korean:"롯데프리미엄아울렛 동부산점", exact:true},
+      "Time Villas Suwon": {address:"134 Sehwa-ro, Gwonseon-gu, Suwon-si, Gyeonggi-do, South Korea", korean:"타임빌라스 수원", exact:true},
+      "Lotte Outlets Seoul Station": {address:"405 Hangang-daero, Yongsan-gu, Seoul, South Korea", korean:"롯데아울렛 서울역점", exact:true},
+      "Myeongdong": {address:"Myeongdong-gil, Jung-gu, Seoul, South Korea", korean:"명동", exact:false},
+      "Insa-dong": {address:"Insadong-gil, Jongno-gu, Seoul, South Korea", korean:"인사동", exact:false},
+      "Hongdae": {address:"Hongik-ro / Wausan-ro area, Mapo-gu, Seoul, South Korea", korean:"홍대 쇼핑거리", exact:false}
+    };
+
+    function getPlaceDetails(item) {
+      const key = item.mapQuery || item.dir || item.title;
+      return placeAddresses[key] || {address: key || "Use the destination name", korean:"", exact:false};
+    }
+    function makeNaverUrl(item) {
+      const d = getPlaceDetails(item);
+      const query = d.korean || d.address || item.mapQuery || item.dir || item.title;
+      return `https://map.naver.com/p/search/${encodeURIComponent(query)}`;
+    }
+    function makeGoogleUrl(item) {
+      const d = getPlaceDetails(item);
+      const query = d.korean || d.address || item.mapQuery || item.dir || item.title;
+      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    }
+    function addressHtml(item) {
+      const d = getPlaceDetails(item);
+      const label = d.exact ? "Address" : "Area / map search";
+      return `<div class="place-address"><strong>📍 ${label}:</strong> ${d.address}</div>`;
+    }
+
+    // Seoul public-transport guidance: approximate route from the previous stop or hotel base.
+    // Confirm live departures, platform and bus details in Naver Map on the day.
+    const transitGuidanceByTitle = {
+      "Breakfast: Hotel Resident Café": "Breakfast at the hotel or nearby; nearest subway is Seodaemun Station (Line 5), around 5–8 min on foot.",
+      "Breakfast: Paris Baguette Seoul": "From Fraser Place: walk to Seoul Station (about 10–15 min) or use a short taxi. Nearest station: Seoul Station (Lines 1/4, AREX and Gyeongui–Jungang).",
+      "Pororo Park Yeongdeungpo": "From Seoul Station: take Line 1 to Yeongdeungpo Station (about 10 min), then walk around 5–10 min to Times Square. Confirm the Pororo branch and floor before travelling.",
+      "Pororo Park Yeongdeungpo Times Square": "From Seoul Station: Line 1 to Yeongdeungpo Station, then walk about 5–10 min to Times Square. The play venue is inside the mall; verify current operation and floor.",
+      "Lunch & Shopping at Times Square Mall": "Same complex as the Pororo stop. Nearest station: Yeongdeungpo (Line 1); follow the mall signs from the station, around 5–10 min on foot.",
+      "Hotel Nap @ Fraser Place from Yeongdeungpo": "From Yeongdeungpo: take Line 1 to Seoul Station, then walk about 10–15 min or take a short taxi to Fraser Place Central Seoul.",
+      "Gwanghwamun Square & Stream Walk": "From Fraser Place: Seodaemun Station (Line 5) to Gwanghwamun Station, 1 stop; use the square exits and walk a few minutes.",
+      "Shopping: COEX Mall & Starfield Library": "From the hotel: walk to Seodaemun Station, Line 5 to Yeouido, transfer to Line 9 to Bongeunsa; allow roughly 40–50 min door-to-door. COEX is linked to Bongeunsa/Samseong stations.",
+      "Coex Aquarium (Gangnam)": "From Fraser Place: Seodaemun Station (Line 5) to Yeouido, transfer to Line 9 to Bongeunsa; walk about 5–10 min through the COEX complex. Allow roughly 40–50 min.",
+      "Shopping & Lunch at COEX Mall": "Inside the same COEX complex as the aquarium. Nearest stations: Bongeunsa (Line 9) or Samseong (Line 2); follow indoor signs.",
+      "Hotel Rest / Nap from COEX": "From COEX: Bongeunsa (Line 9) to Yeouido, transfer to Line 5 to Seodaemun; allow around 40–50 min door-to-door.",
+      "Myeongdong Shopping Street Walk": "From Fraser Place: use Seodaemun Station (Line 5) to Jongno 3-ga, transfer to Line 3 for Chungmuro, then Line 4 to Myeongdong; allow about 25–35 min. Myeongdong Station is Line 4.",
+      "Seoul Museum of History Kids Zone": "Nearest station: Gwanghwamun (Line 5), around 8–10 min walk. From Myeongdong, take Line 4 to Seoul Station and then a short taxi/bus, or return via the hotel and Line 5; allow extra time for the cross-city move.",
+      "Breakfast: Gyeongbokgung Area Cafe": "From Fraser Place: Seodaemun (Line 5) to Jongno 3-ga, transfer to Line 3 to Anguk; allow around 25–35 min including walking. Anguk is the most convenient station for Insadong cafés.",
+      "Gyeongbokgung Palace & Hanbok Experience": "From the Anguk café area: Line 3 from Anguk to Gyeongbokgung is 1 stop, or walk around 15–20 min. Nearest station: Gyeongbokgung (Line 3), Exit 5.",
+      "Lunch: Tosokchon Samgyetang": "From the palace: walk about 8–12 min toward Jahamun-ro. Nearest station: Gyeongbokgung (Line 3), Exit 2; the restaurant is also a short walk from the palace’s west side.",
+      "Hotel Nap @ Fraser Place from Tosokchon": "From Tosokchon: walk to Gyeongbokgung Station (Line 3), take Line 3 to Jongno 3-ga, then transfer to Line 5 to Seodaemun; allow around 25–35 min door-to-door.",
+      "Shopping: Insadong Craft Street & Ssamzigil": "From Fraser Place: Seodaemun (Line 5) to Jongno 3-ga, transfer to Line 3 to Anguk; walk around 5 min to Ssamzigil and Insadong-gil.",
+      "National Children's Museum of Korea": "Nearest station: Ichon (Line 4 / Gyeongui–Jungang), then walk about 10–15 min within the National Museum of Korea complex. From the hotel, allow around 35–45 min with transfers.",
+      "Breakfast: Jamsil Bakery Cafe": "From Fraser Place: walk to City Hall Station (about 10–15 min) and take Line 2 directly to Jamsil; allow around 35–45 min including walking.",
+      "Lotte World Aquarium & Magic Island": "Nearest station: Jamsil (Lines 2 and 8). Follow the signs to Lotte World Mall/Aquarium; the aquarium and mall are connected indoors.",
+      "Shopping & Lunch at Lotte World Mall": "Same Jamsil complex as the aquarium. Nearest station: Jamsil (Lines 2/8); follow indoor mall signs.",
+      "Hotel Nap @ Fraser Place from Jamsil": "From Jamsil: take Line 2 to City Hall and walk about 10–15 min back to Fraser Place, or use a short taxi for the final leg.",
+      "Han River Park Walk": "From Fraser Place: Seodaemun Station (Line 5) directly to Yeouinaru Station; walk around 5 min to Yeouido Hangang Park. Allow around 25–35 min door-to-door.",
+      "Breakfast near Fraser Place Central Seoul": "Start from the hotel; nearby cafés and bakeries are walkable. Nearest subway: Seodaemun Station (Line 5), around 5–8 min on foot.",
+      "Olive Young N Seongsu — Immersive K-Beauty Store": "From Fraser Place: Seodaemun (Line 5) to Jongno 3-ga, transfer to Line 3 to Euljiro 3-ga, then Line 2 to Seongsu; allow roughly 35–45 min. The store is about 2 min from Seongsu Station (Line 2), Exit 4; official tourism listings show 10:00–22:00, but recheck closer to the date.",
+      "Lunch & Seongsu Concept-Shop Browse": "Walk from Olive Young N Seongsu; Yeonmujang-gil and the surrounding concept shops are in the same neighbourhood, generally within 5–15 min on foot.",
+      "Transit to LOTTE Premium Outlets Giheung": "From Seongsu Station take Line 2 to Wangsimni, transfer to the Suin–Bundang Line to Giheung, then use a local bus or taxi for the final leg. Allow about 1.5–1.75 hours; check the exact last-mile option in Naver Map.",
+      "Shopping & Family Break at LOTTE Premium Outlets Giheung": "Address: 124 Singomae-ro, Giheung-gu, Yongin-si. The final approach from Giheung Station is by local bus or taxi; confirm the live route and return connection before shopping.",
+      "Dinner at the Outlet & Return to Seoul": "Reverse the route: local bus/taxi to Giheung Station, Suin–Bundang Line to Wangsimni, then Line 2 and the hotel-side connection. Allow around 1.5–2 hours back to central Seoul.",
+      "Breakfast: Neighborhood Bakery Cafe": "From Fraser Place: use Seodaemun Station (Line 5) or walk to a nearby bakery; confirm the specific café pin before setting off.",
+      "Children's Grand Park": "Nearest station: Children's Grand Park (Line 7), Exit 1. From central Seoul, use Line 5/2 with a transfer to Line 7; allow around 35–45 min door-to-door.",
+      "Lunch nearby": "Stay near Children’s Grand Park; nearby eateries are walkable. Nearest station remains Children's Grand Park (Line 7), Exit 1.",
+      "Hotel Nap / Rest": "From Children's Grand Park: take Line 7 to Konkuk University, transfer to Line 2 to Euljiro 3-ga, then Line 5 to Seodaemun; allow around 40–50 min including walking.",
+      "Shopping: Hongdae Youth & Toy Street": "Nearest station: Hongik University (Line 2, AREX and Gyeongui–Jungang), usually Exit 8/9 for the main shopping streets. From the hotel, use Line 5 and transfer to Line 2, or use a bus/taxi if the children are tired.",
+      "Seoul Animation Center (Tayo Zone)": "Nearest station: Myeongdong (Line 4), then walk uphill around 10–15 min toward Namsan. From Hongdae, Line 2 to Dongdaemun History & Culture Park then Line 4 to Myeongdong; allow about 30–40 min.",
+      "Breakfast: Seoul Station Bakery": "From Fraser Place: walk about 10–15 min to Seoul Station, or take a short taxi. Nearest station: Seoul Station (Lines 1/4, AREX and Gyeongui–Jungang).",
+      "Shopping: Lotte Mart Seoul Station": "At Seoul Station; follow signs from the station concourse. Nearest station: Seoul Station (Lines 1/4, AREX and Gyeongui–Jungang).",
+      "Farewell Lunch near Seoul Station": "Keep lunch inside or beside Seoul Station so you can walk back to the hotel without another cross-city transfer.",
+      "Hotel Rest & Packing": "From Seoul Station: walk around 10–15 min to Fraser Place Central Seoul, or take a short taxi with luggage.",
+      "Farewell Dinner in Seoul": "Choose a restaurant near the hotel or Seoul Station to avoid another long transfer; nearest subway for the hotel is Seodaemun (Line 5).",
+      "Namsan Seoul Tower Cable Car": "Nearest subway: Myeongdong (Line 4), then walk uphill around 10–15 min to the cable-car lower station or take a short taxi. From the hotel, allow around 25–35 min; check cable-car operating status before going.",
+      "AREX Express Train to Incheon": "From Fraser Place, walk or take a short taxi to Seoul Station. Follow signs for AREX and use the Express Train platform for Incheon Airport; allow extra time with children and luggage.",
+      "Check-in @ Incheon Airport T2": "Arrive at Incheon Airport Terminal 2 using AREX to the airport terminal; follow airline check-in and departure signs.",
+      "Flight Departure to Singapore": "Remain inside Incheon Airport Terminal 2 after check-in and security; follow the flight information displays for your gate."
+    };
+
+    function transitHtml(item) {
+      const note = transitGuidanceByTitle[item.title];
+      return note ? `<div class="transit-info"><strong>🚇 Seoul transit · nearest station & route</strong>${note}<span class="transit-small">Travel times are approximate. Check live routes and bus connections in Naver Map before departure.</span></div>` : '';
+    }
+
+    // Optional, geographically grouped ideas. Keep these flexible around naps and weather.
+    const dailySuggestions = [
+      {shop:{title:"Shopping option: Haenggung-dong craft & souvenir lanes",mapQuery:"Suwon Hwaseong Fortress",desc:"Small craft shops, cafés and local souvenirs near the fortress; easiest as a short stroll rather than a separate mall trip."},kids:{title:"Kid-friendly option: Hwaseong Fortress trolley / short wall walk",mapQuery:"Suwon Hwaseong Fortress",desc:"Choose a short, flat section and check trolley operation on the day; keep this gentle after the overnight flight."}},
+      {shop:{title:"Shopping option: Andong Culture Street & Mammoth Bakery",mapQuery:"Andong Culture Street",desc:"Local snacks, bakery treats and small shops in central Andong; a more practical stop than a large mall."},kids:{title:"Kid-friendly option: Andong Confucian Land",mapQuery:"Confucian Land Andong",desc:"Interactive exhibits and a children’s play area; consider this only if the family has energy and the opening day/hours suit."}},
+      {shop:{title:"Shopping option: Hwangridan-gil",mapQuery:"Hwangridan-gil Gyeongju",desc:"Browse small boutiques, traditional-style souvenirs, bakeries and cafés around Poseok-ro."},kids:{title:"Kid-friendly option: Hero Play Park Gyeongju",mapQuery:"Hero Play Park Gyeongju",desc:"Indoor play option for cold or rainy weather; check age suitability, opening hours and ticket rules before driving there."}},
+      {shop:{title:"Shopping option: Bomun tourist area shops",mapQuery:"Bomun Tourist Complex",desc:"Keep shopping light around the Bomun resort area, rather than crossing town after temple sightseeing."},kids:{title:"Kid-friendly option: Gyeongju Bird Park",mapQuery:"Gyeongju Bird Park",desc:"A family-friendly bird and animal stop; check current feeding/activity schedules and dress warmly outdoors."}},
+      {shop:{title:"Shopping option: Haeundae traditional market",mapQuery:"Haeundae Traditional Market",desc:"Pick up snacks and small souvenirs around Haeundae Market near the beach; use the Korean market name in Naver Map."},kids:{title:"Kid-friendly option: Haeundae Beach + Beach Train",mapQuery:"Haeundae Blueline Park Mipo Station",desc:"A scenic, low-effort coastal ride; book/check the timetable ahead, especially if aiming for sunset."}},
+      {shop:{title:"Shopping option: Shinsegae Centum City",mapQuery:"Shinsegae Centum City Busan",desc:"Large all-weather mall with department-store shopping and family dining; a good place to combine shopping with a warm indoor break."},kids:{title:"Kid-friendly option: SEA LIFE Busan Aquarium",mapQuery:"SEA LIFE Busan Aquarium",desc:"Indoor aquarium on Haeundae Beach; check show/feed times and allow about 1.5–2 hours."}},
+      {shop:{title:"Shopping option: convenience-store / rest-stop shopping only",mapQuery:"Korea Expressway Rest Area",desc:"After the long Busan-to-Cheonan drive, keep shopping to snacks and essentials at the confirmed highway rest stop; do not add a separate outlet detour."},kids:{title:"Kid-friendly option: keep the stopover low-key",mapQuery:"Cheonan-si Chungcheongnam-do",desc:"Prioritise a playground, hotel downtime and an early dinner after the long drive; avoid adding a distant attraction."}},
+      {shop:{title:"Shopping option: Namdaemun Market",mapQuery:"Namdaemun Market Seoul",desc:"Great for children’s goods, souvenirs, snacks and practical shopping; go earlier if you want a calmer browse."},kids:{title:"Kid-friendly option: Pororo indoor play visit",mapQuery:"Pororo Park Yeongdeungpo Times Square",desc:"Useful for an indoor play session, but verify that the branch is currently operating and confirm its floor/location before travelling."}},
+      {shop:{title:"Shopping option: Times Square Mall, Yeongdeungpo",mapQuery:"Times Square Mall Yeongdeungpo",desc:"A convenient all-weather mix of fashion, food and family facilities; pair it with the nearby indoor play stop if confirmed open."},kids:{title:"Kid-friendly option: Pororo Park / indoor play",mapQuery:"Pororo Park Yeongdeungpo Times Square",desc:"Keep this as a flexible indoor activity; check current branch details and ticket sessions before setting off."}},
+      {shop:{title:"Shopping option: Starfield COEX Mall",mapQuery:"COEX Mall Gangnam Seoul",desc:"Shop, eat and see Starfield Library in one complex; an easy choice for cold weather or rain."},kids:{title:"Kid-friendly option: COEX Aquarium",mapQuery:"COEX Aquarium Seoul",desc:"A good indoor half-day option; check timed-entry tickets and feeding schedules in advance."}},
+      {shop:{title:"Shopping option: Myeongdong",mapQuery:"Myeongdong Shopping Street Seoul",desc:"Best for K-beauty, fashion and street snacks; keep the route short if little legs are tired."},kids:{title:"Kid-friendly option: Seoul Museum of History",mapQuery:"Seoul Museum of History",desc:"Indoor, educational and weather-proof; check the current children’s programme/exhibition before visiting."}},
+      {shop:{title:"Shopping option: Insadong & Ssamzigil",mapQuery:"Insadong Ssamzigil Seoul",desc:"Browse crafts, stationery, traditional sweets and small gifts; easy to combine with a palace-area day."},kids:{title:"Kid-friendly option: National Children’s Museum",mapQuery:"National Childrens Museum Seoul",desc:"Hands-on museum in the National Museum of Korea complex; check reservation rules and timed sessions before you go."}},
+      {shop:{title:"Shopping option: Lotte World Mall",mapQuery:"Lotte World Mall Seoul",desc:"Large indoor mall with family dining and plenty of shops; plan a meal here to reduce extra transfers."},kids:{title:"Kid-friendly option: Lotte World Aquarium or Lotte World Adventure",mapQuery:"Lotte World Aquarium Seoul",desc:"Choose one main attraction rather than trying to do both aquarium and theme park in a single day."}},
+      {shop:{title:"Shopping option: Seongsu-dong",mapQuery:"Seongsu-dong Cafe Street Seoul",desc:"Trendy concept stores, fashion, cafés and pop-ups; opening days and queues vary by shop."},kids:{title:"Kid-friendly option: Seoul Forest",mapQuery:"Seoul Forest Park",desc:"Open-air park for a reset between shopping stops; bring warm layers and keep the visit weather-dependent."}},
+      {shop:{title:"Shopping option: DDP / Dongdaemun malls",mapQuery:"Dongdaemun Design Plaza Seoul",desc:"Design shops and nearby fashion malls; choose one or two buildings rather than attempting the whole district."},kids:{title:"Kid-friendly option: Children’s Grand Park",mapQuery:"Childrens Grand Park Seoul",desc:"A spacious family park and zoo area, but it is a separate cross-city trip from DDP/Hongdae; use it only if you rearrange the day geographically."}},
+      {shop:{title:"Shopping option: Lotte Mart Seoul Station",mapQuery:"Lotte Mart Seoul Station",desc:"Convenient for snacks, Korean pantry gifts and last-minute essentials; check opening hours before departure day."},kids:{title:"Kid-friendly option: airport family facilities",mapQuery:"Incheon International Airport Terminal 2",desc:"Keep the final day flexible with airport rest/play areas and cultural displays after check-in; confirm terminal-side location and access rules."}}
+    ];
+
+    dailySuggestions[12] = {
+      shop: {title:"Shopping option: LOTTE Premium Outlets Giheung", mapQuery:"LOTTE Premium Outlets Giheung", desc:"Use the outlet as the main afternoon shopping stop after Olive Young N Seongsu. Prioritise selected stores and confirm return transit before you arrive."},
+      kids: {title:"Kid-friendly option: outlet family attractions", mapQuery:"LOTTE Premium Outlets Giheung", desc:"The outlet lists a forest adventure playground and mini train among family facilities; confirm which activities are open on your visit date."}
+    };
+
+    const dayThemes = [
+      {accent:'#4f7d70',soft:'#e5f0eb',deep:'#234b40'}, {accent:'#547ea3',soft:'#e8f0f8',deep:'#254765'},
+      {accent:'#9a7854',soft:'#f5eee4',deep:'#5d432a'}, {accent:'#8a719f',soft:'#f0eaf6',deep:'#4d3b61'},
+      {accent:'#3f8a91',soft:'#e4f3f3',deep:'#20545a'}, {accent:'#bb8057',soft:'#f8eee6',deep:'#70452b'},
+      {accent:'#6f8192',soft:'#eaf0f4',deep:'#384c5d'}, {accent:'#63866a',soft:'#eaf2e9',deep:'#34543a'},
+      {accent:'#b16d65',soft:'#f8ece9',deep:'#6c3e39'}, {accent:'#8c8a53',soft:'#f3f2e2',deep:'#555329'},
+      {accent:'#98765e',soft:'#f5ede5',deep:'#62432f'}, {accent:'#4e82a0',soft:'#e7f1f7',deep:'#284b64'},
+      {accent:'#a46c8c',soft:'#f6eaf1',deep:'#673c56'}, {accent:'#6e8b9c',soft:'#eaf1f5',deep:'#3b5665'},
+      {accent:'#b58a4b',soft:'#f8f0df',deep:'#6e5124'}, {accent:'#4f817b',soft:'#e5f1ee',deep:'#234e49'}
+    ];
+
+    const paceNotes = {
+      "Day 1": {label:"Arrival day — keep it gentle", text:"After an overnight flight, prioritise rental-car collection, hotel check-in, food and rest. Treat the fortress visit as optional if everyone is tired."},
+      "Day 2": {label:"Long intercity drive", text:"Suwon to Andong is a substantial drive. Allow a comfort stop and verify the hanok check-in instructions before leaving Suwon."},
+      "Day 7": {label:"Longest driving day", text:"Busan to the Cheonan-area stopover is the trip's longest drive. Plan two breaks, keep shopping to a rest stop, and confirm the overnight hotel address."},
+      "Day 10": {label:"Cross-city day", text:"COEX and Myeongdong are in different parts of Seoul. The afternoon hotel rest helps, but check the live subway route from the previous stop before setting out again."},
+      "Day 13": {label:"Heavy shopping day", text:"Olive Young N Seongsu plus Giheung Outlet is ambitious without a car. Limit the Seongsu browse, check the final bus/taxi connection from Giheung Station, and confirm the return route before shopping."},
+      "Day 16": {label:"Airport buffer", text:"Keep a generous buffer for hotel checkout, Seoul Station, AREX, check-in and security. Do not add another sightseeing stop to the departure day."}
+    };
+
+    function paceNoteHtml(day) {
+      const note = paceNotes[day.day];
+      const times = (day.items || []).map(i => i.time).filter(Boolean);
+      const start = times[0] || "Flexible start";
+      const end = times[times.length - 1] || "Flexible finish";
+      const schedule = `Scheduled window: ${start}–${end}. Times are planning anchors, not live arrival predictions.`;
+      return `<div class="pace-note"><div aria-hidden="true">⏱️</div><div><strong>${note ? note.label : "Pacing guide"}</strong>${note ? note.text : "Keep optional stops flexible around meal breaks, transit and the children’s energy."}<div class="route-caveat">${schedule} Subway routes, walking times, opening hours and outlet last-mile connections should be rechecked in Naver Map / with the venue on the day.</div></div></div>`;
+    }
+
+    const STORAGE_KEYS = {progress:"koreaTripProgress_v1", notes:"koreaTripNotes_v1", day:"koreaTripCurrentDay_v1", nap:"koreaTripNapMode_v1"};
+    function readSaved(key, fallback) { try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : fallback; } catch (_) { return fallback; } }
+    function writeSaved(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (_) { /* Storage may be unavailable in private or restricted browsers. */ } }
+    function setItemComplete(input) {
+      const progress = readSaved(STORAGE_KEYS.progress, {});
+      progress[input.dataset.progressKey] = input.checked;
+      writeSaved(STORAGE_KEYS.progress, progress);
+      const item = input.closest('.timeline-item');
+      if (item) item.classList.toggle('is-complete', input.checked);
+      updateDayProgress(input.dataset.progressDay);
+    }
+    function updateDayProgress(dayName) {
+      const checks = [...document.querySelectorAll(`input[data-progress-day="${dayName}"][data-progress-key]`)];
+      const done = checks.filter(c => c.checked).length;
+      const dayIndex = daysData.findIndex(d => d.day === dayName);
+      const count = document.getElementById(`progress-count-${dayIndex}`);
+      const fill = document.getElementById(`progress-fill-${dayIndex}`);
+      if (count) count.textContent = `${done} / ${checks.length} complete`;
+      if (fill) fill.style.width = `${checks.length ? (done / checks.length) * 100 : 0}%`;
+      const navBtn = document.querySelectorAll('.day-btn')[dayIndex];
+      if (navBtn) {
+        let mini = navBtn.querySelector('.mini-progress');
+        if (!mini) { mini = document.createElement('span'); mini.className = 'mini-progress'; navBtn.appendChild(mini); }
+        mini.textContent = done ? `${done}/${checks.length} ✓` : `${checks.length} stops`;
+      }
+    }
+    function saveDayNote(textarea) {
+      const notes = readSaved(STORAGE_KEYS.notes, {});
+      notes[textarea.dataset.noteDay] = textarea.value;
+      writeSaved(STORAGE_KEYS.notes, notes);
+    }
+    function restoreTripState() {
+      const progress = readSaved(STORAGE_KEYS.progress, {});
+      const notes = readSaved(STORAGE_KEYS.notes, {});
+      document.querySelectorAll('input[data-progress-key]').forEach(input => {
+        input.checked = !!progress[input.dataset.progressKey];
+        const item = input.closest('.timeline-item');
+        if (item) item.classList.toggle('is-complete', input.checked);
+      });
+      document.querySelectorAll('textarea[data-note-day]').forEach(area => { area.value = notes[area.dataset.noteDay] || ''; });
+      daysData.forEach(d => updateDayProgress(d.day));
+      const napSaved = readSaved(STORAGE_KEYS.nap, true);
+      document.getElementById('napToggle').checked = !!napSaved;
+      document.body.classList.toggle('no-nap-active', !napSaved);
+      const savedDay = readSaved(STORAGE_KEYS.day, 0);
+      if (Number.isInteger(savedDay) && savedDay >= 0 && savedDay < daysData.length) selectDay(savedDay, false, false);
+    }
+
+    function updateHero(index) {
+      const d = daysData[index];
+      const theme = dayThemes[index] || dayThemes[0];
+      const hero = document.querySelector('.trip-hero');
+      hero.style.setProperty('--day-accent', theme.accent);
+      hero.style.setProperty('--day-soft', theme.soft);
+      hero.style.setProperty('--day-deep', theme.deep);
+      document.getElementById('heroDayKicker').textContent = `${d.day} · ${d.date.replace(/[()]/g, '').toUpperCase()}`;
+      document.getElementById('heroTitle').textContent = d.heroTitle || d.stay;
+      document.getElementById('heroCopy').textContent = d.heroCopy || 'A flexible family day with time for meals, rest and optional discoveries.';
+      document.getElementById('heroHighlights').innerHTML = (d.highlights || d.items.slice(0,3).map(item => item.title)).map(text => `<li>${text}</li>`).join('');
+    }
+
+    function renderApp() {
+      const dayNav = document.getElementById('dayNav');
+      const panelsContainer = document.getElementById('dayPanelsContainer');
+
+      daysData.forEach((d, idx) => {
+        // Nav button
+        const btn = document.createElement('button');
+        btn.className = `day-btn ${idx === 0 ? 'active' : ''}`;
+        btn.style.setProperty('--nav-accent', dayThemes[idx].deep);
+        btn.onclick = () => selectDay(idx);
+        btn.innerHTML = `<span>${d.day}</span><span class="date">${d.date.split(' ')[0]} ${d.date.split(' ')[1]}</span>`;
+        dayNav.appendChild(btn);
+
+        // Panel content
+        const panel = document.createElement('div');
+        panel.className = `day-panel ${idx === 0 ? 'active' : ''}`;
+        panel.style.setProperty('--day-accent', dayThemes[idx].accent);
+        panel.style.setProperty('--day-soft', dayThemes[idx].soft);
+        panel.style.setProperty('--day-deep', dayThemes[idx].deep);
+        panel.id = `day-panel-${idx}`;
+
+        let itemsHtml = d.items.map((item, itemIndex) => {
+          let tagClass = 'tag-kid';
+          if (item.tag === 'food') tagClass = 'tag-food';
+          if (item.tag === 'drive') tagClass = 'tag-drive';
+          if (item.tag === 'nap') tagClass = 'tag-nap';
+          if (item.tag === 'shop') tagClass = 'tag-shop';
+
+          let isNapItem = item.tag === 'nap';
+          return `
+            <div class="timeline-item ${isNapItem ? 'nap-block' : ''}">
+              <div class="time-stamp">${item.time}</div>
+              <div class="section-card" style="margin-top: 6px; box-shadow: none;">
+                <div style="padding: 10px 12px 0;"><label class="complete-toggle"><input type="checkbox" data-progress-day="${d.day}" data-progress-key="${encodeURIComponent(d.day + '|' + item.title + '|' + item.time + '|' + itemIndex)}" onchange="setItemComplete(this)"><span>Mark stop complete</span></label></div>
+                ${imageArticleMap[item.mapQuery] ? `<img data-place-photo="${item.mapQuery}" class="card-img image-loading" alt="Photo of ${item.title}" loading="lazy">` : ''}
+                <div style="padding: 12px;">
+                  ${item.tag ? `<span class="tag ${tagClass}">${item.tag.toUpperCase()}</span>` : ''}
+                  <div class="item-title">${item.title}</div>
+                  <div class="item-desc">${item.desc}</div>
+                  ${transitHtml(item)}
+                  ${driveNotes[item.title] ? `<div class="drive-info"><strong>🚗 ${driveNotes[item.title].route}</strong><div>Estimated drive: ${driveNotes[item.title].time} · Estimated tolls: ${driveNotes[item.title].toll}</div><div>${driveNotes[item.title].note}</div><div class="image-credit">Toll estimates are indicative for a standard passenger car and may vary by route, entry/exit ramps and vehicle class.</div></div>` : ''}
+                  ${item.fact ? `
+                    <div class="fact-box">
+                      <div class="fact-title">🏛️ History & Fun Fact</div>
+                      <div>${item.fact}</div>
+                    </div>
+                  ` : ''}
+                  ${item.mapQuery || item.dir ? addressHtml(item) : ''}
+                  ${(item.dir || item.mapQuery) ? `
+                    <div class="action-buttons">
+                      <a class="btn-link btn-dir" href="${makeNaverUrl(item)}" target="_blank" rel="noopener">🧭 Open in Naver Map</a>
+                      <a class="btn-link btn-map" href="${makeGoogleUrl(item)}" target="_blank" rel="noopener">↗ Google Maps backup</a>
+                    </div>
+                  ` : ''}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        const routeNote = d.items.map(item => driveNotes[item.title]).find(Boolean);
+        const daySummaryHtml = `<div class="day-summary"><span class="summary-chip">📍 <strong>${d.items.length}</strong> planned stops</span>${routeNote ? `<span class="summary-chip">🚗 ${routeNote.time}</span>` : `<span class="summary-chip">👨‍👩‍👧‍👦 Family-friendly pace</span>`}</div>`;
+
+        let noNapHtml = (d.noNapExtra || []).map((item, itemIndex) => `
+          <div class="timeline-item no-nap-block">
+            <div class="time-stamp">${item.time}</div>
+            <div class="section-card" style="margin-top: 6px; box-shadow: none;">
+              <div style="padding: 10px 12px 0;"><label class="complete-toggle"><input type="checkbox" data-progress-day="${d.day}" data-progress-key="${encodeURIComponent(d.day + '|optional|' + item.title + '|' + item.time + '|' + itemIndex)}" onchange="setItemComplete(this)"><span>Mark optional stop complete</span></label></div>
+              ${imageArticleMap[item.mapQuery] ? `<img data-place-photo="${item.mapQuery}" class="card-img image-loading" alt="Photo of ${item.title}" loading="lazy">` : ''}
+              <div style="padding: 12px;">
+                <span class="tag ${item.tag === 'shop' ? 'tag-shop' : 'tag-kid'}">${item.tag ? item.tag.toUpperCase() : 'KID'}</span>
+                <div class="item-title">${item.title}</div>
+                <div class="item-desc">${item.desc}</div>
+                ${transitHtml(item)}
+                ${item.fact ? `
+                  <div class="fact-box">
+                    <div class="fact-title">🏛️ History & Fun Fact</div>
+                    <div>${item.fact}</div>
+                  </div>
+                ` : ''}
+                ${item.mapQuery || item.dir ? addressHtml(item) : ''}
+                ${(item.dir || item.mapQuery) ? `
+                  <div class="action-buttons">
+                    <a class="btn-link btn-dir" href="${makeNaverUrl(item)}" target="_blank" rel="noopener">🧭 Open in Naver Map</a>
+                    <a class="btn-link btn-map" href="${makeGoogleUrl(item)}" target="_blank" rel="noopener">↗ Google Maps backup</a>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        panel.innerHTML = `
+          <div class="hotel-card">
+            <div class="hotel-title">🏨 Accommodation Base</div>
+            <div class="hotel-desc">${d.stay}</div>
+            ${d.addr ? `<div class="hotel-addr">📍 ${d.addr}</div>` : ''}
+            
+          </div>
+          ${daySummaryHtml}
+          ${paceNoteHtml(d)}
+          <section class="progress-card" data-progress-day="${d.day}">
+            <div class="progress-head"><div class="progress-title">Your day · tick off as you go</div><div class="progress-count" id="progress-count-${idx}">0 / ${d.items.length + (d.noNapExtra || []).length} complete</div></div>
+            <div class="progress-track"><div class="progress-fill" id="progress-fill-${idx}"></div></div>
+            <div class="progress-help">Progress and notes are saved in this browser on this device. They do not sync automatically to other devices or ChatGPT.</div>
+            <label class="day-notes-label" for="day-notes-${idx}">Notes / changes for ${d.day}</label>
+            <textarea class="day-notes" id="day-notes-${idx}" data-note-day="${d.day}" placeholder="e.g. booked tickets, restaurant closed, children tired…" oninput="saveDayNote(this)"></textarea>
+          </section>
+          <div class="timeline">
+            ${itemsHtml}
+            ${noNapHtml}
+          </div>
+          ${dailySuggestions[idx] ? `<section class="suggestions-wrap"><div class="suggestions-heading">✨ Optional shopping & kids ideas for ${d.day}</div>${[dailySuggestions[idx].shop,dailySuggestions[idx].kids].map(idea => `<div class="suggestion-card"><div class="suggestion-label">${idea.title.toLowerCase().includes('shopping') ? '🛍️ Shopping' : '🧸 Kid-friendly'}</div><div class="suggestion-title">${idea.title}</div><div class="suggestion-desc">${idea.desc}</div>${transitHtml(idea)}${addressHtml(idea)}<div class="action-buttons"><a class="btn-link btn-dir" href="${makeNaverUrl(idea)}" target="_blank" rel="noopener">🧭 Open in Naver Map</a><a class="btn-link btn-map" href="${makeGoogleUrl(idea)}" target="_blank" rel="noopener">↗ Google Maps backup</a></div></div>`).join('')}</section>` : ''}
+          <nav class="day-stepper" aria-label="Move between itinerary days">
+            <button type="button" ${idx === 0 ? 'disabled' : ''} onclick="selectDay(${idx - 1}, true)">← Previous day</button>
+            <div class="step-caption"><strong>${d.day} of ${daysData.length}</strong>Keep the pace flexible for the kids</div>
+            <button type="button" ${idx === daysData.length - 1 ? 'disabled' : ''} onclick="selectDay(${idx + 1}, true)">Next day →</button>
+          </nav>
+        `;
+
+        panelsContainer.appendChild(panel);
+      });
+    }
+
+    function selectDay(index, returnToNav = false, persist = true) {
+      updateHero(index);
+      if (persist) writeSaved(STORAGE_KEYS.day, index);
+      document.querySelectorAll('.day-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+        if (i === index) btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      });
+      document.querySelectorAll('.day-panel').forEach((panel, i) => {
+        panel.classList.toggle('active', i === index);
+      });
+      if (returnToNav) document.querySelector('.day-nav-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function toggleNapMode() {
+      const isNapChecked = document.getElementById('napToggle').checked;
+      writeSaved(STORAGE_KEYS.nap, isNapChecked);
+      if (isNapChecked) {
+        document.body.classList.remove('no-nap-active');
+      } else {
+        document.body.classList.add('no-nap-active');
+      }
+    }
+
+    renderApp();
+    restoreTripState();
+
+    // Photos are shown only for places with a curated Wikipedia article match.
+    // The lookup targets every matching stop card by map query, avoiding the old
+    // bug where duplicate card titles could receive another stop's photo.
+    async function loadRelevantImages() {
+      const entries = Object.entries(imageArticleMap);
+      for (const [mapQuery, article] of entries) {
+        const images = [...document.querySelectorAll('[data-place-photo]')]
+          .filter(img => img.dataset.placePhoto === mapQuery);
+        if (!images.length) continue;
+        try {
+          const response = await fetch('https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(article));
+          if (!response.ok) { images.forEach(img => img.classList.add('photo-missing')); continue; }
+          const data = await response.json();
+          const source = data.thumbnail && data.thumbnail.source;
+          if (!source) { images.forEach(img => img.classList.add('photo-missing')); continue; }
+          images.forEach(img => {
+            img.src = source;
+            img.classList.remove('image-loading');
+            img.onload = () => img.classList.remove('image-loading');
+            img.onerror = () => img.classList.add('photo-missing');
+          });
+        } catch (_) {
+          // If offline or the image API is unavailable, hide the slot rather than
+          // showing an unrelated generic stock photo.
+          images.forEach(img => img.classList.add('photo-missing'));
+        }
+      }
+    }
+    loadRelevantImages();
+  </script>
+</body>
+</html>
