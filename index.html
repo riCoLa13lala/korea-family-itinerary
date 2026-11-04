@@ -2711,7 +2711,23 @@
             <div class="hotel-title">🏨 Accommodation Base</div>
             <div class="hotel-desc">${d.stay}</div>
             ${d.addr ? `<div class="hotel-addr">📍 ${d.addr}</div>` : ''}
-            
+            <div class="action-buttons" style="margin-top:10px">
+              <a class="btn-link btn-dir" href="${makeNaverUrl({mapQuery:d.stay,dir:d.stay})}" target="_blank" rel="noopener">🧭 Accommodation in Naver Map</a>
+              <a class="btn-link btn-map" href="${makeGoogleUrl({mapQuery:d.stay,dir:d.stay})}" target="_blank" rel="noopener">↗ Google Maps backup</a>
+            </div>
+            ${d.stay && d.stay.includes('Soyojae') ? `
+              <div class="hotel-title" style="margin-top:16px">🚗 Recommended parking for your 12–14 Nov stay</div>
+              <div class="hotel-desc" style="font-size:.95rem;margin-top:8px">1. Seorabeol Cultural Centre public car park</div>
+              <div class="hotel-addr">Free when there are no events. Check availability on arrival.</div>
+              <div class="action-buttons" style="margin-top:7px"><a class="btn-link btn-dir" href="https://map.naver.com/p/search/${encodeURIComponent('서라벌문화회관 주차장 경주')}" target="_blank" rel="noopener">🧭 Naver Map</a></div>
+              <div class="hotel-desc" style="font-size:.95rem;margin-top:12px">2. Hwangnam Living Culture Centre car park</div>
+              <div class="hotel-addr">Maximum daily fee: KRW 10,000 (host's guidance).</div>
+              <div class="action-buttons" style="margin-top:7px"><a class="btn-link btn-dir" href="https://map.naver.com/p/search/${encodeURIComponent('황남생활문화센터 주차장 경주')}" target="_blank" rel="noopener">🧭 Naver Map</a></div>
+              <div class="hotel-desc" style="font-size:.95rem;margin-top:12px">3. Hwangnamsaengnae-gil Public Parking Lot</div>
+              <div class="hotel-addr">A little farther from the property; maximum daily fee around KRW 7,000 (host's guidance).</div>
+              <div class="action-buttons" style="margin-top:7px"><a class="btn-link btn-dir" href="https://map.naver.com/p/search/${encodeURIComponent('황남새내길 공영주차장 경주')}" target="_blank" rel="noopener">🧭 Naver Map</a></div>
+              <div class="hotel-addr" style="margin-top:10px">Parking fees and access are based on your host's message; confirm event closures, current fees and space availability before parking.</div>
+            ` : ''}
           </div>
           ${daySummaryHtml}
           ${paceNoteHtml(d)}
